@@ -13,6 +13,52 @@ metadata:
 
 Query wallet data for both EVM chains and Solana with automatic blockchain detection.
 
+## When to Use This Skill
+
+Use this skill when the user asks about:
+
+**Wallet Basics:**
+- "What's the balance?", "How much ETH?", "What's the wallet balance?"
+- "What tokens does this wallet hold?", "Show me the tokens"
+- "What NFTs does this wallet own?", "NFT collection"
+
+**Transaction History:**
+- "Show transaction history", "Transaction list", "Recent activity"
+- "Token transfers", "Tokens sent/received"
+- "NFT transfers", "When were NFTs transferred"
+
+**DeFi & Advanced:**
+- "DeFi positions", "Liquidity positions", "Staking", "Yield farming"
+- "Net worth", "Total portfolio value", "What's it worth across all chains?"
+- "Token swaps", "DEX trades", "Swap history"
+- "Token approvals", "What contracts are approved?"
+
+**Wallet Analysis:**
+- "Wallet stats", "Activity statistics"
+- "Profitability", "PnL", "Gains and losses"
+- "Active chains", "Which networks have activity"
+
+**⚠️ NOT for:**
+- Individual token prices → Use `web3-price-api` or `web3-token-api`
+- Token metadata/contract info → Use `web3-token-api`
+- NFT metadata/collections → Use `web3-nft-api`
+- Blockchain blocks/transactions → Use `web3-blockchain-api`
+
+## Common Pitfalls
+
+### ❌ Wrong: `/wallets/:address/balance`
+### ✅ Correct: `/:address/balance`
+
+Native balance uses `/:address/balance`, NOT `/wallets/:address/balance`. Most other wallet endpoints use the `/wallets/:address/*` pattern, but native balance is different.
+
+**Quick Reference:**
+- Native balance (ETH/BNB/MATIC): `/:address/balance`
+- Tokens with prices: `/wallets/:address/tokens`
+- NFTs: `/:address/nft`
+- DeFi: `/wallets/:address/defi/*`
+
+---
+
 ## Important: Path Resolution
 
 This skill can be installed in different locations. Always use `$SKILL_DIR` to reference the skill directory:
