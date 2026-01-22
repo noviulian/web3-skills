@@ -1,0 +1,257 @@
+---
+name: web3-nft-api
+description: Query NFT data including metadata, traits, transfers, trades, floor prices, and rarity for both EVM chains and Solana. Get NFT collections, individual NFT metadata, transfer history, trading data, and analyze NFT portfolios. Use when user asks about NFTs, collections, metadata, or NFT trading.
+tags: [web3, blockchain, nft, metadata, traits, rarity, evm, solana]
+version: 1.0.0
+author: web3-skills
+compatibility: Requires Node.js (built-in modules only, no npm install needed)
+---
+
+# Web3 NFT API
+
+Query NFT data for both EVM chains and Solana including metadata, transfers, trades, traits, and rarity.
+
+## Setup
+
+```bash
+/web3-api-key
+```
+
+## Common Queries
+
+### Get All NFTs by Wallet
+
+**EVM:**
+```bash
+cd $SKILL_DIR
+node -e "
+const { query } = require('./query');
+query('/:address/nft', {
+  address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
+  params: { format: 'decimal', limit: 10 }
+})
+  .then(data => console.log('NFTs:', data.result?.length || 0))
+  .catch(console.error);
+"
+```
+
+**Solana:**
+```bash
+cd $SKILL_DIR
+node -e "
+const { query } = require('./query');
+query('/:network/:address/nft', {
+  address: '742d35Cc6634C0532925a3b844Bc9e7595f0bEb',
+  network: 'mainnet'
+})
+  .then(data => console.log(JSON.stringify(data, null, 2)))
+  .catch(console.error);
+"
+```
+
+### Get NFT Metadata
+
+**EVM:**
+```bash
+cd $SKILL_DIR
+node -e "
+const { query } = require('./query');
+query('/nft/:address', {
+  address: '0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d',
+  params: { chain: 'eth', format: 'decimal' }
+})
+  .then(data => console.log('Name:', data.name))
+  .catch(console.error);
+"
+```
+
+**Solana:**
+```bash
+cd $SKILL_DIR
+node -e "
+const { query } = require('./query');
+query('/nft/:network/:address', {
+  address: '742d35Cc6634C0532925a3b844Bc9e7595f0bEb',
+  network: 'mainnet'
+})
+  .then(data => console.log(JSON.stringify(data, null, 2)))
+  .catch(console.error);
+"
+```
+
+### Get NFTs by Contract
+
+```bash
+cd $SKILL_DIR
+node -e "
+const { query } = require('./query');
+query('/nft/:address', {
+  address: '0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d',
+  params: { chain: 'eth', limit: 10, format: 'decimal' }
+})
+  .then(data => console.log('NFTs:', data.result?.length || 0))
+  .catch(console.error);
+"
+```
+
+### Get NFT Transfers
+
+**EVM:**
+```bash
+cd $SKILL_DIR
+node -e "
+const { query } = require('./query');
+query('/nft/:address/transfers', {
+  address: '0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d',
+  params: { limit: 10 }
+})
+  .then(data => console.log('Transfers:', data.result?.length || 0))
+  .catch(console.error);
+"
+```
+
+**By Wallet:**
+```bash
+cd $SKILL_DIR
+node -e "
+const { query } = require('./query');
+query('/:address/nft/transfers', {
+  address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
+  params: { limit: 10 }
+})
+  .then(data => console.log('Transfers:', data.result?.length || 0))
+  .catch(console.error);
+"
+```
+
+### Get NFT Owners
+
+```bash
+cd $SKILL_DIR
+node -e "
+const { query } = require('./query');
+query('/nft/:address/owners', {
+  address: '0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d',
+  params: { chain: 'eth', limit: 10 }
+})
+  .then(data => console.log('Owners:', data.result?.length || 0))
+  .catch(console.error);
+"
+```
+
+### Get NFT Traits
+
+```bash
+cd $SKILL_DIR
+node -e "
+const { query } = require('./query');
+query('/nft/:address/traits', {
+  address: '0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d',
+  params: { chain: 'eth' }
+})
+  .then(data => console.log('Traits:', JSON.stringify(data, null, 2)))
+  .catch(console.error);
+"
+```
+
+### Get NFT Collections
+
+```bash
+cd $SKILL_DIR
+node -e "
+const { query } = require('./query');
+query('/:address/nft/collections', {
+  address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
+})
+  .then(data => console.log('Collections:', data.result?.length || 0))
+  .catch(console.error);
+"
+```
+
+### Get Top NFT Collections
+
+```bash
+cd $SKILL_DIR
+node -e "
+const { query } = require('./query');
+query('/nft/collections/trending', {
+  params: { chain: 'eth' }
+})
+  .then(data => console.log('Trending:', data.result?.length || 0))
+  .catch(console.error);
+"
+```
+
+### Get NFT Trades
+
+```bash
+cd $SKILL_DIR
+node -e "
+const { query } = require('./query');
+query('/nft/:address/trades', {
+  address: '0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d',
+  params: { chain: 'eth', limit: 10 }
+})
+  .then(data => console.log('Trades:', data.result?.length || 0))
+  .catch(console.error);
+"
+```
+
+### Get NFT Metadata from URI
+
+```bash
+cd $SKILL_DIR
+node -e "
+const { query } = require('./query');
+query('/nft/resolve', {
+  params: { uri: 'ipfs://Qm...' }
+})
+  .then(data => console.log(JSON.stringify(data, null, 2)))
+  .catch(console.error);
+"
+```
+
+### Get NFT Lowest Price
+
+```bash
+cd $SKILL_DIR
+node -e "
+const { query } = require('./query');
+query('/nft/:address/lowestprice', {
+  address: '0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d',
+  params: { chain: 'eth' }
+})
+  .then(data => console.log('Floor Price:', JSON.stringify(data, null, 2)))
+  .catch(console.error);
+"
+```
+
+### Search NFTs
+
+```bash
+cd $SKILL_DIR
+node -e "
+const { query } = require('./query');
+query('/nft/search', {
+  params: { q: 'bored ape', chain: 'eth', limit: 10 }
+})
+  .then(data => console.log('Results:', data.result?.length || 0))
+  .catch(console.error);
+"
+```
+
+## Response Format
+
+```json
+{
+  "token_address": "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d",
+  "token_id": "1234",
+  "name": "Bored Ape #1234",
+  "metadata": "..."
+}
+```
+
+## See Also
+
+- [EVM Endpoints Reference](references/EVM_ENDPOINTPOINTS.md)
+- [Solana Endpoints Reference](references/SOLANA_ENDPOINTPOINTS.md)
