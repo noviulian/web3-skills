@@ -240,6 +240,67 @@ query('/token/:network/:address/transfers', {
 "
 ```
 
+## Pagination
+
+Many endpoints return paginated results. Use `cursor` and `limit` parameters:
+
+```bash
+cd $SKILL_DIR
+node -e "
+const { query } = require('./query');
+
+// First page
+query('/erc20/:address/transfers', {
+  address: '0x6B175474E89094C44Da98b954EedeAC495271d0F',
+  params: { limit: 100 }
+})
+  .then(data => {
+    console.log('Page 1:', data.result.length, 'transfers');
+    console.log('Cursor for next page:', data.cursor);
+
+    // Fetch next page using cursor
+    if (data.cursor) {
+      return query('/erc20/:address/transfers', {
+        address: '0x6B175474E89094C44Da98b954EedeAC495271d0F',
+        params: { limit: 100, cursor: data.cursor }
+      });
+    }
+  })
+  .then(data => {
+    if (data) console.log('Page 2:', data.result.length, 'transfers');
+  })
+  .catch(console.error);
+"
+```
+
+### Automatic Pagination Loop
+
+```bash
+cd $SKILL_DIR
+node -e "
+const { query } = require('./query');
+
+async function getAllTransfers() {
+  let allTransfers = [];
+  let cursor = null;
+
+  do {
+    const result = await query('/erc20/:address/transfers', {
+      address: '0x6B175474E89094C44Da98b954EedeAC495271d0F',
+      params: { limit: 100, cursor }
+    });
+    allTransfers.push(...result.result);
+    cursor = result.cursor;
+  } while (cursor);
+
+  console.log('Total transfers:', allTransfers.length);
+  return allTransfers;
+}
+
+getAllTransfers().catch(console.error);
+"
+```
+
 ## Response Format
 
 ```json

@@ -149,6 +149,68 @@ query('/wallets/:address/swaps', {
 "
 ```
 
+## Pagination
+
+Many endpoints return paginated results. Use `cursor` and `limit` parameters:
+
+```bash
+cd $SKILL_DIR
+node -e "
+const { query } = require('./query');
+
+// First page
+query('/:address/nft', {
+  address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
+  params: { limit: 100, format: 'decimal' }
+})
+  .then(data => {
+    console.log('Page 1:', data.result.length, 'NFTs');
+    console.log('Total:', data.total);
+    console.log('Cursor for next page:', data.cursor);
+
+    // Fetch next page using cursor
+    if (data.cursor) {
+      return query('/:address/nft', {
+        address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
+        params: { limit: 100, cursor: data.cursor, format: 'decimal' }
+      });
+    }
+  })
+  .then(data => {
+    if (data) console.log('Page 2:', data.result.length, 'NFTs');
+  })
+  .catch(console.error);
+"
+```
+
+### Automatic Pagination Loop
+
+```bash
+cd $SKILL_DIR
+node -e "
+const { query } = require('./query');
+
+async function getAllNFTs() {
+  let allNFTs = [];
+  let cursor = null;
+
+  do {
+    const result = await query('/:address/nft', {
+      address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
+      params: { limit: 100, cursor, format: 'decimal' }
+    });
+    allNFTs.push(...result.result);
+    cursor = result.cursor;
+  } while (cursor);
+
+  console.log('Total NFTs collected:', allNFTs.length);
+  return allNFTs;
+}
+
+getAllNFTs().catch(console.error);
+"
+```
+
 ## Response Format
 
 All responses return JSON:
