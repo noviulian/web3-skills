@@ -16,12 +16,35 @@ Comprehensive Web3 data skills for Claude Code supporting both **EVM chains** (E
 
 ## Quick Start
 
-### 1. Get API Key
+### Method 1: Marketplace Installation (Recommended)
+
+The easiest way to install all Web3 skills at once:
+
+```bash
+# Add marketplace
+/plugin marketplace add noviulian/web3-skills
+
+# Install plugin
+/plugin install web3-skills
+
+# Set API key
+/web3-api-key
+```
+
+That's it! All 9 skills are installed and ready to use.
+
+---
+
+### Method 2: Manual Installation (Advanced)
+
+If you prefer to install individual skills or want more control:
+
+#### 1. Get API Key
 
 1. Register at **[admin.moralis.io/register](https://admin.moralis.io/register)** (free, no credit card required)
 2. Get your API key at **[admin.moralis.com/api-keys](https://admin.moralis.com/api-keys)**
 
-### 2. Install Skills
+#### 2. Install Skills
 
 ```bash
 # Add to Claude Code skills directory
@@ -34,7 +57,7 @@ cp -r web3-skills/skills/web3-token-api ~/.claude/skills/
 # ... etc for other skills
 ```
 
-### 3. Set API Key
+#### 3. Set API Key
 
 ```bash
 # Set API key for a skill
@@ -47,7 +70,9 @@ for dir in web3-*; do
 done
 ```
 
-### 4. Use
+---
+
+### Use
 
 Simply ask Claude about Web3 data:
 

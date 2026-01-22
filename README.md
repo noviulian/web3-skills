@@ -11,7 +11,9 @@ Comprehensive Web3 data skills for Claude Code supporting both **EVM chains** (E
 
 ## Quick Start
 
-### Installation
+### Method 1: Marketplace Installation (Recommended)
+
+The easiest way to install all Web3 skills at once:
 
 ```bash
 # Add marketplace
@@ -23,6 +25,12 @@ Comprehensive Web3 data skills for Claude Code supporting both **EVM chains** (E
 # Set API key
 /web3-api-key
 ```
+
+**That's it!** All 9 skills are installed and ready to use.
+
+### Method 2: Manual Installation (Advanced)
+
+If you prefer to install individual skills or want more control, see the [Installation Guide](https://noviulian.github.io/web3-skills/installation).
 
 ### Usage
 

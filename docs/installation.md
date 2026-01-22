@@ -16,7 +16,26 @@ Follow these steps to install Web3 Skills for Claude Code.
 
 ## Installation Methods
 
-### Method 1: Install All Skills
+### Method 1: Marketplace Installation (Recommended)
+
+The easiest way to install all Web3 skills at once:
+
+```bash
+# Add marketplace
+/plugin marketplace add noviulian/web3-skills
+
+# Install plugin
+/plugin install web3-skills
+
+# Set API key
+/web3-api-key
+```
+
+**That's it!** All 9 skills are installed and ready to use.
+
+---
+
+### Method 2: Install All Skills Manually
 
 ```bash
 # Clone to Claude skills directory
@@ -26,7 +45,11 @@ git clone https://github.com/noviulian/web3-skills.git
 # The skills are now in ~/.claude/skills/web3-skills/skills/
 ```
 
-### Method 2: Install Individual Skills
+Then set your API key (see below).
+
+---
+
+### Method 3: Install Individual Skills
 
 ```bash
 # Create skills directory if it doesn't exist
@@ -39,15 +62,34 @@ cp -r /tmp/web3-skills/skills/web3-token-api ~/.claude/skills/
 # ... add more skills as needed
 ```
 
-### Method 3: Manual Installation
+Then set your API key for each skill (see below).
+
+---
+
+### Method 4: Manual Installation
 
 1. Download the skill directory you want
 2. Copy it to `~/.claude/skills/`
 3. Ensure the directory contains `SKILL.md` and `query.js`
+4. Set your API key (see below)
 
 ## Setting Your API Key
 
-### For Individual Skills
+### For Marketplace Installation
+
+If you used the marketplace installation method, simply run:
+
+```bash
+/web3-api-key
+```
+
+This will prompt you to enter your Moralis API key and configure all skills automatically.
+
+---
+
+### For Manual Installation
+
+#### For Individual Skills
 
 ```bash
 # Replace YOUR_API_KEY from https://admin.moralis.io/register
