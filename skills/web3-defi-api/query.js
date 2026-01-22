@@ -1,7 +1,6 @@
 const https = require("https");
 const fs = require("fs");
 const path = require("path");
-const url = require("url");
 
 /**
  * Simple API client using ONLY Node.js built-in modules
@@ -68,12 +67,12 @@ function detectBlockchain(address, context = {}) {
  */
 function httpsRequest(fullUrl, headers) {
   return new Promise((resolve, reject) => {
-    const parsedUrl = url.parse(fullUrl);
+    const parsedUrl = new URL(fullUrl);
 
     const options = {
       hostname: parsedUrl.hostname,
       port: parsedUrl.port || 443,
-      path: parsedUrl.path,
+      path: parsedUrl.pathname + parsedUrl.search,
       method: "GET",
       headers: headers,
     };
