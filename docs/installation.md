@@ -28,7 +28,7 @@ The easiest way to install all Web3 skills at once:
 /plugin install web3-skills
 
 # Set API key
-/web3-api-key
+/web3-api-key <paste your API key here>
 ```
 
 **That's it!** All 9 skills are installed and ready to use.
@@ -80,10 +80,15 @@ Then set your API key for each skill (see below).
 If you used the marketplace installation method, simply run:
 
 ```bash
-/web3-api-key
+/web3-api-key <paste your API key here>
 ```
 
-This will prompt you to enter your Moralis API key and configure all skills automatically.
+For example:
+```bash
+/web3-api-key eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+```
+
+This will configure your Moralis API key for all 9 Web3 skills automatically.
 
 ---
 

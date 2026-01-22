@@ -28,7 +28,7 @@ The easiest way to install all Web3 skills at once:
 /plugin install web3-skills
 
 # Set API key
-/web3-api-key
+/web3-api-key <paste your API key here>
 ```
 
 That's it! All 9 skills are installed and ready to use.
