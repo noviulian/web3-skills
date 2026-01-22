@@ -33,7 +33,7 @@ echo "MORALIS_API_KEY=paste_your_actual_key_here" > ~/.claude/plugins/marketplac
 
 ## Get Your API Key
 
-Visit: https://admin.moralis.io/register
+Visit: **[admin.moralis.io/register](https://admin.moralis.io/register)** (free, no credit card required)
 
 **Note:** A single Moralis API key provides access to both EVM and Solana APIs.
 
@@ -64,5 +64,5 @@ Expected response:
 - No extra spaces or quotes around the key
 
 **API authentication error:**
-- Verify your API key is valid at https://admin.moralis.io
+- Verify your API key is valid at [admin.moralis.io](https://admin.moralis.io/register)
 - Make sure you copied the entire key without any extra characters

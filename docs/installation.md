@@ -10,7 +10,7 @@ Follow these steps to install Web3 Skills for Claude Code.
 ## Prerequisites
 
 - **Node.js** installed (for running queries)
-- **Moralis API key** - Get one free at [admin.moralis.io/register](https://admin.moralis.io/register)
+- **[Moralis API key](https://admin.moralis.io/register)** - Get one free (no credit card required)
 
 ## Installation Methods
 
@@ -48,7 +48,7 @@ cp -r /tmp/web3-skills/skills/web3-token-api ~/.claude/skills/
 ### For Individual Skills
 
 ```bash
-# Replace YOUR_API_KEY with your actual Moralis API key
+# Replace YOUR_API_KEY from https://admin.moralis.io/register
 echo "MORALIS_API_KEY=YOUR_API_KEY" > ~/.claude/skills/web3-wallet-api/.env
 ```
 
@@ -104,7 +104,7 @@ Make sure you copied the entire skill directory, including the `SKILL.md` file.
 
 ### Query returns errors
 
-1. Verify your API key is valid at [admin.moralis.io](https://admin.moralis.io)
+1. Verify your API key is valid at [admin.moralis.io](https://admin.moralis.io/register)
 2. Check the address format is correct
 3. Ensure you have network access
 

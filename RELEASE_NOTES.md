@@ -39,13 +39,14 @@
 
 - [README.md](README.md)
 - [Implementation Plan](IMPLEMENTATION_PLAN.md)
-- [Moralis EVM API](https://deep-index.moralis.io/api-docs-2.2/)
-- [Moralis Solana API](https://solana-gateway.moralis.io/api/)
+- [Get API Key](https://admin.moralis.io/register) - Free registration
+- [Moralis EVM API Docs](https://deep-index.moralis.io/api-docs-2.2/)
+- [Moralis Solana API Docs](https://solana-gateway.moralis.io/api/)
 
 ### Requirements
 
 - Node.js (built-in modules only)
-- Moralis API key (get it at https://admin.moralis.io/register)
+- [Moralis API key](https://admin.moralis.io/register) - Get one free
 
 ### Known Limitations
 

@@ -5,7 +5,7 @@ title: Web3 Skills for Claude Code
 
 # Web3 Skills for Claude Code
 
-Comprehensive Web3 data skills for Claude Code supporting both **EVM chains** (Ethereum, Polygon, BSC, etc.) and **Solana** using the Moralis API.
+Comprehensive Web3 data skills for Claude Code supporting both **EVM chains** (Ethereum, Polygon, BSC, etc.) and **Solana** using the [Moralis API](https://admin.moralis.io/register).
 
 ## Features
 
@@ -18,7 +18,7 @@ Comprehensive Web3 data skills for Claude Code supporting both **EVM chains** (E
 
 ### 1. Get API Key
 
-Visit [Moralis](https://admin.moralis.io/register) to get your free API key.
+Visit [admin.moralis.io/register](https://admin.moralis.io/register) to get your free API key.
 
 ### 2. Install Skills
 
