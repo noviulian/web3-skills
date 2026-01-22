@@ -28,7 +28,8 @@ I'll automatically configure the API key for all 9 Web3 skills at once.
 ```bash
 # Set API key for all skills at once
 API_KEY="paste_your_actual_key_here"
-cd ~/.claude/plugins/marketplaces/web3-skills/skills
+MARKETPLACE_DIR=$(ls -d ~/.claude/plugins/marketplaces/web3-skills* 2>/dev/null | head -1)
+cd "$MARKETPLACE_DIR/skills"
 for dir in web3-*; do
   echo "MORALIS_API_KEY=$API_KEY" > "$dir/.env"
 done
@@ -39,9 +40,10 @@ echo "✅ API key set for all 9 skills"
 
 ```bash
 # For each skill you want to use
-echo "MORALIS_API_KEY=paste_your_actual_key_here" > ~/.claude/plugins/marketplaces/web3-skills/skills/web3-wallet-api/.env
-echo "MORALIS_API_KEY=paste_your_actual_key_here" > ~/.claude/plugins/marketplaces/web3-skills/skills/web3-token-api/.env
-echo "MORALIS_API_KEY=paste_your_actual_key_here" > ~/.claude/plugins/marketplaces/web3-skills/skills/web3-nft-api/.env
+MARKETPLACE_DIR=$(ls -d ~/.claude/plugins/marketplaces/web3-skills* 2>/dev/null | head -1)
+echo "MORALIS_API_KEY=paste_your_actual_key_here" > "$MARKETPLACE_DIR/skills/web3-wallet-api/.env"
+echo "MORALIS_API_KEY=paste_your_actual_key_here" > "$MARKETPLACE_DIR/skills/web3-token-api/.env"
+echo "MORALIS_API_KEY=paste_your_actual_key_here" > "$MARKETPLACE_DIR/skills/web3-nft-api/.env"
 # ... repeat for other skills
 ```
 
@@ -56,7 +58,8 @@ echo "MORALIS_API_KEY=paste_your_actual_key_here" > ~/.claude/plugins/marketplac
 
 ```bash
 # Test wallet balance query
-cd ~/.claude/plugins/marketplaces/web3-skills/skills/web3-wallet-api
+MARKETPLACE_DIR=$(ls -d ~/.claude/plugins/marketplaces/web3-skills* 2>/dev/null | head -1)
+cd "$MARKETPLACE_DIR/skills/web3-wallet-api"
 node query.js /0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045/balance
 ```
 
