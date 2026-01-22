@@ -28,11 +28,24 @@ I'll automatically configure the API key for all 9 Web3 skills at once.
 ```bash
 # Set API key for all skills at once
 API_KEY="paste_your_actual_key_here"
+
+# Set in plugin source directory (for development)
 MARKETPLACE_DIR=$(ls -d ~/.claude/plugins/marketplaces/web3-skills* 2>/dev/null | head -1)
-cd "$MARKETPLACE_DIR/skills"
-for dir in web3-*; do
-  echo "MORALIS_API_KEY=$API_KEY" > "$dir/.env"
-done
+if [ -d "$MARKETPLACE_DIR/skills" ]; then
+  cd "$MARKETPLACE_DIR/skills"
+  for dir in web3-*; do
+    echo "MORALIS_API_KEY=$API_KEY" > "$dir/.env"
+  done
+fi
+
+# Set in cache directory (where installed plugins actually run)
+CACHE_DIR=$(ls -d ~/.claude/plugins/cache/web3-skills-marketplace/web3-skills/*/skills 2>/dev/null | head -1)
+if [ -n "$CACHE_DIR" ]; then
+  for dir in "$CACHE_DIR"/web3-*; do
+    echo "MORALIS_API_KEY=$API_KEY" > "$dir/.env"
+  done
+fi
+
 echo "✅ API key set for all 9 skills"
 ```
 
@@ -41,9 +54,17 @@ echo "✅ API key set for all 9 skills"
 ```bash
 # For each skill you want to use
 MARKETPLACE_DIR=$(ls -d ~/.claude/plugins/marketplaces/web3-skills* 2>/dev/null | head -1)
+CACHE_DIR=$(ls -d ~/.claude/plugins/cache/web3-skills-marketplace/web3-skills/*/skills 2>/dev/null | head -1)
+
+# Set in both plugin and cache directories
 echo "MORALIS_API_KEY=paste_your_actual_key_here" > "$MARKETPLACE_DIR/skills/web3-wallet-api/.env"
+[ -n "$CACHE_DIR" ] && echo "MORALIS_API_KEY=paste_your_actual_key_here" > "$CACHE_DIR/web3-wallet-api/.env"
+
 echo "MORALIS_API_KEY=paste_your_actual_key_here" > "$MARKETPLACE_DIR/skills/web3-token-api/.env"
+[ -n "$CACHE_DIR" ] && echo "MORALIS_API_KEY=paste_your_actual_key_here" > "$CACHE_DIR/web3-token-api/.env"
+
 echo "MORALIS_API_KEY=paste_your_actual_key_here" > "$MARKETPLACE_DIR/skills/web3-nft-api/.env"
+[ -n "$CACHE_DIR" ] && echo "MORALIS_API_KEY=paste_your_actual_key_here" > "$CACHE_DIR/web3-nft-api/.env"
 # ... repeat for other skills
 ```
 
@@ -58,8 +79,9 @@ echo "MORALIS_API_KEY=paste_your_actual_key_here" > "$MARKETPLACE_DIR/skills/web
 
 ```bash
 # Test wallet balance query
-MARKETPLACE_DIR=$(ls -d ~/.claude/plugins/marketplaces/web3-skills* 2>/dev/null | head -1)
-cd "$MARKETPLACE_DIR/skills/web3-wallet-api"
+# Note: Skills run from the cache directory when installed
+CACHE_DIR=$(ls -d ~/.claude/plugins/cache/web3-skills-marketplace/web3-skills/*/skills 2>/dev/null | head -1)
+cd "$CACHE_DIR/web3-wallet-api"
 node query.js /0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045/balance
 ```
 
@@ -74,8 +96,11 @@ Expected response:
 ## Troubleshooting
 
 **"API key not found" error:**
-- Make sure `.env` file exists in the skill directory
-- Check the file path is correct
+- The API key must be set in BOTH the plugin source directory AND the cache directory
+- Use Method 1 above to automatically set it in both locations
+- Verify `.env` files exist in both:
+  - `~/.claude/plugins/marketplaces/web3-skills/skills/web3-*/.env`
+  - `~/.claude/plugins/cache/web3-skills-marketplace/web3-skills/*/skills/web3-*/.env`
 
 **"Invalid .env file" error:**
 - Ensure the file format is exactly: `MORALIS_API_KEY=your_key_here`

@@ -1,5 +1,31 @@
 # Release Notes
 
+## Version 1.0.1
+
+### Fixes
+
+- ✅ **Fixed API key setup** - Now sets the API key in both plugin source directory and cache directory to ensure skills work correctly after installation
+- ✅ **Updated documentation** - Separated installation commands into 3 easy-to-copy steps with clear restart instruction
+
+### Installation (Updated)
+
+**Step 1:** Add the marketplace
+```bash
+/plugin marketplace add noviulian/web3-skills
+```
+
+**Step 2:** Install the plugin
+```bash
+/plugin install web3-skills
+```
+
+**Step 3:** Restart Claude Code, then set your API key
+```bash
+/web3-api-key <paste your API key here>
+```
+
+---
+
 ## Version 1.0.0 (Initial Release)
 
 ### Features
