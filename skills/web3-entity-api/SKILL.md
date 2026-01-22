@@ -1,10 +1,12 @@
 ---
 name: web3-entity-api
 description: Search and query labeled entities including exchanges, funds, protocols, and whales. Get entity categories, search for labeled addresses, and retrieve entity information. Use when user asks about exchange wallets, fund tracking, or labeled addresses.
-tags: [web3, blockchain, entity, labels, exchange, funds, evm]
-version: 1.0.0
-author: web3-skills
+license: MIT
 compatibility: Requires Node.js (built-in modules only, no npm install needed). EVM chains only - not supported on Solana.
+metadata:
+  version: "1.0.0"
+  author: web3-skills
+  tags: [web3, blockchain, entity, labels, exchange, funds, evm]
 ---
 
 # Web3 Entity API (EVM Only)

@@ -1,10 +1,12 @@
 ---
 name: web3-price-api
 description: Query token and NFT prices including current prices, historical data, OHLCV candlesticks, floor prices, and sale prices for both EVM chains and Solana. Get native token prices, ERC20 prices, NFT floor prices, and price history. Use when user asks about prices, market data, or valuations.
-tags: [web3, blockchain, price, market, trading, evm, solana]
-version: 1.0.0
-author: web3-skills
+license: MIT
 compatibility: Requires Node.js (built-in modules only, no npm install needed)
+metadata:
+  version: "1.0.0"
+  author: web3-skills
+  tags: [web3, blockchain, price, market, trading, evm, solana]
 ---
 
 # Web3 Price API

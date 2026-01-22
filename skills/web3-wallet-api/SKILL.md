@@ -1,10 +1,12 @@
 ---
 name: web3-wallet-api
 description: Query wallet data including balances, transactions, NFTs, DeFi positions, net worth, and history for both EVM chains (ETH, Polygon, BSC, etc.) and Solana. Use when user asks about wallet balances, transaction history, token holdings, or Web3 wallet analysis.
-tags: [web3, blockchain, wallet, crypto, defi, evm, solana]
-version: 1.0.0
-author: web3-skills
+license: MIT
 compatibility: Requires Node.js (built-in modules only, no npm install needed)
+metadata:
+  version: "1.0.0"
+  author: web3-skills
+  tags: [web3, blockchain, wallet, crypto, defi, evm, solana]
 ---
 
 # Web3 Wallet API

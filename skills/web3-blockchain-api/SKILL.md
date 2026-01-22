@@ -1,10 +1,12 @@
 ---
 name: web3-blockchain-api
 description: Query blockchain data including blocks, transactions, and decoded transactions. Get block by hash or date, retrieve transaction details, decode contract interactions, and get wallet transaction history. Use when user asks about blocks, transactions, or on-chain data.
-tags: [web3, blockchain, block, transaction, evm]
-version: 1.0.0
-author: web3-skills
+license: MIT
 compatibility: Requires Node.js (built-in modules only, no npm install needed). EVM chains only - not supported on Solana.
+metadata:
+  version: "1.0.0"
+  author: web3-skills
+  tags: [web3, blockchain, block, transaction, evm]
 ---
 
 # Web3 Blockchain API (EVM Only)

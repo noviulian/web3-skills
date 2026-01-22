@@ -1,10 +1,12 @@
 ---
 name: web3-nft-api
 description: Query NFT data including metadata, traits, transfers, trades, floor prices, and rarity for both EVM chains and Solana. Get NFT collections, individual NFT metadata, transfer history, trading data, and analyze NFT portfolios. Use when user asks about NFTs, collections, metadata, or NFT trading.
-tags: [web3, blockchain, nft, metadata, traits, rarity, evm, solana]
-version: 1.0.0
-author: web3-skills
+license: MIT
 compatibility: Requires Node.js (built-in modules only, no npm install needed)
+metadata:
+  version: "1.0.0"
+  author: web3-skills
+  tags: [web3, blockchain, nft, metadata, traits, rarity, evm, solana]
 ---
 
 # Web3 NFT API

@@ -1,10 +1,12 @@
 ---
 name: web3-defi-api
 description: Query DeFi positions, protocol exposure, and liquidity pool positions on EVM chains. Get summary of all DeFi protocols used by a wallet, detailed positions per protocol, and portfolio allocation across DeFi platforms. Use when user asks about DeFi, liquidity pools, yield farming, or protocol exposure.
-tags: [web3, blockchain, defi, liquidity, yield, evm]
-version: 1.0.0
-author: web3-skills
+license: MIT
 compatibility: Requires Node.js (built-in modules only, no npm install needed). EVM chains only - not supported on Solana.
+metadata:
+  version: "1.0.0"
+  author: web3-skills
+  tags: [web3, blockchain, defi, liquidity, yield, evm]
 ---
 
 # Web3 DeFi API (EVM Only)

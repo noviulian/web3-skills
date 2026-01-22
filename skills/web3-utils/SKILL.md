@@ -1,10 +1,12 @@
 ---
 name: web3-utils
 description: Get API information including version, endpoint weights, and usage stats. Use for debugging and API management.
-tags: [web3, utils, api, debug]
-version: 1.0.0
-author: web3-skills
+license: MIT
 compatibility: Requires Node.js (built-in modules only, no npm install needed). EVM chains only.
+metadata:
+  version: "1.0.0"
+  author: web3-skills
+  tags: [web3, utils, api, debug]
 ---
 
 # Web3 Utils

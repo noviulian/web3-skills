@@ -1,10 +1,12 @@
 ---
 name: web3-premium
 description: Premium endpoints with advanced analytics including volume stats, timeseries data, filtered token search, and multiple token analytics for both EVM and Solana. Use for advanced market analysis and professional data.
-tags: [web3, premium, analytics, volume, timeseries]
-version: 1.0.0
-author: web3-skills
+license: MIT
 compatibility: Requires Node.js (built-in modules only, no npm install needed)
+metadata:
+  version: "1.0.0"
+  author: web3-skills
+  tags: [web3, premium, analytics, volume, timeseries]
 ---
 
 # Web3 Premium API

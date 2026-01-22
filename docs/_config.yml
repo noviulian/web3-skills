@@ -1,0 +1,28 @@
+# GitHub Pages configuration
+theme: minima
+title: Web3 Skills for Claude Code
+description: Comprehensive Web3 data skills for Claude Code
+url: https://noviulian.github.io/web3-skills
+baseurl: /web3-skills
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+
+# Exclude from processing
+exclude:
+  - README.md
+  - LICENSE
+  - todo/
+  - swagger/
+  - tasks/
+  - scripts/
+  - agents/
+  - commands/
+  - .gitignore
+
+# Navigation
+header_pages:
+  - index.md
+  - installation.md
+  - examples.md

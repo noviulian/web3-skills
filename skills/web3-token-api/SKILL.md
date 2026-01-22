@@ -1,10 +1,12 @@
 ---
 name: web3-token-api
 description: Query token data including prices, metadata, DEX pairs, swaps, and transfers for both EVM chains and Solana. Get token prices, search tokens, view trading pairs, track Pump.fun tokens on Solana, and analyze token activity. Use when user asks about token prices, metadata, swaps, or DEX data.
-tags: [web3, blockchain, token, price, dex, swap, evm, solana]
-version: 1.0.0
-author: web3-skills
+license: MIT
 compatibility: Requires Node.js (built-in modules only, no npm install needed)
+metadata:
+  version: "1.0.0"
+  author: web3-skills
+  tags: [web3, blockchain, token, price, dex, swap, evm, solana]
 ---
 
 # Web3 Token API
