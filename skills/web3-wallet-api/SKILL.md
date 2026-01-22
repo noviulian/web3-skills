@@ -84,15 +84,14 @@ The skill automatically detects the blockchain:
 
 ## Common Queries
 
-### Get Wallet Balance
+### Get Wallet Balance (Token-Efficient)
 
-**EVM (auto-detected):**
+**EVM (auto-detected, defaults to Ethereum):**
 ```bash
 cd $SKILL_DIR
-node -e "
-const { query } = require('./query');
-query('/:address/balance', { address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045' })
-  .then(console.log)
+node -e "const { q } = require('./query');
+q('/:address/balance', { address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045' })
+  .then(r => console.log('Balance:', (r.balance/1e18).toFixed(4), 'ETH'))
   .catch(console.error);
 "
 ```
@@ -100,10 +99,9 @@ query('/:address/balance', { address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA9604
 **Solana (auto-detected):**
 ```bash
 cd $SKILL_DIR
-node -e "
-const { query } = require('./query');
-query('/:network/:address/balance', { address: '742d35Cc6634C0532925a3b844Bc9e7595f0bEb', network: 'mainnet' })
-  .then(console.log)
+node -e "const { q } = require('./query');
+q('/:network/:address/balance', { address: '742d35Cc6634C0532925a3b844Bc9e7595f0bEb' })
+  .then(r => console.log('Balance:', r.balance, 'SOL'))
   .catch(console.error);
 "
 ```
@@ -111,10 +109,9 @@ query('/:network/:address/balance', { address: '742d35Cc6634C0532925a3b844Bc9e75
 **With specific chain:**
 ```bash
 cd $SKILL_DIR
-node -e "
-const { query } = require('./query');
-query('/:address/balance', { address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045', chain: 'polygon' })
-  .then(console.log)
+node -e "const { q } = require('./query');
+q('/:address/balance', { address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045', chain: 'polygon' })
+  .then(r => console.log('Balance:', (r.balance/1e18).toFixed(4), 'MATIC'))
   .catch(console.error);
 "
 ```
@@ -124,10 +121,9 @@ query('/:address/balance', { address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA9604
 **EVM:**
 ```bash
 cd $SKILL_DIR
-node -e "
-const { query } = require('./query');
-query('/wallets/:address/tokens', { address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045' })
-  .then(console.log)
+node -e "const { q } = require('./query');
+q('/wallets/:address/tokens', { address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045' })
+  .then(r => console.log('Tokens:', r.result.length))
   .catch(console.error);
 "
 ```
@@ -135,10 +131,51 @@ query('/wallets/:address/tokens', { address: '0xd8dA6BF26964aF9D7eEd9e03E53415D3
 **Solana (SPL tokens):**
 ```bash
 cd $SKILL_DIR
-node -e "
-const { query } = require('./query');
-query('/:network/:address/tokens', { address: '742d35Cc6634C0532925a3b844Bc9e7595f0bEb' })
-  .then(console.log)
+node -e "const { q } = require('./query');
+q('/:network/:address/tokens', { address: '742d35Cc6634C0532925a3b844Bc9e7595f0bEb' })
+  .then(r => console.log('Tokens:', r.result.length))
+  .catch(console.error);
+"
+```
+
+### Query with Date Ranges
+
+**Query transactions from specific date:**
+```bash
+cd $SKILL_DIR
+node -e "const { q } = require('./query');
+q('/:address/erc20/transfers', {
+  address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
+  fromDate: '2024-01-01'
+})
+  .then(r => console.log('Transfers since 2024-01-01:', r.result.length))
+  .catch(console.error);
+"
+```
+
+**Query with relative time ("2 hours ago"):**
+```bash
+cd $SKILL_DIR
+node -e "const { q } = require('./query');
+q('/:address/erc20/transfers', {
+  address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
+  toDate: '2 hours ago'
+})
+  .then(r => console.log('Transfers in last 2 hours:', r.result.length))
+  .catch(console.error);
+"
+```
+
+**Date range:**
+```bash
+cd $SKILL_DIR
+node -e "const { q } = require('./query');
+q('/:address/erc20/transfers', {
+  address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
+  fromDate: '2024-01-01',
+  toDate: '2024-01-31'
+})
+  .then(r => console.log('Jan 2024 transfers:', r.result.length))
   .catch(console.error);
 "
 ```
@@ -147,9 +184,8 @@ query('/:network/:address/tokens', { address: '742d35Cc6634C0532925a3b844Bc9e759
 
 ```bash
 cd $SKILL_DIR
-node -e "
-const { query } = require('./query');
-query('/:network/:address/portfolio', { address: '742d35Cc6634C0532925a3b844Bc9e7595f0bEb' })
+node -e "const { q } = require('./query');
+q('/:network/:address/portfolio', { address: '742d35Cc6634C0532925a3b844Bc9e7595f0bEb' })
   .then(console.log)
   .catch(console.error);
 "
@@ -160,13 +196,12 @@ query('/:network/:address/portfolio', { address: '742d35Cc6634C0532925a3b844Bc9e
 **EVM:**
 ```bash
 cd $SKILL_DIR
-node -e "
-const { query } = require('./query');
-query('/:address/nft', {
+node -e "const { q } = require('./query');
+q('/:address/nft', {
   address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
   params: { format: 'decimal' }
 })
-  .then(console.log)
+  .then(r => console.log('NFTs:', r.result.length))
   .catch(console.error);
 "
 ```
@@ -174,10 +209,9 @@ query('/:address/nft', {
 **Solana:**
 ```bash
 cd $SKILL_DIR
-node -e "
-const { query } = require('./query');
-query('/:network/:address/nft', { address: '742d35Cc6634C0532925a3b844Bc9e7595f0bEb' })
-  .then(console.log)
+node -e "const { q } = require('./query');
+q('/:network/:address/nft', { address: '742d35Cc6634C0532925a3b844Bc9e7595f0bEb' })
+  .then(r => console.log('NFTs:', r.result.length))
   .catch(console.error);
 "
 ```
@@ -186,15 +220,60 @@ query('/:network/:address/nft', { address: '742d35Cc6634C0532925a3b844Bc9e7595f0
 
 ```bash
 cd $SKILL_DIR
-node -e "
-const { query } = require('./query');
-query('/wallets/:address/swaps', {
+node -e "const { q } = require('./query');
+q('/wallets/:address/swaps', {
   address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
   params: { limit: 10 }
 })
-  .then(console.log)
+  .then(r => console.log('Swaps:', r.result.length))
   .catch(console.error);
 "
+```
+
+## New Features
+
+### Date/Time to Block Conversion
+
+Convert dates to block numbers automatically when querying:
+
+**Supported date formats:**
+- ISO dates: `'2024-01-01'` or `'2024-01-01T00:00:00Z'`
+- Relative time: `'2 hours ago'`, `'1 day ago'`, `'1 week ago'`
+
+**Usage:**
+```bash
+cd $SKILL_DIR
+node -e "const { q, dateToBlock } = require('./query');
+
+// Get block for a specific date
+dateToBlock('2024-01-01')
+  .then(block => console.log('Block on 2024-01-01:', block))
+  .catch(console.error);
+
+// Get block for relative time
+dateToBlock('2 hours ago')
+  .then(block => console.log('Block 2 hours ago:', block))
+  .catch(console.error);
+"
+```
+
+### Hex Chain IDs
+
+Chain names are automatically converted to hex IDs to save tokens:
+
+| Chain | Hex ID |
+|-------|--------|
+| Ethereum (eth) | `0x1` |
+| Polygon | `0x89` |
+| BSC | `0x38` |
+| Arbitrum | `0xa4b1` |
+| Optimism | `0xa` |
+| Base | `0x2105` |
+| Avalanche | `0xa86a` |
+
+**Use chain names, hex IDs are automatic:**
+```bash
+q('/:address/balance', { address: '0x...', chain: 'polygon' })  // Uses 0x89
 ```
 
 ## Pagination
@@ -203,29 +282,17 @@ Many endpoints return paginated results. Use `cursor` and `limit` parameters:
 
 ```bash
 cd $SKILL_DIR
-node -e "
-const { query } = require('./query');
+node -e "const { q } = require('./query');
 
 // First page
-query('/:address/nft', {
+q('/:address/nft', {
   address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
   params: { limit: 100, format: 'decimal' }
 })
-  .then(data => {
-    console.log('Page 1:', data.result.length, 'NFTs');
-    console.log('Total:', data.total);
-    console.log('Cursor for next page:', data.cursor);
-
-    // Fetch next page using cursor
-    if (data.cursor) {
-      return query('/:address/nft', {
-        address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
-        params: { limit: 100, cursor: data.cursor, format: 'decimal' }
-      });
-    }
-  })
-  .then(data => {
-    if (data) console.log('Page 2:', data.result.length, 'NFTs');
+  .then(r => {
+    console.log('Page 1:', r.result.length, 'NFTs');
+    console.log('Cursor:', r.cursor);
+    return r;
   })
   .catch(console.error);
 "
@@ -235,27 +302,23 @@ query('/:address/nft', {
 
 ```bash
 cd $SKILL_DIR
-node -e "
-const { query } = require('./query');
+node -e "const { q } = require('./query');
 
-async function getAllNFTs() {
+(async () => {
   let allNFTs = [];
   let cursor = null;
 
   do {
-    const result = await query('/:address/nft', {
+    const r = await q('/:address/nft', {
       address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
       params: { limit: 100, cursor, format: 'decimal' }
     });
-    allNFTs.push(...result.result);
-    cursor = result.cursor;
+    allNFTs.push(...r.result);
+    cursor = r.cursor;
   } while (cursor);
 
-  console.log('Total NFTs collected:', allNFTs.length);
-  return allNFTs;
-}
-
-getAllNFTs().catch(console.error);
+  console.log('Total NFTs:', allNFTs.length);
+})().catch(console.error);
 "
 ```
 

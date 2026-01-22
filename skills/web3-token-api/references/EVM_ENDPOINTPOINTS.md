@@ -76,10 +76,14 @@
 - **Params:** `limit`, `cursor`, `from`, `to`
 
 ## Search Tokens
-- **Endpoint:** `GET /erc20/search`
-- **Description:** Search for tokens by name/symbol
+- **Endpoint:** `GET /tokens/search` (via `searchToken()` helper)
+- **Description:** Search for tokens by name, symbol, or address across all chains
 - **Use this endpoint when:** User asks "search tokens", "find tokens", "look up token", "token search"
-- **Params:** `q`, `chain`, `limit`
+- **Params:** `query`, `chains` (optional array of hex chain IDs)
+- **Usage:**
+  - Search all: `searchToken('pepe')`
+  - Search specific chain: `searchToken('pepe', '0x1')`
+  - Search multiple: `searchToken('pepe', ['0x1', '0x89'])`
 
 ## Get Trending Tokens
 - **Endpoint:** `GET /trending/tokens`

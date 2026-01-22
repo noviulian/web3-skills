@@ -131,19 +131,26 @@ async function query(endpoint, options = {}) {
 
   if (blockchain.type === "evm") {
     const baseURL = "https://deep-index.moralis.io/api/v2.2";
-    const searchParams = new URLSearchParams(params);
-    searchParams.append("chain", blockchain.chain);
-    fullUrl = baseURL + endpoint + "?" + searchParams.toString();
+    // Replace :address and :walletAddress placeholders in endpoint
+    let endpointPath = endpoint.replace(":address", address);
+    endpointPath = endpointPath.replace(":walletAddress", address);
+    // Remove chain from params to avoid duplication, we'll add it back
+    const { chain: _chain, ...otherParams } = params;
+    const searchParams = new URLSearchParams(otherParams);
+    // Use chain from params if provided, otherwise use detected chain
+    const chainParam = params.chain || blockchain.chain;
+    searchParams.append("chain", chainParam);
+    fullUrl = baseURL + endpointPath + "?" + searchParams.toString();
   } else {
     const baseURL = "https://solana-gateway.moralis.io";
-    const endpointWithNetwork = endpoint.replace(
-      ":network",
-      blockchain.network,
-    );
+    // Replace :network, :address, and :walletAddress placeholders in endpoint
+    let endpointPath = endpoint.replace(":network", blockchain.network);
+    endpointPath = endpointPath.replace(":address", address);
+    endpointPath = endpointPath.replace(":walletAddress", address);
     const searchParams = new URLSearchParams(params);
     const queryString =
       Object.keys(params).length > 0 ? "?" + searchParams.toString() : "";
-    fullUrl = baseURL + endpointWithNetwork + queryString;
+    fullUrl = baseURL + endpointPath + queryString;
   }
 
   // Make request
@@ -155,5 +162,77 @@ async function query(endpoint, options = {}) {
   return httpsRequest(fullUrl, headers);
 }
 
-// Export for use in SKILL.md examples
-module.exports = { query, detectBlockchain, getAPIKey, httpsRequest };
+/**
+ * Search for tokens by name, symbol, or address
+ * @param {string} queryParam - Token name, symbol, or address
+ * @param {string|string[]} chains - Optional chain filter (chain name, hex ID, or array of hex IDs)
+ * @param {string} skillDir - Skill directory for API key
+ * @returns {Promise<object>} Token search results
+ *
+ * @example
+ * // Search all chains
+ * searchToken('pepe')
+ *
+ * @example
+ * // Search specific chain
+ * searchToken('pepe', '0x1')
+ *
+ * @example
+ * // Search multiple chains
+ * searchToken('pepe', ['0x1', '0x89'])
+ */
+async function searchToken(queryParam, chains, skillDir = __dirname) {
+  const apiKey = getAPIKey(skillDir);
+  let url = `https://deep-index.moralis.io/api/v2.2/tokens/search?query=${encodeURIComponent(queryParam)}`;
+
+  // Add chains filter if specified
+  if (chains) {
+    if (Array.isArray(chains)) {
+      url += `&chains=${chains.join(",")}`;
+    } else {
+      url += `&chains=${chains}`;
+    }
+  }
+
+  return new Promise((resolve, reject) => {
+    https
+      .get(
+        url,
+        { headers: { "x-api-key": apiKey, Accept: "application/json" } },
+        (res) => {
+          let data = "";
+          res.on("data", (chunk) => {
+            data += chunk;
+          });
+          res.on("end", () => {
+            try {
+              const parsed = JSON.parse(data);
+              if (res.statusCode >= 400) {
+                reject(
+                  new Error(
+                    `API Error ${res.statusCode}: ${JSON.stringify(parsed)}`,
+                  ),
+                );
+              } else {
+                resolve(parsed);
+              }
+            } catch (e) {
+              reject(e);
+            }
+          });
+          res.on("error", reject);
+        },
+      )
+      .on("error", reject);
+  });
+}
+
+// Export with shorthand aliases for token efficiency
+module.exports = {
+  q: query, // Shorthand for query (token-efficient)
+  query,
+  searchToken, // Search tokens by name/symbol/address
+  detectBlockchain,
+  getAPIKey,
+  httpsRequest,
+};

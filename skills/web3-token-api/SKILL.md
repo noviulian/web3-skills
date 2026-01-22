@@ -203,14 +203,32 @@ query('/erc20/:address/owners', {
 
 ### Search Tokens
 
+**Search all chains:**
 ```bash
 cd $SKILL_DIR
-node -e "
-const { query } = require('./query');
-query('/erc20/search', {
-  params: { q: 'bitcoin', chain: 'eth' }
-})
-  .then(data => console.log('Results:', data.result?.length || 0))
+node -e "const { searchToken } = require('./query');
+searchToken('pepe')
+  .then(r => console.log('Found:', r.result.length, 'tokens'))
+  .catch(console.error);
+"
+```
+
+**Search specific chain:**
+```bash
+cd $SKILL_DIR
+node -e "const { searchToken } = require('./query');
+searchToken('pepe', '0x1')
+  .then(r => console.log('Found:', r.result.length, 'tokens on Ethereum'))
+  .catch(console.error);
+"
+```
+
+**Search multiple chains:**
+```bash
+cd $SKILL_DIR
+node -e "const { searchToken } = require('./query');
+searchToken('pepe', ['0x1', '0x89'])
+  .then(r => console.log('Found:', r.result.length, 'tokens on ETH+Polygon'))
   .catch(console.error);
 "
 ```
