@@ -1,0 +1,20 @@
+{
+  "plugins": [
+    {
+      "name": "web3-skills",
+      "skills": [
+        "web3-wallet-api",
+        "web3-nft-api",
+        "web3-token-api",
+        "web3-defi-api",
+        "web3-entity-api",
+        "web3-price-api",
+        "web3-blockchain-api",
+        "web3-utils",
+        "web3-premium"
+      ],
+      "commands": ["web3-api-key"],
+      "agents": ["web3-developer"]
+    }
+  ]
+}

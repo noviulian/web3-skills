@@ -1,2 +1,23 @@
-/tasks
-/swagger
+# Development files (not part of plugin)
+/tasks/
+/swagger/
+IMPLEMENTATION_PLAN.md
+todo/
+
+# Always ignore API keys (in skill directories)
+.env
+**/.env
+
+# No node_modules needed!
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
