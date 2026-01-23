@@ -3,7 +3,7 @@
 /swagger/
 IMPLEMENTATION_PLAN.md
 todo/
-
+/simulation
 # Always ignore API keys (in skill directories)
 .env
 **/.env
