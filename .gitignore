@@ -4,10 +4,10 @@
 IMPLEMENTATION_PLAN.md
 todo/
 /simulation
-# External documentation (reference only)
-/documentation/moralis-docs/*
-/documentation/audit-reports/*
-/documentation/anthropic-official/*
+# External documentation (reference only - do not commit)
+/documentation/moralis-docs/
+/documentation/audit-reports/
+/documentation/anthropic-official/
 # Always ignore API keys (in skill directories)
 .env
 **/.env
