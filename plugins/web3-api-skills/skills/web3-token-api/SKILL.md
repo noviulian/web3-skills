@@ -409,7 +409,7 @@ query('/volume/timeseries', {
 cd $SKILL_DIR
 node -e "
 const { query } = require('./query');
-query('/erc20/:token_address/holders/historical', {
+query('/erc20/:tokenAddress/holders/historical', {
   address: '0x6B175474E89094C44Da98b954EedeAC495271d0F',
   params: { limit: 30 }
 })
