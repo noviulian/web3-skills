@@ -36,7 +36,14 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/erc20/:address/price
 - **Use this endpoint when:** User asks "token price", "how much is this token", "current price", "USD price"
 - **Auto-chain:** Yes
-- **Params:** `include` (optional: "percent_change")
+- **Params:**
+  - `address` (required) - The address of the token contract
+  - `chain` (optional) - The chain to query
+  - `exchange` (optional) - The factory name or address of the token exchange
+  - `to_block` (optional) - The block number from which the token price should be checked
+  - `include` (optional) - Deprecated (percentage changes are included by default)
+  - `max_token_inactivity` (optional) - Exclude tokens inactive for more than the given amount of days
+  - `min_pair_side_liquidity_usd` (optional) - Exclude tokens with liquidity less than the specified amount in USD
 
 ---
 
@@ -47,6 +54,11 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/erc20/prices
 - **Use this endpoint when:** User asks "multiple token prices", "batch prices", "check these tokens", "price list"
 - **Method:** POST with body `{"addresses": ["0x...", ...]}`
+- **Params:**
+  - `chain` (optional) - The chain to query
+  - `include` (optional) - Deprecated (percentage changes are included by default)
+  - `max_token_inactivity` (optional) - Exclude tokens inactive for more than the given amount of days
+  - `min_pair_side_liquidity_usd` (optional) - Exclude tokens with liquidity less than the specified amount in USD
 
 ---
 
@@ -68,6 +80,9 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/floor-price
 - **Use this endpoint when:** User asks "floor price", "NFT floor", "lowest price", "collection floor"
 - **Auto-chain:** Yes
+- **Params:**
+  - `address` (required) - The address of the NFT contract
+  - `chain` (optional) - The chain to query
 
 ---
 
@@ -78,6 +93,10 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/:token_id/floor-price
 - **Use this endpoint when:** User asks "floor price for this NFT", "token floor price"
 - **Auto-chain:** Yes
+- **Params:**
+  - `address` (required) - The address of the NFT contract
+  - `token_id` (required) - The token ID of the NFT
+  - `chain` (optional) - The chain to query
 
 ---
 
@@ -88,7 +107,11 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/floor-price/historical
 - **Use this endpoint when:** User asks "NFT price history", "historical floor", "floor over time"
 - **Auto-chain:** Yes
-- **Params:** `days`, `fromDate`, `toDate`
+- **Params:**
+  - `address` (required) - The address of the NFT contract
+  - `chain` (optional) - The chain to query
+  - `interval` (required) - The duration to query
+  - `cursor` (optional) - The cursor returned in the previous response
 
 ---
 
@@ -99,6 +122,10 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/price
 - **Use this endpoint when:** User asks "NFT sales", "recent sales", "sale prices", "what did it sell for"
 - **Auto-chain:** Yes
+- **Params:**
+  - `address` (required) - The address of the NFT collection
+  - `chain` (optional) - The chain to query
+  - `days` (optional) - The number of days to look back to find the lowest price (default: 7)
 
 ---
 
@@ -109,3 +136,8 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/:token_id/price
 - **Use this endpoint when:** User asks "this NFT's sale price", "token sale price"
 - **Auto-chain:** Yes
+- **Params:**
+  - `address` (required) - The address of the NFT collection
+  - `token_id` (required) - The token id of the NFT collection
+  - `chain` (optional) - The chain to query
+  - `days` (optional) - The number of days to look back to find the lowest price (default: 7)
