@@ -1,51 +1,37 @@
 #!/bin/bash
 
-# Test installation flow
+# Test installation flow for skills-only layout
 
-echo "Testing Installation Flow"
+echo "Testing Installation Flow (Skills-Only Layout)"
 echo "============================="
 echo ""
 
-# Test 1: Check marketplace manifest
-echo "Test 1: Marketplace Manifest"
-if [ -f ".claude-plugin/marketplace.json" ]; then
-  echo "✓ Marketplace metadata exists"
+# Test 1: Check skills directory exists
+echo "Test 1: Skills Directory"
+if [ -d "skills" ]; then
+  echo "✓ Skills directory exists"
 else
-  echo "✗ Marketplace metadata missing"
+  echo "✗ Skills directory missing"
   exit 1
 fi
 echo ""
 
-# Test 2: Check plugin manifests
-echo "Test 2: Plugin Manifests"
-if [ -f "plugins/web3-api-skills/.claude-plugin/plugin.json" ]; then
-  echo "✓ web3-api-skills plugin.json exists"
-else
-  echo "✗ web3-api-skills plugin.json missing"
-fi
-if [ -f "plugins/streams-api-skills/.claude-plugin/plugin.json" ]; then
-  echo "✓ streams-api-skills plugin.json exists"
-else
-  echo "✗ streams-api-skills plugin.json missing"
-fi
-echo ""
-
-# Test 3: Check all skill directories
-echo "Test 3: Skill Directories"
-SKILL_COUNT=$(find plugins/web3-api-skills/skills -maxdepth 1 -type d -name "web3-*" ! -name "web3-shared" | wc -l)
+# Test 2: Count all skill directories
+echo "Test 2: Skill Directories"
+SKILL_COUNT=$(find skills -maxdepth 1 -type d ! -name "skills" ! -name "web3-shared" | wc -l)
 echo "Found $SKILL_COUNT skill directories"
-if [ "$SKILL_COUNT" -eq 9 ]; then
-  echo "✓ All 9 skills present"
+if [ "$SKILL_COUNT" -ge 9 ]; then
+  echo "✓ At least 9 skills present (found $SKILL_COUNT)"
 else
-  echo "✗ Expected 9 skills, found $SKILL_COUNT"
+  echo "✗ Expected at least 9 skills, found $SKILL_COUNT"
 fi
 echo ""
 
-# Test 4: Check shared utilities
-echo "Test 4: Shared Utilities"
-if [ -f "plugins/web3-api-skills/skills/web3-shared/query.js" ]; then
+# Test 3: Check shared utilities
+echo "Test 3: Shared Utilities"
+if [ -f "skills/web3-shared/query.js" ]; then
   echo "✓ Shared query.js exists"
-  if node -e "require('./plugins/web3-api-skills/skills/web3-shared/query.js')" 2>/dev/null; then
+  if node -e "require('./skills/web3-shared/query.js')" 2>/dev/null; then
     echo "✓ query.js loads without errors"
   else
     echo "✗ query.js has syntax errors"
@@ -55,42 +41,31 @@ else
 fi
 echo ""
 
-# Test 5: Check command
-echo "Test 5: Commands"
-if [ -f "plugins/web3-api-skills/commands/web3-api-key.md" ]; then
-  echo "✓ API key command exists"
+# Test 4: Check API key command
+echo "Test 4: API Key Command"
+if [ -f "skills/moralis-api-key/SKILL.md" ]; then
+  echo "✓ API key command skill exists"
 else
-  echo "✗ API key command missing"
+  echo "✗ API key command skill missing"
 fi
 echo ""
 
-# Test 6: Validate JSON files
-echo "Test 6: JSON Validation"
-if command -v python3 &> /dev/null; then
-  python3 -m json.tool .claude-plugin/marketplace.json > /dev/null 2>&1
-  if [ $? -eq 0 ]; then
-    echo "✓ marketplace.json is valid JSON"
+# Test 5: Sample skill validation
+echo "Test 5: Sample Skill Validation"
+SAMPLE_SKILL="skills/moralis-wallet-api"
+if [ -d "$SAMPLE_SKILL" ]; then
+  if [ -f "$SAMPLE_SKILL/SKILL.md" ] && [ -f "$SAMPLE_SKILL/query.js" ]; then
+    echo "✓ Sample skill has SKILL.md and query.js"
   else
-    echo "✗ marketplace.json has invalid JSON"
-  fi
-
-  python3 -m json.tool plugins/web3-api-skills/.claude-plugin/plugin.json > /dev/null 2>&1
-  if [ $? -eq 0 ]; then
-    echo "✓ web3-api-skills plugin.json is valid JSON"
-  else
-    echo "✗ web3-api-skills plugin.json has invalid JSON"
-  fi
-
-  python3 -m json.tool plugins/streams-api-skills/.claude-plugin/plugin.json > /dev/null 2>&1
-  if [ $? -eq 0 ]; then
-    echo "✓ streams-api-skills plugin.json is valid JSON"
-  else
-    echo "✗ streams-api-skills plugin.json has invalid JSON"
+    echo "✗ Sample skill missing required files"
   fi
 else
-  echo "⚠ python3 not found, skipping JSON validation"
+  echo "✗ Sample skill directory not found"
 fi
 echo ""
 
 echo "============================="
 echo "Installation test complete!"
+echo ""
+echo "Note: Skills-only layout does not use plugin manifests or marketplace.json"
+echo "Skills are located at: skills/<skill-name>/"

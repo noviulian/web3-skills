@@ -73,13 +73,15 @@ validate_query_js() {
   # Check if it's the shared query or streams query
   if [[ "$file" == *"web3-shared/query.js" ]]; then
     echo -e "  ${GREEN}✓ SKIP${NC} - Core query.js (manual review required)"
-  elif [[ "$file" == *"streams-api/query.js" ]]; then
+  elif [[ "$file" == *"moralis-streams-api/query.js" ]]; then
     echo -e "  ${GREEN}✓ SKIP${NC} - Streams query.js (manual review required)"
+  elif [[ "$file" == *"moralis-api-key/query.js" ]]; then
+    echo -e "  ${GREEN}✓ SKIP${NC} - API key command (manual review required)"
   else
     # Check if it properly re-exports from web3-shared
     local content=$(cat "$file")
-    if [[ "$content" == *"module.exports = require("../web3-shared/query");"* ]] || \
-       [[ "$content" == *"module.exports = require(\"../web3-shared/query\");"* ]]; then
+    if [[ "$content" == *"module.exports = require(\"../web3-shared/query\")"* ]] || \
+       [[ "$content" == *"module.exports = require('../web3-shared/query')"* ]]; then
       echo -e "  ${GREEN}✓ PASS${NC} - Correctly re-exports from web3-shared"
       VALID_FILES=$((VALID_FILES + 1))
     else
@@ -97,7 +99,7 @@ echo "===================================="
 echo ""
 
 # Find and validate all SKILL.md files
-for file in plugins/*/skills/*/SKILL.md; do
+for file in skills/*/SKILL.md; do
   if [ -f "$file" ]; then
     validate_file "$file"
   fi
@@ -109,7 +111,7 @@ echo "============================================"
 echo ""
 
 # Find and validate all ENDPOINTS.md files
-for file in plugins/*/skills/*/references/*ENDPOINTS.md; do
+for file in skills/*/references/*ENDPOINTS.md; do
   if [ -f "$file" ]; then
     validate_file "$file"
   fi
@@ -121,7 +123,7 @@ echo "==================================="
 echo ""
 
 # Find and validate all query.js files
-for file in plugins/*/skills/*/query.js; do
+for file in skills/*/query.js; do
   if [ -f "$file" ]; then
     validate_query_js "$file"
   fi
