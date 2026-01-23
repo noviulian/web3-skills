@@ -48,25 +48,147 @@ You can also use the shared `/web3-api-key` command to set the same key for both
 
 ## Core Endpoints
 
-- `GET /streams/evm` - List streams (requires `limit`)
-- `PUT /streams/evm` - Create a stream
-- `GET /streams/evm/{id}` - Get stream details
-- `POST /streams/evm/{id}` - Update a stream
-- `DELETE /streams/evm/{id}` - Delete a stream
-- `POST /streams/evm/{id}/duplicate` - Duplicate a stream
-- `POST /streams/evm/{id}/status` - Update stream status
-- `GET /streams/evm/{id}/address` - List stream addresses (requires `limit`)
-- `POST /streams/evm/{id}/address` - Add addresses to a stream
-- `PATCH /streams/evm/{id}/address` - Remove addresses from a stream
-- `POST /streams/evm/{chainId}/block/{blockNumber}` - Fetch stream block data (POST)
-- `POST /streams/evm/{chainId}/block-to-webhook/{blockNumber}/{streamId}` - Deliver block data to webhook (POST)
-- `GET /history` - Stream history (requires `limit`)
-- `GET /history/logs` - Delivery logs (requires `limit`)
-- `POST /history/replay/{streamId}/{id}` - Replay delivery
-- `GET /settings` - Get project settings
-- `POST /settings` - Update project settings
-- `GET /stats` - Get overall stats
-- `GET /stats/{streamId}` - Get stats for a stream
+### List Streams
+
+**Endpoint:** `GET /streams/evm`
+**Function Name:** GetStreams
+**Description:** Retrieve a list of all streams. Requires `limit` parameter (max 100).
+
+**Endpoint:** `PUT /streams/evm`
+**Function Name:** CreateStream
+**Description:** Create a new stream for real-time blockchain event monitoring. Requires `webhookUrl`, `description`, and `chainIds`.
+
+### Stream Details
+
+**Endpoint:** `GET /streams/evm/:id`
+**Function Name:** GetStream
+**Description:** Get detailed information about a specific stream by ID.
+
+**Endpoint:** `POST /streams/evm/:id`
+**Function Name:** UpdateStream
+**Description:** Update an existing stream. Supports partial updates (any subset of create fields).
+
+**Endpoint:** `DELETE /streams/evm/:id`
+**Function Name:** DeleteStream
+**Description:** Permanently delete a stream. Use with caution - this cannot be undone.
+
+### Stream Operations
+
+**Endpoint:** `POST /streams/evm/:id/duplicate`
+**Function Name:** DuplicateStream
+**Description:** Create a copy of an existing stream with the same configuration.
+
+**Endpoint:** `POST /streams/evm/:id/status`
+**Function Name:** UpdateStreamStatus
+**Description:** Update the status of a stream (active, paused, error, terminated).
+
+### Address Management
+
+**Endpoint:** `GET /streams/evm/:id/address`
+**Function Name:** GetAddresses
+**Description:** List all addresses associated with a stream. Requires `limit` parameter (max 100).
+
+**Endpoint:** `POST /streams/evm/:id/address`
+**Function Name:** AddAddressToStream
+**Description:** Add one or more addresses to a stream.
+
+**Endpoint:** `PATCH /streams/evm/:id/address`
+**Function Name:** ReplaceAddressFromStream
+**Description:** Replace addresses in a stream with a new set.
+
+**Endpoint:** `DELETE /streams/evm/:id/address`
+**Function Name:** DeleteAddressFromStream
+**Description:** Remove one or more addresses from a stream.
+
+### Block Data
+
+**Endpoint:** `POST /streams/evm/:chainId/block/:blockNumber`
+**Function Name:** GetStreamBlockDataByNumber
+**Description:** Fetch historical block data using a stream's configuration. Uses POST method with optional body for filters.
+
+**Endpoint:** `POST /streams/evm/:chainId/block-to-webhook/:blockNumber/:streamId`
+**Function Name:** GetStreamBlockDataToWebhookByNumber
+**Description:** Deliver historical block data directly to a stream's webhook. Uses POST method.
+
+### History and Replay
+
+**Endpoint:** `GET /history`
+**Function Name:** GetHistory
+**Description:** Retrieve stream history with optional filters. Requires `limit` parameter (max 100).
+
+**Endpoint:** `GET /history/logs`
+**Function Name:** GetHistoryLogs
+**Description:** Get delivery logs for webhook deliveries. Requires `limit` parameter (max 100).
+
+**Endpoint:** `POST /history/replay/:streamId/:id`
+**Function Name:** ReplayHistory
+**Description:** Replay a specific webhook delivery.
+
+### Settings
+
+**Endpoint:** `GET /settings`
+**Function Name:** GetSettings
+**Description:** Get project settings including region and secret key configuration.
+
+**Endpoint:** `POST /settings`
+**Function Name:** UpdateSettings
+**Description:** Update project settings (region, secret key).
+
+### Stats
+
+**Endpoint:** `GET /stats`
+**Function Name:** GetStats
+**Description:** Get overall statistics for all streams.
+
+**Endpoint:** `GET /stats/:streamId`
+**Function Name:** GetStreamStats
+**Description:** Get statistics for a specific stream.
+
+## Aptos Streams Endpoints
+
+### List Aptos Streams
+
+**Endpoint:** `GET /streams/aptos`
+**Function Name:** aptosStreamsGetAll
+**Description:** Retrieve a list of all Aptos streams.
+
+**Endpoint:** `PUT /streams/aptos`
+**Function Name:** aptosStreamsCreate
+**Description:** Create a new Aptos stream.
+
+### Aptos Stream Details
+
+**Endpoint:** `GET /streams/aptos/:id`
+**Function Name:** aptosStreamsGet
+**Description:** Get detailed information about a specific Aptos stream.
+
+**Endpoint:** `POST /streams/aptos/:id`
+**Function Name:** aptosStreamsUpdate
+**Description:** Update an existing Aptos stream.
+
+**Endpoint:** `DELETE /streams/aptos/:id`
+**Function Name:** aptosStreamsDelete
+**Description:** Delete an Aptos stream.
+
+### Aptos Address Management
+
+**Endpoint:** `POST /streams/aptos/:id/address`
+**Function Name:** aptosStreamsAddAddresses
+**Description:** Add addresses to an Aptos stream.
+
+**Endpoint:** `DELETE /streams/aptos/:id/address`
+**Function Name:** aptosStreamsDeleteAddresses
+**Description:** Remove addresses from an Aptos stream.
+
+**Endpoint:** `GET /streams/aptos/:id/address`
+**Function Name:** aptosStreamsGetAddresses
+**Description:** List all addresses in an Aptos stream.
+
+### Aptos Stream Status
+
+**Endpoint:** `POST /streams/aptos/:id/status`
+**Function Name:** aptosStreamsUpdateStatus
+**Description:** Update the status of an Aptos stream.
 
 ## Stream Status Values
 
@@ -85,6 +207,11 @@ Common chain IDs:
 - Avalanche: `0xa86a`
 - Optimism: `0xa`
 - Base: `0x2105`
+- Flow (2025): `0x54`
+- Ronin (2025): `0x7e`
+- Lisk (2025): `0x94`
+- Sei (2025): `0x82`
+- Monad (2025): `0x8f`
 
 ## Advanced Options (Selectors)
 
@@ -104,8 +231,9 @@ Common chain IDs:
 4. **Webhook URL**: Must be a valid HTTPS URL
 5. **Topic0 format**: Event signatures must be in string format, not keccak256 hash
 6. **Block endpoints**: `/block` and `/block-to-webhook` use `POST`, not `GET`
-7. **Address removal**: Use `PATCH` (or `DELETE`) with a JSON body
+7. **Address removal**: Use `PATCH` or `DELETE` with a JSON body
 8. **Status updates**: Use the status endpoint to pause/resume, don't delete to pause
+9. **DELETE method**: The `DELETE /streams/evm/{id}` endpoint permanently removes a stream. Use `POST /streams/evm/{id}/status` with `{"status":"paused"}` instead if you want to temporarily disable it.
 
 ## Example Query
 

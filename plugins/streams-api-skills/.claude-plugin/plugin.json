@@ -1,7 +1,7 @@
 {
   "name": "streams-api-skills",
-  "version": "1.0.0",
-  "description": "Moralis Streams API skill for real-time blockchain event monitoring with webhooks and custom filters. Supports EVM chains for tracking transactions, logs, token transfers, NFT transfers, and internal transactions.",
+  "version": "1.1.0",
+  "description": "Moralis Streams API skill for real-time blockchain event monitoring with webhooks and custom filters. Supports EVM chains including new chains (Flow, Ronin, Lisk, Sei, Monad) for tracking transactions, logs, token transfers, NFT transfers, and internal transactions. Enhanced with POST/DELETE/PATCH support.",
   "author": {
     "name": "noviulian",
     "email": "noviulian@icloud.com"
@@ -16,7 +16,8 @@
     "events",
     "monitoring",
     "blockchain",
-    "moralis"
+    "moralis",
+    "evm"
   ],
   "skills": "./skills/"
 }
