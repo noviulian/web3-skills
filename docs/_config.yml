@@ -2,8 +2,8 @@
 theme: minima
 title: Web3 Skills for Claude Code
 description: Comprehensive Web3 data skills for Claude Code
-url: https://noviulian.github.io/web3-skills
-baseurl: /web3-skills
+url: https://noviulian.github.io/moralis-skills
+baseurl: /moralis-skills
 
 # Build settings
 markdown: kramdown

@@ -56,8 +56,8 @@ cd ~/.claude/skills
 git clone https://github.com/noviulian/moralis-skills.git
 
 # Or install individual skills
-cp -r moralis-skills/skills/web3-wallet-api ~/.claude/skills/
-cp -r moralis-skills/skills/web3-token-api ~/.claude/skills/
+cp -r moralis-skills/plugins/web3-api-skills/skills/web3-wallet-api ~/.claude/skills/
+cp -r moralis-skills/plugins/web3-api-skills/skills/web3-token-api ~/.claude/skills/
 # ... etc for other skills
 ```
 
@@ -68,7 +68,7 @@ cp -r moralis-skills/skills/web3-token-api ~/.claude/skills/
 echo "MORALIS_API_KEY=your_actual_key_here" > ~/.claude/skills/web3-wallet-api/.env
 
 # Or set for all skills
-cd ~/.claude/skills/moralis-skills/skills
+cd ~/.claude/skills/moralis-skills/plugins/web3-api-skills/skills
 for dir in web3-*; do
   echo "MORALIS_API_KEY=your_actual_key_here" > "$dir/.env"
 done

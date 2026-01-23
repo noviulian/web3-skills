@@ -64,7 +64,7 @@ Native balance uses `/:address/balance`, NOT `/wallets/:address/balance`. Most o
 This skill can be installed in different locations. Always use `$SKILL_DIR` to reference the skill directory:
 
 **Installation paths:**
-- Plugin: `~/.claude/plugins/marketplaces/web3-skills/skills/web3-wallet-api`
+- Plugin: `~/.claude/plugins/marketplaces/moralis-api/skills/web3-wallet-api`
 - Global: `~/.claude/skills/web3-wallet-api`
 - Project: `<project>/.claude/skills/web3-wallet-api`
 

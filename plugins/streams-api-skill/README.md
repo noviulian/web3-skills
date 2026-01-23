@@ -21,6 +21,12 @@ Real-time blockchain event monitoring with webhooks using the [Moralis Streams A
 
 **Step 2:** Set your API key
 ```bash
+# Create a .env file in the streams-api skill directory (or a parent folder)
+MORALIS_API_KEY=your_key_here
+```
+
+You can also run the shared command (it sets the key for both plugins):
+```bash
 /web3-api-key <paste your API key here>
 ```
 

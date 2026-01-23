@@ -102,10 +102,10 @@ function getAPIKey(skillDir = __dirname) {
 
   if (!envPath) {
     throw new Error(
-      "API key not found. Please set it by running:\n" +
-        "  /web3-api-key\n\n" +
-        "Or create .env file with:\n" +
-        "  MORALIS_API_KEY=your_key_here\n" +
+      "API key not found. Create a .env file with:\n" +
+        "  MORALIS_API_KEY=your_key_here\n\n" +
+        "If you installed web3-api-skills, you can also run:\n" +
+        "  /web3-api-key\n" +
         "Searched from: " +
         skillDir,
     );

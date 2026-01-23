@@ -39,6 +39,16 @@ The easiest way to install all Web3 skills at once:
 
 ---
 
+## Path Notes
+
+Claude Code includes the plugin version in cache paths, so cache directories change on every update. The marketplace folder name also follows the marketplace name (not the repo name). Avoid hard-coded version paths and prefer:
+
+- `~/.claude/plugins/marketplaces/moralis-api/` for the installed marketplace
+- `~/.claude/plugins/cache/moralis-api/web3-api-skills/*/` for cache versions
+- `.env` discovery from the skill directory (supported by the query clients)
+
+---
+
 ### Method 2: Install All Skills Manually
 
 ```bash
@@ -46,7 +56,7 @@ The easiest way to install all Web3 skills at once:
 cd ~/.claude/skills
 git clone https://github.com/noviulian/moralis-skills.git
 
-# The skills are now in ~/.claude/skills/web3-skills/skills/
+# The skills are now in ~/.claude/skills/moralis-skills/plugins/web3-api-skills/skills/
 ```
 
 Then set your API key (see below).
@@ -61,8 +71,8 @@ mkdir -p ~/.claude/skills
 
 # Copy specific skills
 git clone https://github.com/noviulian/moralis-skills.git /tmp/moralis-skills
-cp -r /tmp/moralis-skills/skills/web3-wallet-api ~/.claude/skills/
-cp -r /tmp/moralis-skills/skills/web3-token-api ~/.claude/skills/
+cp -r /tmp/moralis-skills/plugins/web3-api-skills/skills/web3-wallet-api ~/.claude/skills/
+cp -r /tmp/moralis-skills/plugins/web3-api-skills/skills/web3-token-api ~/.claude/skills/
 # ... add more skills as needed
 ```
 
@@ -110,7 +120,7 @@ echo "MORALIS_API_KEY=YOUR_API_KEY" > ~/.claude/skills/web3-wallet-api/.env
 ```bash
 # Set API key for all Web3 skills
 API_KEY="YOUR_API_KEY"
-cd ~/.claude/skills/web3-skills/skills
+cd ~/.claude/skills/moralis-skills/plugins/web3-api-skills/skills
 for dir in web3-*; do
   echo "MORALIS_API_KEY=$API_KEY" > "$dir/.env"
 done
@@ -172,10 +182,10 @@ Make sure you copied the entire skill directory, including the `SKILL.md` file.
 rm -rf ~/.claude/skills/web3-wallet-api
 
 # Remove all Web3 skills
-rm -rf ~/.claude/skills/web3-skills
+rm -rf ~/.claude/skills/moralis-skills
 ```
 
 ## Next Steps
 
-- See [Usage Examples](/web3-skills/examples) for common queries
-- Check [API Reference](/web3-skills/api-reference) for endpoint details
+- See [Usage Examples](/moralis-skills/examples) for common queries
+- Check [API Reference](/moralis-skills/api-reference) for endpoint details

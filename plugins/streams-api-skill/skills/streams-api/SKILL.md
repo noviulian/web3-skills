@@ -37,6 +37,13 @@ All requests require the Moralis API key in the header:
 x-api-key: YOUR_API_KEY
 ```
 
+Create a `.env` file (in this skill folder or a parent directory) with:
+```
+MORALIS_API_KEY=your_key_here
+```
+
+You can also use the shared `/web3-api-key` command to set the same key for both Web3 and Streams skills.
+
 ## Stream Status Values
 
 - `active` - Stream is processing blocks

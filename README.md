@@ -84,6 +84,14 @@ Real-time blockchain event monitoring with webhooks:
 "Pause the stream with ID a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 ```
 
+## Path Notes
+
+Claude Code includes the plugin version in cache paths, so cache directories change on every update. The marketplace folder name also follows the marketplace name (not the repo name). Avoid hard-coded version paths and prefer:
+
+- `~/.claude/plugins/marketplaces/moralis-api/` for the installed marketplace
+- `~/.claude/plugins/cache/moralis-api/web3-api-skills/*/` for cache versions
+- `.env` discovery from the skill directory (supported by the query clients)
+
 ## Supported Chains
 
 **EVM:** eth, polygon, bsc, arbitrum, optimism, avalanche, fantom, base, and more
