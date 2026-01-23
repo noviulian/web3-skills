@@ -64,7 +64,6 @@ const CHAIN_HEX_MAP = {
   ronin: "0x7e4",
   "ronin testnet": "0x7e5",
   "ronin-testnet": "0x7e5",
-  "2021": "0x7e5",
   lisk: "0x46f",
   "lisk sepolia": "0x106a",
   "lisk-sepolia": "0x106a",
