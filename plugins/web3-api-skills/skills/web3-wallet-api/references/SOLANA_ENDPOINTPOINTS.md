@@ -26,6 +26,7 @@
 ## Get Native Balance
 
 - **Endpoint:** `GET /account/:network/:address/balance`
+- **Function Name:** `balance`
 - **Description:** Get native balance by wallet. Retrieves the SOL balance for a given address.
 - **API Reference:** https://solana-gateway.moralis.io/account/:network/:address/balance
 - **Use this endpoint when:** User asks "SOL balance", "native balance", "how much SOL", "Solana balance"
@@ -39,6 +40,7 @@
 ## Get SPL Tokens
 
 - **Endpoint:** `GET /account/:network/:address/tokens`
+- **Function Name:** `getSPL`
 - **Description:** Get token balance by wallet. Retrieves all SPL token balances for a given address.
 - **API Reference:** https://solana-gateway.moralis.io/account/:network/:address/tokens
 - **Use this endpoint when:** User asks "SPL tokens", "token balances", "what tokens", "Solana tokens"
@@ -53,6 +55,7 @@
 ## Get Portfolio
 
 - **Endpoint:** `GET /account/:network/:address/portfolio`
+- **Function Name:** `getPortfolio`
 - **Description:** Get portfolio by wallet. Retrieves a comprehensive portfolio including tokens with their values.
 - **API Reference:** https://solana-gateway.moralis.io/account/:network/:address/portfolio
 - **Use this endpoint when:** User asks "portfolio", "full portfolio", "complete holdings", "wallet value"
@@ -69,6 +72,7 @@
 ## Get NFTs
 
 - **Endpoint:** `GET /account/:network/:address/nft`
+- **Function Name:** `getNFTs`
 - **Description:** Get NFTs by wallet. Retrieves all NFTs owned by the specified address.
 - **API Reference:** https://solana-gateway.moralis.io/account/:network/:address/nft
 - **Use this endpoint when:** User asks "wallet NFTs", "what NFTs does this wallet own", "Solana NFT portfolio"
@@ -86,6 +90,7 @@
 ## Get Token Swaps
 
 - **Endpoint:** `GET /account/:network/:address/swaps`
+- **Function Name:** `getSwapsByWalletAddress`
 - **Description:** Get token swaps by wallet address. Retrieves all DEX swaps performed by a wallet.
 - **API Reference:** https://solana-gateway.moralis.io/account/:network/:address/swaps
 - **Use this endpoint when:** User asks "wallet swaps", "swap history", "trading history", "DEX trades"

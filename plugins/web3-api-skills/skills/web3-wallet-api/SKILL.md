@@ -4,7 +4,7 @@ description: Query wallet data including balances, transactions, NFTs, DeFi posi
 license: MIT
 compatibility: Requires Node.js (built-in modules only, no npm install needed)
 metadata:
-    version: "1.0.0"
+    version: "1.1.0"
     author: web3-skills
     tags: [web3, blockchain, wallet, crypto, defi, evm, solana]
 ---
@@ -65,6 +65,11 @@ Native balance uses `/:address/balance`, NOT `/wallets/:address/balance`. Most o
 - NFTs: `/:address/nft`
 - DeFi: `/wallets/:address/defi/*`
 - Wallet history (all activity): `/wallets/:address/history`
+- Net worth (mainnet only): `/wallets/:address/net-worth`
+- Profitability/PnL (mainnet only): `/wallets/:address/profitability`, `/wallets/:address/profitability/summary`
+- Wallet stats: `/wallets/:address/stats`
+- Active chains: `/wallets/:address/chains`
+- Domain resolution: `/resolve/:domain`, `/resolve/:address/domain`, `/wallets/:address/domains`
 
 ---
 
@@ -238,6 +243,112 @@ q('/wallets/:address/swaps', {
 "
 ```
 
+### Get Wallet Net Worth
+
+**Get total portfolio value across all chains (mainnet only):**
+
+```bash
+cd $SKILL_DIR
+node -e "const { q } = require('./query');
+q('/wallets/:address/net-worth', {
+  address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
+})
+  .then(r => console.log('Net Worth:', r.total_net_worth_usd, 'USD'))
+  .catch(console.error);
+"
+```
+
+**Note:** This endpoint filters out spam tokens and unverified contracts. Mainnet only.
+
+### Get Wallet Profitability (PnL)
+
+**Detailed profit/loss data:**
+
+```bash
+cd $SKILL_DIR
+node -e "const { q } = require('./query');
+q('/wallets/:address/profitability', {
+  address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
+  params: { limit: 10 }
+})
+  .then(r => console.log('PnL:', r.results))
+  .catch(console.error);
+"
+```
+
+**PnL summary:**
+
+```bash
+cd $SKILL_DIR
+node -e "const { q } = require('./query');
+q('/wallets/:address/profitability/summary', {
+  address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
+})
+  .then(r => console.log('Total PnL:', r.total_profit_loss))
+  .catch(console.error);
+"
+```
+
+**Note:** Profitability endpoints are mainnet only.
+
+### Get Wallet Statistics
+
+**Wallet activity statistics and analytics:**
+
+```bash
+cd $SKILL_DIR
+node -e "const { q } = require('./query');
+q('/wallets/:address/stats', {
+  address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
+})
+  .then(r => console.log('Wallet Stats:', r))
+  .catch(console.error);
+"
+```
+
+### Get Active Chains for Wallet
+
+**Which chains have wallet activity:**
+
+```bash
+cd $SKILL_DIR
+node -e "const { q } = require('./query');
+q('/wallets/:address/chains', {
+  address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
+})
+  .then(r => console.log('Active Chains:', r.chains))
+  .catch(console.error);
+"
+```
+
+### Domain Resolution (ENS)
+
+**Resolve domain to address:**
+
+```bash
+cd $SKILL_DIR
+node -e "const { q } = require('./query');
+q('/resolve/:domain', {
+  address: 'vitalik.eth'
+})
+  .then(r => console.log('Address:', r.address))
+  .catch(console.error);
+"
+```
+
+**Resolve address to domain (reverse lookup):**
+
+```bash
+cd $SKILL_DIR
+node -e "const { q } = require('./query');
+q('/resolve/:address/domain', {
+  address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
+})
+  .then(r => console.log('Domain:', r.domain))
+  .catch(console.error);
+"
+```
+
 ## New Features
 
 ### Date/Time to Block Conversion
@@ -280,11 +391,17 @@ Chain names are automatically converted to hex IDs to save tokens:
 | Optimism       | `0xa`    |
 | Base           | `0x2105` |
 | Avalanche      | `0xa86a` |
+| Flow           | `0x54`   |
+| Ronin          | `0x7e`   |
+| Lisk           | `0x94`   |
+| Sei            | `0x82`   |
+| Monad          | `0x8f`   |
 
 **Use chain names, hex IDs are automatic:**
 
 ```bash
 q('/:address/balance', { address: '0x...', chain: 'polygon' })  // Uses 0x89
+q('/:address/balance', { address: '0x...', chain: 'flow' })    // Uses 0x54
 ```
 
 ## Pagination
@@ -374,4 +491,3 @@ node -e "console.log('Node.js works:', require('./query'))"
 
 - [EVM Endpoints Reference](references/EVM_ENDPOINTPOINTS.md)
 - [Solana Endpoints Reference](references/SOLANA_ENDPOINTPOINTS.md)
-- [Usage Examples](references/EXAMPLES.md)
