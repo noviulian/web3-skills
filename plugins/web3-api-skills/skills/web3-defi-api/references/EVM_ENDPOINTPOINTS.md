@@ -22,6 +22,7 @@
 ## Get DeFi Summary
 
 - **Endpoint:** `GET /wallets/:address/defi/summary`
+- **Function Name:** `getDefiSummary`
 - **Description:** Get DeFi protocols by wallet. Retrieves a summary of all DeFi protocols the wallet has interacted with, showing total value and protocol exposure.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/wallets/:address/defi/summary
 - **Use this endpoint when:** User asks "DeFi summary", "what protocols", "DeFi overview", "protocol exposure", "which DeFi protocols"
@@ -33,6 +34,7 @@
 ## Get DeFi Positions Summary
 
 - **Endpoint:** `GET /wallets/:address/defi/positions`
+- **Function Name:** `getDefiPositionsSummary`
 - **Description:** Get DeFi positions by wallet. Retrieves detailed DeFi positions across all protocols including liquidity, staking, lending, and yield farming positions.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/wallets/:address/defi/positions
 - **Use this endpoint when:** User asks "DeFi positions", "liquidity positions", "staking", "yield farming", "lending positions", "where is the liquidity"
@@ -44,6 +46,7 @@
 ## Get DeFi Positions by Protocol
 
 - **Endpoint:** `GET /wallets/:address/defi/:protocol/positions`
+- **Function Name:** `getDefiPositionsByProtocol`
 - **Description:** Get detailed DeFi positions by wallet and protocol. Retrieves detailed positions for a specific DeFi protocol.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/wallets/:address/defi/:protocol/positions
 - **Use this endpoint when:** User asks "Aave positions", "Uniswap positions", "positions in [protocol]", "what's in [protocol]"

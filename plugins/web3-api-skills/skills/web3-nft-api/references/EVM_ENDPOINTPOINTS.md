@@ -34,6 +34,7 @@
 ### Get NFTs by Wallet
 
 - **Endpoint:** `GET /:address/nft`
+- **Function Name:** `getWalletNFTs`
 - **Description:** Get NFTs by wallet. Retrieves all NFTs owned by the specified address including metadata.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/:address/nft
 - **Use this endpoint when:** User asks "wallet NFTs", "what NFTs does this wallet own", "NFT portfolio"
@@ -46,6 +47,7 @@
 ### Get Multiple NFTs
 
 - **Endpoint:** `POST /nft/getMultipleNFTs`
+- **Function Name:** `getMultipleNFTs`
 - **Description:** Get multiple NFTs. Retrieves metadata for multiple NFTs in a single request.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/getMultipleNFTs
 - **Use this endpoint when:** User asks "multiple NFTs", "get these NFTs", "batch NFT metadata"
@@ -57,6 +59,7 @@
 ### Get NFTs by Contract
 
 - **Endpoint:** `GET /nft/:address`
+- **Function Name:** `getContractNFTs`
 - **Description:** Get NFTs by contract. Retrieves all NFTs in a specific contract/collection.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address
 - **Use this endpoint when:** User asks "NFTs in this collection", "all NFTs by contract", "show me the collection", "list all NFTs"
@@ -71,6 +74,7 @@
 ### Get NFT Metadata
 
 - **Endpoint:** `GET /nft/:address/:token_id`
+- **Function Name:** `getNFTMetadata`
 - **Description:** Get NFT data. Retrieves metadata for a specific NFT including on-chain and off-chain metadata.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/:token_id
 - **Use this endpoint when:** User asks "NFT metadata", "this specific NFT", "NFT #123", "show NFT details"
@@ -81,17 +85,19 @@
 
 ### Resync NFT Metadata
 
-- **Endpoint:** `PUT /nft/:address/:token_id/metadata/resync`
+- **Endpoint:** `GET /nft/:address/:token_id/metadata/resync`
+- **Function Name:** `reSyncMetadata`
 - **Description:** Resync metadata. Forces a refresh of NFT metadata from the URI.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/:token_id/metadata/resync
 - **Use this endpoint when:** User asks "refresh NFT metadata", "resync metadata", "update NFT data"
-- **Method:** PUT
+- **Method:** GET (triggers async resync)
 
 ---
 
 ### Get Contract Metadata
 
 - **Endpoint:** `GET /nft/:address/metadata`
+- **Function Name:** `getNFTContractMetadata`
 - **Description:** Get contract metadata. Retrieves collection-level metadata and contract details.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/metadata
 - **Use this endpoint when:** User asks "collection metadata", "contract info", "collection details"
@@ -103,10 +109,11 @@
 ### Sync NFT Contract
 
 - **Endpoint:** `PUT /nft/:address/sync`
+- **Function Name:** `syncNFTContract`
 - **Description:** Sync NFT contract. Forces a refresh of all NFT metadata in a contract.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/sync
 - **Use this endpoint when:** User asks "sync collection", "refresh all NFTs in contract", "update contract metadata"
-- **Method:** PUT
+- **Method:** PUT (triggers async sync)
 
 ---
 
@@ -115,6 +122,7 @@
 ### Get NFT Transfers by Wallet
 
 - **Endpoint:** `GET /:address/nft/transfers`
+- **Function Name:** `getWalletNFTTransfers`
 - **Description:** Get transfers by wallet. Retrieves all NFT transfers to and from the specified address.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/:address/nft/transfers
 - **Use this endpoint when:** User asks "wallet NFT transfers", "NFTs sent/received by wallet", "wallet NFT activity"
@@ -127,6 +135,7 @@
 ### Get NFT Transfers by Contract
 
 - **Endpoint:** `GET /nft/:address/transfers`
+- **Function Name:** `getNFTContractTransfers`
 - **Description:** Get transfers by contract. Retrieves all NFT transfers for a specific contract.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/transfers
 - **Use this endpoint when:** User asks "collection transfers", "all transfers for this NFT", "transfer history"
@@ -139,6 +148,7 @@
 ### Get NFT Transfers by Token
 
 - **Endpoint:** `GET /nft/:address/:token_id/transfers`
+- **Function Name:** `getNFTTransfers`
 - **Description:** Get transfers by contract and token ID. Retrieves transfer history for a specific NFT.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/:token_id/transfers
 - **Use this endpoint when:** User asks "this NFT's transfers", "transfer history for token #123"
@@ -153,6 +163,7 @@
 ### Get NFT Collections by Wallet
 
 - **Endpoint:** `GET /:address/nft/collections`
+- **Function Name:** `getWalletNFTCollections`
 - **Description:** Get collections by wallet. Provides a summary of NFT collections owned by the address.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/:address/nft/collections
 - **Use this endpoint when:** User asks "wallet NFT collections", "what collections does this wallet own", "NFT portfolio summary"
@@ -167,6 +178,7 @@
 ### Get NFT Owners
 
 - **Endpoint:** `GET /nft/:address/owners`
+- **Function Name:** `getNFTOwners`
 - **Description:** Get NFT owners. Retrieves current owners of all NFTs in a contract.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/owners
 - **Use this endpoint when:** User asks "who owns these NFTs", "NFT holders", "current owners", "holder list"
@@ -179,6 +191,7 @@
 ### Get NFT Owners by Token ID
 
 - **Endpoint:** `GET /nft/:address/:token_id/owners`
+- **Function Name:** `getNFTTokenIdOwners`
 - **Description:** Get token ID owners. Retrieves current owners of a specific NFT (handles multi-token NFTs).
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/:token_id/owners
 - **Use this endpoint when:** User asks "who owns this NFT", "owner of NFT #123"
@@ -192,6 +205,7 @@
 ### Get NFT Floor Price by Contract
 
 - **Endpoint:** `GET /nft/:address/floor-price`
+- **Function Name:** `getNFTFloorPriceByContract`
 - **Description:** Get NFT floor price by contract. Retrieves the current lowest price across all marketplaces.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/floor-price
 - **Use this endpoint when:** User asks "floor price", "lowest price", "current floor", "cheapest NFT"
@@ -202,6 +216,7 @@
 ### Get NFT Floor Price by Token
 
 - **Endpoint:** `GET /nft/:address/:token_id/floor-price`
+- **Function Name:** `getNFTFloorPriceByToken`
 - **Description:** Get NFT floor price by token. Retrieves the floor price for a specific token ID.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/:token_id/floor-price
 - **Use this endpoint when:** User asks "floor price for this NFT", "price for token #123"
@@ -212,6 +227,7 @@
 ### Get Historical NFT Floor Price
 
 - **Endpoint:** `GET /nft/:address/floor-price/historical`
+- **Function Name:** `getNFTHistoricalFloorPriceByContract`
 - **Description:** Get historical NFT floor price by contract. Retrieves historical floor price data over time.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/floor-price/historical
 - **Use this endpoint when:** User asks "historical floor price", "floor price history", "floor price over time"
@@ -223,6 +239,7 @@
 ### Get NFT Contract Sale Prices
 
 - **Endpoint:** `GET /nft/:address/price`
+- **Function Name:** `getNFTContractSalePrices`
 - **Description:** Get contract sale prices. Retrieves recent sale prices for NFTs in the contract.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/price
 - **Use this endpoint when:** User asks "sale prices", "recent sales", "what did these NFTs sell for"
@@ -233,6 +250,7 @@
 ### Get NFT Sale Prices
 
 - **Endpoint:** `GET /nft/:address/:token_id/price`
+- **Function Name:** `getNFTSalePrices`
 - **Description:** Get sale prices. Retrieves recent sale prices for a specific NFT.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/:token_id/price
 - **Use this endpoint when:** User asks "sale price for this NFT", "what did NFT #123 sell for"
@@ -245,6 +263,7 @@
 ### Get NFT Trades
 
 - **Endpoint:** `GET /nft/:address/trades`
+- **Function Name:** `getNFTTrades`
 - **Description:** Get NFT trades. Retrieves marketplace trades for NFTs in a contract.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/trades
 - **Use this endpoint when:** User asks "NFT trades", "sales history", "who sold this NFT", "market activity"
@@ -257,6 +276,7 @@
 ### Get NFT Trades by Token
 
 - **Endpoint:** `GET /nft/:address/:token_id/trades`
+- **Function Name:** `getNFTTradesByToken`
 - **Description:** Get trades by token. Retrieves trade history for a specific NFT.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/:token_id/trades
 - **Use this endpoint when:** User asks "trades for this NFT", "trade history for #123"
@@ -268,6 +288,7 @@
 ### Get NFT Trades by Wallet
 
 - **Endpoint:** `GET /wallets/:address/nfts/trades`
+- **Function Name:** `getNFTTradesByWallet`
 - **Description:** Get NFT trades by wallet. Retrieves NFT trades performed by a specific wallet.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/wallets/:address/nfts/trades
 - **Use this endpoint when:** User asks "my NFT trades", "NFT trades by wallet", "what NFTs did this wallet trade"
@@ -281,10 +302,12 @@
 ### Get NFT Collection Stats
 
 - **Endpoint:** `GET /nft/:address/stats`
+- **Function Name:** `getNFTCollectionStats`
 - **Description:** Get collection stats. Retrieves statistics about an NFT collection including holder count, transfer count, etc.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/stats
 - **Use this endpoint when:** User asks "collection stats", "NFT statistics", "collection data"
 - **Auto-chain:** Yes
+- **⚠️ DEPRECATED (Dec 6, 2024):** Use Streams API instead for real-time NFT event monitoring
 
 ---
 
@@ -293,6 +316,7 @@
 ### Get NFT Traits by Collection
 
 - **Endpoint:** `GET /nft/:address/traits`
+- **Function Name:** `getNFTTraitsByCollection`
 - **Description:** Get NFT traits by collection. Retrieves all traits for a collection in a single response (limited to 5,000 traits).
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/traits
 - **Use this endpoint when:** User asks "NFT traits", "attributes", "trait distribution", "rarity data" (for smaller collections)
@@ -303,6 +327,7 @@
 ### Get NFT Traits by Collection (Paginated)
 
 - **Endpoint:** `GET /nft/:address/traits/paginate`
+- **Function Name:** `getNFTTraitsByCollectionPaginate`
 - **Description:** Get NFT traits by collection (paginated). Retrieves traits with pagination support (no limit).
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/traits/paginate
 - **Use this endpoint when:** User asks "NFT traits", "all traits" (for large collections)
@@ -314,6 +339,7 @@
 ### Get NFTs by Traits
 
 - **Endpoint:** `POST /nft/:address/nfts-by-traits`
+- **Function Name:** `getNFTByContractTraits`
 - **Description:** Get NFTs by traits. Queries NFTs based on trait values.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/nfts-by-traits
 - **Use this endpoint when:** User asks "NFTs with traits", "find NFTs by attributes", "query by traits"
@@ -324,11 +350,12 @@
 
 ### Resync NFT Traits
 
-- **Endpoint:** `PUT /nft/:address/traits/resync`
+- **Endpoint:** `GET /nft/:address/traits/resync`
+- **Function Name:** `resyncNFTTrait`
 - **Description:** Resync NFT traits by collection. Forces a refresh of trait data for a collection.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/traits/resync
 - **Use this endpoint when:** User asks "refresh traits", "resync rarity data", "update trait information"
-- **Method:** PUT
+- **Method:** GET (triggers async resync)
 
 ---
 
@@ -337,6 +364,7 @@
 ### Get Top NFT Collections by Market Cap
 
 - **Endpoint:** `GET /market-data/nfts/top-collections`
+- **Function Name:** `getTopNFTCollectionsByMarketCap`
 - **Description:** Get the top NFT collections by market cap. Retrieves collections ranked by market capitalization.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/market-data/nfts/top-collections
 - **Use this endpoint when:** User asks "top NFT collections", "biggest NFT projects", "NFTs by market cap"
@@ -347,6 +375,7 @@
 ### Get Top NFT Collections by Trading Volume
 
 - **Endpoint:** `GET /market-data/nfts/hottest-collections`
+- **Function Name:** `getHottestNFTCollectionsByTradingVolume`
 - **Description:** Get the top NFT collections by trading volume. Retrieves collections ranked by 24h trading volume.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/market-data/nfts/hottest-collections
 - **Use this endpoint when:** User asks "hot NFT collections", "trending NFTs", "top volume NFTs", "most traded NFTs"

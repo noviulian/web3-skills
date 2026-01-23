@@ -109,7 +109,7 @@ query('/{token0_address}/{token1_address}/price', {
 "
 ```
 
-**Note:** This endpoint is deprecated. For production use, get the pair address first and use `/pairs/:address/ohlcv`.
+**⚠️ DEPRECATED:** This endpoint is deprecated. For production use, get the pair address first and use `/pairs/:address/ohlcv` for candlestick data instead.
 
 ### Get Pair OHLCV Candlesticks (EVM)
 

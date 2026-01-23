@@ -32,6 +32,7 @@
 ## Get Token Price
 
 - **Endpoint:** `GET /erc20/:address/price`
+- **Function Name:** `getTokenPrice`
 - **Description:** Get ERC20 token price. Retrieves the current price of a token in the blockchain's native currency and USD.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/erc20/:address/price
 - **Use this endpoint when:** User asks "token price", "how much is this token", "current price", "USD price"
@@ -43,6 +44,7 @@
 ## Get Multiple Token Prices
 
 - **Endpoint:** `POST /erc20/prices`
+- **Function Name:** `getMultipleTokenPrices`
 - **Description:** Get multiple token prices. Retrieves prices for multiple tokens in a single request.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/erc20/prices
 - **Use this endpoint when:** User asks "multiple token prices", "batch prices", "check these tokens", "price list"
@@ -54,6 +56,7 @@
 ## Get Pair OHLCV Candlesticks
 
 - **Endpoint:** `GET /pairs/:address/ohlcv`
+- **Function Name:** `getPairCandlesticks`
 - **Description:** Get the OHLCV candlesticks by using pair address. Retrieves Open-High-Low-Close-Volume data for a trading pair.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/pairs/:address/ohlcv
 - **Use this endpoint when:** User asks "candlesticks", "OHLCV", "price chart", "charting data", "open/high/low/close"
@@ -65,6 +68,7 @@
 ## Get NFT Floor Price by Contract
 
 - **Endpoint:** `GET /nft/:address/floor-price`
+- **Function Name:** `getNFTFloorPriceByContract`
 - **Description:** Get NFT floor price by contract. Retrieves the current lowest price across all marketplaces.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/floor-price
 - **Use this endpoint when:** User asks "floor price", "NFT floor", "lowest price", "collection floor"
@@ -76,6 +80,7 @@
 ## Get NFT Floor Price by Token
 
 - **Endpoint:** `GET /nft/:address/:token_id/floor-price`
+- **Function Name:** `getNFTFloorPriceByToken`
 - **Description:** Get NFT floor price by token. Retrieves the floor price for a specific token ID.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/:token_id/floor-price
 - **Use this endpoint when:** User asks "floor price for this NFT", "token floor price"
@@ -87,6 +92,7 @@
 ## Get Historical NFT Floor Price
 
 - **Endpoint:** `GET /nft/:address/floor-price/historical`
+- **Function Name:** `getNFTHistoricalFloorPriceByContract`
 - **Description:** Get historical NFT floor price by contract. Retrieves historical floor price data over time.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/floor-price/historical
 - **Use this endpoint when:** User asks "NFT price history", "historical floor", "floor over time"
@@ -98,6 +104,7 @@
 ## Get NFT Contract Sale Prices
 
 - **Endpoint:** `GET /nft/:address/price`
+- **Function Name:** `getNFTContractSalePrices`
 - **Description:** Get contract sale prices. Retrieves recent sale prices for NFTs in the contract.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/price
 - **Use this endpoint when:** User asks "NFT sales", "recent sales", "sale prices", "what did it sell for"
@@ -109,6 +116,7 @@
 ## Get NFT Sale Prices
 
 - **Endpoint:** `GET /nft/:address/:token_id/price`
+- **Function Name:** `getNFTSalePrices`
 - **Description:** Get sale prices. Retrieves recent sale prices for a specific NFT.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/:token_id/price
 - **Use this endpoint when:** User asks "this NFT's sale price", "token sale price"

@@ -5,16 +5,16 @@
     "email": "noviulian@icloud.com"
   },
   "metadata": {
-    "description": "Moralis API skills marketplace - plugins for Web3 Streams API and EVM/Solana data APIs",
-    "version": "1.0.0"
+    "description": "Moralis API skills marketplace - plugins for Web3 Streams API and EVM/Solana data APIs. v1.1.0 adds: Net worth, PnL tracking, token analytics, security scores, DEX snipers, 5 new chains (Flow, Ronin, Lisk, Sei, Monad), and enhanced query client with pagination helpers.",
+    "version": "1.1.0"
   },
   "plugins": [
     {
       "name": "web3-api-skills",
-      "description": "Comprehensive Web3 development suite including wallet, NFT, token, DeFi, blockchain APIs, and specialized utilities for Moralis integration",
+      "description": "Comprehensive Web3 development suite including wallet (net worth, PnL, stats, ENS), token (analytics, security scores, snipers), NFT (floor price history), DeFi, blockchain APIs, and specialized utilities for 40+ EVM chains + Solana",
       "source": "./plugins/web3-api-skills/",
       "strict": true,
-      "version": "1.0.1",
+      "version": "1.1.0",
       "author": {
         "name": "noviulian",
         "email": "noviulian@icloud.com"
@@ -28,16 +28,19 @@
         "ethereum",
         "solana",
         "evm",
-        "moralis"
+        "moralis",
+        "analytics",
+        "dex",
+        "trading"
       ],
       "category": "web3"
     },
     {
       "name": "streams-api-skills",
-      "description": "Moralis Streams API for real-time blockchain event monitoring with webhooks and custom filters",
+      "description": "Moralis Streams API for real-time blockchain event monitoring with webhooks and custom filters. v1.1.0 adds: native balance streaming, enhanced history replay, POST/DELETE/PATCH support, and 5 new chains (Flow, Ronin, Lisk, Sei, Monad).",
       "source": "./plugins/streams-api-skills/",
       "strict": true,
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": {
         "name": "noviulian",
         "email": "noviulian@icloud.com"
@@ -48,7 +51,9 @@
         "real-time",
         "events",
         "monitoring",
-        "moralis"
+        "blockchain",
+        "moralis",
+        "evm"
       ],
       "category": "web3"
     }

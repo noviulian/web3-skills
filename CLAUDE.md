@@ -7,7 +7,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **Moralis API Skills Marketplace** is a multi-plugin marketplace for Moralis API integration with Claude Code. It contains two separate plugins:
 
 1. **web3-api-skills** - 9 modular skills for Web3 blockchain data (EVM chains + Solana)
+   - **New in v1.1.0:** Net worth, PnL tracking, wallet stats, domain resolution, token analytics, security scores, DEX snipers
+   - **New Chains (2025):** Flow, Ronin, Lisk, Sei, Monad
 2. **streams-api-skills** - Real-time blockchain event monitoring with webhooks
+   - **New in v1.1.0:** Native balance streaming, enhanced history replay, POST/DELETE/PATCH support
 
 **Key Design Principle: ZERO external dependencies - uses only Node.js built-in modules (https, fs, path, url, crypto).**
 
@@ -110,11 +113,34 @@ All web3-api-skills share a single query client that provides:
 **Key Features:**
 - **Auto blockchain detection:** EVM (0x addresses) vs Solana (base58 addresses)
 - **Chain name to hex conversion:** Saves API tokens by converting "eth" → "0x1", "polygon" → "0x89"
+- **HTTP method support:** GET, POST, PUT, DELETE, PATCH for Streams API and future endpoints
+- **Custom baseURL support:** Query cross-API endpoints (e.g., Streams API from web3 skills)
 - **Path parameter replacement:** `/:address` becomes actual address in URL
 - **Date/time to block conversion:** Convert timestamps to block numbers
 - **Token search:** Find tokens by symbol
 - **Pagination support:** Handle large result sets
+- **Spam filtering:** `createSpamFilter()` helper for excluding spam/unverified tokens
+- **Verified filtering:** `createVerifiedFilter()` helper for verified contracts
+- **Auto-pagination:** `paginate()` helper for cursor-based pagination loops
 - **Zero dependencies:** Pure Node.js built-in modules
+
+**New Helper Functions (v1.1.0):**
+```javascript
+// Cursor-based pagination
+const allNFTs = await paginate('/:address/nft', { address: '0x123...' });
+
+// Spam filtering
+query('/wallets/:address/tokens', {
+  address: '0x123...',
+  params: createSpamFilter({ excludeSpam: true, onlyVerified: true })
+});
+
+// Verified contracts only
+query('/nft/:address', {
+  address: '0xabc...',
+  params: createVerifiedFilter({ onlyVerified: true })
+});
+```
 
 **Chain Detection:**
 ```javascript
@@ -186,11 +212,15 @@ metadata:
 Contains 9 modular skills for EVM and Solana blockchain data queries:
 
 - `web3-wallet-api` - Wallet balances, tokens, NFTs, DeFi positions
+  - **v1.1.0 additions:** Net worth, PnL tracking, wallet stats, chain activity, ENS domain resolution
 - `web3-token-api` - Token prices, metadata, DEX pairs, swaps
+  - **v1.1.0 additions:** Token security scores, DEX snipers detection, bonding status, analytics, volume timeseries, historical holder stats
 - `web3-nft-api` - NFT metadata, transfers, traits, rarity
+  - **v1.1.0 additions:** NFT floor price history
 - `web3-defi-api` - Protocol positions and exposure
 - `web3-entity-api` - Labeled addresses/entities
 - `web3-price-api` - Token/NFT prices, OHLCV data
+  - **v1.1.0 additions:** NFT contract sale prices
 - `web3-blockchain-api` - Blocks and transactions
 - `web3-utils` - API version, endpoint weights
 - `web3-premium` - Advanced analytics endpoints

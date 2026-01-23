@@ -4,7 +4,7 @@ description: Query NFT data including metadata, traits, transfers, trades, floor
 license: MIT
 compatibility: Requires Node.js (built-in modules only, no npm install needed)
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   author: web3-skills
   tags: [web3, blockchain, nft, metadata, traits, rarity, evm, solana]
 ---
@@ -238,6 +238,42 @@ query('/nft/:address/floor-price', {
   params: { chain: 'eth' }
 })
   .then(data => console.log('Floor Price:', JSON.stringify(data, null, 2)))
+  .catch(console.error);
+"
+```
+
+### Get NFT Floor Price History
+
+**Historical floor price data over time:**
+
+```bash
+cd $SKILL_DIR
+node -e "
+const { query } = require('./query');
+query('/nft/:address/floor-price/historical', {
+  address: '0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d',
+  params: {
+    chain: 'eth',
+    fromDate: '2024-01-01',
+    toDate: '2024-12-31'
+  }
+})
+  .then(data => console.log('Floor Price History:', data.result))
+  .catch(console.error);
+"
+```
+
+**With relative time:**
+
+```bash
+cd $SKILL_DIR
+node -e "
+const { query } = require('./query');
+query('/nft/:address/floor-price/historical', {
+  address: '0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d',
+  params: { chain: 'eth', days: 30 }
+})
+  .then(data => console.log('30-Day History:', data.result))
   .catch(console.error);
 "
 ```

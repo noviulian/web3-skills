@@ -1,0 +1,716 @@
+# All Endpoints with Function Names
+
+## /:address
+  - getWalletTransactions (GET) [transaction]
+  - getWalletTransactions (GET) [evm-docs]
+
+## /:address/balance
+  - getNativeBalance (GET) [balance]
+  - getNativeBalance (GET) [evm-docs]
+
+## /:address/erc20
+  - getWalletTokenBalances (GET) [token]
+  - getWalletTokenBalances (GET) [evm-docs]
+
+## /:address/erc20/transfers
+  - getWalletTokenTransfers (GET) [token]
+  - getWalletTokenTransfers (GET) [evm-docs]
+
+## /:address/events
+  - getContractEvents (POST) [events]
+
+## /:address/function
+  - runContractFunction (POST) [utils]
+  - runContractFunction (POST) [evm-docs]
+
+## /:address/logs
+  - getContractLogs (GET) [events]
+
+## /:address/nft
+  - getWalletNFTs (GET) [nft]
+  - getWalletNFTs (GET) [evm-docs]
+
+## /:address/nft/collections
+  - getWalletNFTCollections (GET) [nft]
+  - getWalletNFTCollections (GET) [evm-docs]
+
+## /:address/nft/transfers
+  - getWalletNFTTransfers (GET) [nft]
+  - getWalletNFTTransfers (GET) [evm-docs]
+
+## /:address/verbose
+  - getWalletTransactionsVerbose (GET) [transaction]
+  - getWalletTransactionsVerbose (GET) [evm-docs]
+
+## /:chain/:apiKey
+  - evmRpc (POST) [rpc]
+  - eth_blockNumber (POST) [rpc]
+  - eth_call (POST) [rpc]
+  - eth_chainId (POST) [rpc]
+  - eth_createAccessList (POST) [rpc]
+  - eth_estimateGas (POST) [rpc]
+  - eth_feeHistory (POST) [rpc]
+  - eth_gasPrice (POST) [rpc]
+  - eth_getBalance (POST) [rpc]
+  - eth_getBlockByHash (POST) [rpc]
+  - eth_getBlockByNumber (POST) [rpc]
+  - eth_getBlockTransactionCountByHash (POST) [rpc]
+  - eth_getBlockTransactionCountByNumber (POST) [rpc]
+  - eth_getBlockReceipts (POST) [rpc]
+  - eth_getCode (POST) [rpc]
+  - eth_getLogs (POST) [rpc]
+  - eth_getProof (POST) [rpc]
+  - eth_getStorageAt (POST) [rpc]
+  - eth_getTransactionByHash (POST) [rpc]
+  - eth_getTransactionByBlockHashAndIndex (POST) [rpc]
+  - eth_getTransactionByBlockNumberAndIndex (POST) [rpc]
+  - eth_getTransactionCount (POST) [rpc]
+  - eth_getTransactionReceipt (POST) [rpc]
+  - eth_getUncleByBlockHashAndIndex (POST) [rpc]
+  - eth_getUncleByBlockNumberAndIndex (POST) [rpc]
+  - eth_getUncleCountByBlockHash (POST) [rpc]
+  - eth_getUncleCountByBlockNumber (POST) [rpc]
+  - eth_maxPriorityFeePerGas (POST) [rpc]
+  - eth_sendRawTransaction (POST) [rpc]
+  - eth_getTransactions (POST) [rpc]
+  - eth_getDecodedTransactions (POST) [rpc]
+  - eth_getTokenBalances (POST) [rpc]
+  - eth_getTokenPrice (POST) [rpc]
+  - eth_getTokenMetadata (POST) [rpc]
+  - eth_getNFTBalances (POST) [rpc]
+  - eth_getNFTCollections (POST) [rpc]
+
+## /:pair_address/reserves
+  - getPairReserves (GET) [defi]
+  - getPairReserves (GET) [evm-docs]
+
+## /:token0_address/:token1_address/pairAddress
+  - getPairAddress (GET) [defi]
+  - getPairAddress (GET) [evm-docs]
+
+## /:token0_address/:token1_address/price
+  - getPairPrice (GET) [evm-docs]
+
+## /account/:network/:address/balance
+  - balance (GET) [solana]
+
+## /account/:network/:address/nft
+  - getNFTs (GET) [solana]
+
+## /account/:network/:address/portfolio
+  - getPortfolio (GET) [solana]
+
+## /account/:network/:address/swaps
+  - getSwapsByWalletAddress (GET) [solana]
+
+## /account/:network/:address/tokens
+  - getSPL (GET) [solana]
+
+## /api/v2.2/discovery/tokens
+  - getFilteredTokens (POST) [discovery]
+
+## /api/v2.2/tokens/search
+  - searchTokens (GET) [token]
+
+## /bind/remove
+  - removeBind (POST) [auth]
+
+## /bind/remove/verify
+  - verifyRemoveBind (POST) [auth]
+
+## /bind/request
+  - requestBind (POST) [auth]
+
+## /bind/request/verify
+  - verifyRequestBind (POST) [auth]
+
+## /block/:block_number_or_hash
+  - getBlock (GET) [block]
+  - getBlock (GET) [evm-docs]
+
+## /block/:block_number_or_hash/nft/transfers
+  - getNFTTransfersByBlock (GET) [nft]
+
+## /block/:block_number_or_hash/stats
+  - getBlockStats (GET) [block]
+
+## /challenge/request/aptos
+  - requestChallengeAptos (POST) [auth]
+
+## /challenge/request/evm
+  - requestChallengeEvm (POST) [auth]
+
+## /challenge/request/solana
+  - requestChallengeSolana (POST) [auth]
+
+## /challenge/verify/aptos
+  - verifyChallengeAptos (POST) [auth]
+
+## /challenge/verify/evm
+  - verifyChallengeEvm (POST) [auth]
+
+## /challenge/verify/solana
+  - verifyChallengeSolana (POST) [auth]
+
+## /chat
+  - McpController_chat (POST) [cortex]
+
+## /contracts-review
+  - contractsReview (POST) [utils]
+  - reviewContracts (POST) [evm-docs]
+
+## /dateToBlock
+  - getDateToBlock (GET) [block]
+  - getDateToBlock (GET) [evm-docs]
+
+## /discovery/token
+  - getDiscoveryToken (GET) [discovery]
+  - getDiscoveryToken (GET) [evm-docs]
+
+## /discovery/tokens
+  - getFilteredTokens (POST) [evm-docs]
+
+## /discovery/tokens/blue-chip
+  - getBlueChipTokens (GET) [discovery]
+  - getBlueChipTokens (GET) [evm-docs]
+
+## /discovery/tokens/buying-pressure
+  - getBuyingPressureTokens (GET) [discovery]
+  - getBuyingPressureTokens (GET) [evm-docs]
+
+## /discovery/tokens/experienced-buyers
+  - getExperiencedBuyersTokens (GET) [discovery]
+  - getExperiencedBuyersTokens (GET) [evm-docs]
+
+## /discovery/tokens/rising-liquidity
+  - getRisingLiquidityTokens (GET) [discovery]
+  - getRisingLiquidityTokens (GET) [evm-docs]
+
+## /discovery/tokens/risky-bets
+  - getRiskyBetsTokens (GET) [discovery]
+  - getRiskyBetsTokens (GET) [evm-docs]
+
+## /discovery/tokens/solid-performers
+  - getSolidPerformersTokens (GET) [discovery]
+  - getSolidPerformersTokens (GET) [evm-docs]
+
+## /discovery/tokens/top-gainers
+  - getTopGainersTokens (GET) [discovery]
+  - getTopGainersTokens (GET) [evm-docs]
+
+## /discovery/tokens/top-losers
+  - getTopLosersTokens (GET) [discovery]
+  - getTopLosersTokens (GET) [evm-docs]
+
+## /discovery/tokens/trending
+  - getTrendingTokens (GET) [evm-docs]
+
+## /entities/:entityId
+  - getEntity (GET) [entities]
+  - getEntity (GET) [evm-docs]
+
+## /entities/categories
+  - getEntityCategories (GET) [entities]
+  - getEntityCategories (GET) [evm-docs]
+
+## /entities/categories/:categoryId
+  - getEntitiesByCategory (GET) [entities]
+  - getEntitiesByCategory (GET) [evm-docs]
+
+## /entities/search
+  - searchEntities (GET) [entities]
+  - searchEntities (GET) [evm-docs]
+
+## /erc20/:address/allowance
+  - getTokenAllowance (GET) [token]
+
+## /erc20/:address/bondingStatus
+  - getTokenBondingStatus (GET) [token]
+
+## /erc20/:address/holders
+  - getTokenHolders (GET) [token]
+
+## /erc20/:address/holders/historical
+  - getHistoricalTokenHolders (GET) [token]
+
+## /erc20/:address/price
+  - getTokenPrice (GET) [token]
+  - getTokenPrice (GET) [evm-docs]
+
+## /erc20/:address/stats
+  - getTokenStats (GET) [token]
+  - getTokenStats (GET) [evm-docs]
+
+## /erc20/:address/swaps
+  - getSwapsByTokenAddress (GET) [token]
+  - getSwapsByTokenAddress (GET) [evm-docs]
+
+## /erc20/:address/top-gainers
+  - getTopProfitableWalletPerToken (GET) [token]
+  - getTopProfitableWalletPerToken (GET) [evm-docs]
+
+## /erc20/:address/transfers
+  - getTokenTransfers (GET) [token]
+  - getTokenTransfers (GET) [evm-docs]
+
+## /erc20/:token_address/owners
+  - getTokenOwners (GET) [token]
+  - getTokenOwners (GET) [evm-docs]
+
+## /erc20/:token_address/pairs
+  - getTokenPairs (GET) [token]
+  - getTokenPairs (GET) [evm-docs]
+
+## /erc20/:token_address/pairs/stats
+  - getAggregatedTokenPairStats (GET) [token]
+  - getAggregatedTokenPairStats (GET) [evm-docs]
+
+## /erc20/:tokenAddress/bondingStatus
+  - getTokenBondingStatus (GET) [evm-docs]
+
+## /erc20/:tokenAddress/holders
+  - getTokenHolders (GET) [evm-docs]
+
+## /erc20/:tokenAddress/holders/historical
+  - getHistoricalTokenHolders (GET) [evm-docs]
+
+## /erc20/exchange/:exchange/bonding
+  - getBondingTokensByExchange (GET) [token]
+
+## /erc20/exchange/:exchange/graduated
+  - getGraduatedTokensByExchange (GET) [token]
+
+## /erc20/exchange/:exchange/new
+  - getNewTokensByExchange (GET) [token]
+
+## /erc20/exchange/:exchangeName/bonding
+  - getBondingTokensByExchange (GET) [evm-docs]
+
+## /erc20/exchange/:exchangeName/graduated
+  - getGraduatedTokensByExchange (GET) [evm-docs]
+
+## /erc20/exchange/:exchangeName/new
+  - getNewTokensByExchange (GET) [evm-docs]
+
+## /erc20/metadata
+  - getTokenMetadata (GET) [token]
+  - getTokenMetadata (GET) [evm-docs]
+
+## /erc20/metadata/symbols
+  - getTokenMetadataBySymbol (GET) [token]
+  - getTokenMetadataBySymbol (GET) [evm-docs]
+
+## /erc20/prices
+  - getMultipleTokenPrices (POST) [token]
+  - getMultipleTokenPrices (POST) [evm-docs]
+
+## /historicalJobs/createJob
+  - CreateJob (POST) [streams]
+
+## /history
+  - GetHistory (GET) [streams]
+
+## /history/logs
+  - GetLogs (GET) [streams]
+
+## /history/replay/:streamId/:id
+  - ReplayHistory (POST) [streams]
+
+## /info/endpointWeights
+  - endpointWeights (GET) [utils]
+  - endpointWeights (GET) [evm-docs]
+
+## /ipfs/uploadFolder
+  - uploadFolder (POST) [ipfs]
+
+## /latestBlockNumber/:chain
+  - getLatestBlockNumber (GET) [block]
+  - getLatestBlockNumber (GET) [evm-docs]
+
+## /market-data/erc20s/top-movers
+  - getTopERC20TokensByPriceMovers (GET) [market-data]
+  - getTopERC20TokensByPriceMovers (GET) [evm-docs]
+
+## /market-data/erc20s/top-tokens
+  - getTopERC20TokensByMarketCap (GET) [market-data]
+  - getTopERC20TokensByMarketCap (GET) [evm-docs]
+
+## /market-data/global/market-cap
+  - getTopCryptoCurrenciesByMarketCap (GET) [market-data]
+  - getTopCryptoCurrenciesByMarketCap (GET) [evm-docs]
+
+## /market-data/global/volume
+  - getTopCryptoCurrenciesByTradingVolume (GET) [market-data]
+  - getTopCryptoCurrenciesByTradingVolume (GET) [evm-docs]
+
+## /market-data/nfts/hottest-collections
+  - getHottestNFTCollectionsByTradingVolume (GET) [market-data]
+  - getHottestNFTCollectionsByTradingVolume (GET) [evm-docs]
+
+## /market-data/nfts/top-collections
+  - getTopNFTCollectionsByMarketCap (GET) [market-data]
+  - getTopNFTCollectionsByMarketCap (GET) [evm-docs]
+
+## /news
+  - news (GET) [market]
+
+## /nft/:address
+  - getContractNFTs (GET) [nft]
+  - getContractNFTs (GET) [evm-docs]
+
+## /nft/:address/:token_id
+  - getNFTMetadata (GET) [nft]
+  - getNFTMetadata (GET) [evm-docs]
+
+## /nft/:address/:token_id/floor-price
+  - getNFTFloorPriceByToken (GET) [nft]
+  - getNFTFloorPriceByToken (GET) [evm-docs]
+
+## /nft/:address/:token_id/metadata/resync
+  - reSyncMetadata (GET) [nft]
+  - reSyncMetadata (GET) [evm-docs]
+
+## /nft/:address/:token_id/owners
+  - getNFTTokenIdOwners (GET) [nft]
+  - getNFTTokenIdOwners (GET) [evm-docs]
+
+## /nft/:address/:token_id/price
+  - getNFTSalePrices (GET) [nft]
+  - getNFTSalePrices (GET) [evm-docs]
+
+## /nft/:address/:token_id/stats
+  - getNFTTokenStats (GET) [nft]
+
+## /nft/:address/:token_id/trades
+  - getNFTTradesByToken (GET) [nft]
+  - getNFTTradesByToken (GET) [evm-docs]
+
+## /nft/:address/:token_id/transfers
+  - getNFTTransfers (GET) [nft]
+  - getNFTTransfers (GET) [evm-docs]
+
+## /nft/:address/floor-price
+  - getNFTFloorPriceByContract (GET) [nft]
+  - getNFTFloorPriceByContract (GET) [evm-docs]
+
+## /nft/:address/floor-price/historical
+  - getNFTHistoricalFloorPriceByContract (GET) [nft]
+  - getNFTHistoricalFloorPriceByContract (GET) [evm-docs]
+
+## /nft/:address/metadata
+  - getNFTContractMetadata (GET) [nft]
+  - getNFTContractMetadata (GET) [evm-docs]
+
+## /nft/:address/nfts-by-traits
+  - getNFTByContractTraits (POST) [nft]
+  - getNFTByContractTraits (POST) [evm-docs]
+
+## /nft/:address/owners
+  - getNFTOwners (GET) [nft]
+  - getNFTOwners (GET) [evm-docs]
+
+## /nft/:address/price
+  - getNFTContractSalePrices (GET) [nft]
+  - getNFTContractSalePrices (GET) [evm-docs]
+
+## /nft/:address/stats
+  - getNFTCollectionStats (GET) [nft]
+  - getNFTCollectionStats (GET) [evm-docs]
+
+## /nft/:address/sync
+  - syncNFTContract (PUT) [nft]
+  - syncNFTContract (PUT) [evm-docs]
+
+## /nft/:address/trades
+  - getNFTTrades (GET) [nft]
+  - getNFTTrades (GET) [evm-docs]
+
+## /nft/:address/traits
+  - getNFTTraitsByCollection (GET) [nft]
+  - getNFTTraitsByCollection (GET) [evm-docs]
+
+## /nft/:address/traits/paginate
+  - getNFTTraitsByCollectionPaginate (GET) [nft]
+  - getNFTTraitsByCollectionPaginate (GET) [evm-docs]
+
+## /nft/:address/traits/resync
+  - resyncNFTTrait (GET) [nft]
+  - resyncNFTRarity (GET) [evm-docs]
+
+## /nft/:address/transfers
+  - getNFTContractTransfers (GET) [nft]
+  - getNFTContractTransfers (GET) [evm-docs]
+
+## /nft/:address/unique-owners
+  - getUniqueOwnersByCollection (GET) [nft]
+  - getUniqueOwnersByCollection (GET) [evm-docs]
+
+## /nft/:network/:address/metadata
+  - getNFTMetadata (GET) [solana]
+
+## /nft/getMultipleNFTs
+  - getMultipleNFTs (POST) [nft]
+  - getMultipleNFTs (POST) [evm-docs]
+
+## /nft/metadata
+  - getNFTBulkContractMetadata (POST) [nft]
+  - getNFTBulkContractMetadata (POST) [evm-docs]
+
+## /nft/transfers
+  - getNFTTransfersFromToBlock (GET) [nft]
+
+## /pairs/:address/ohlcv
+  - getPairCandlesticks (GET) [token]
+  - getPairCandlesticks (GET) [evm-docs]
+
+## /pairs/:address/snipers
+  - getSnipersByPairAddress (GET) [token]
+  - getSnipersByPairAddress (GET) [evm-docs]
+
+## /pairs/:address/stats
+  - getPairStats (GET) [token]
+  - getPairStats (GET) [evm-docs]
+
+## /pairs/:address/swaps
+  - getSwapsByPairAddress (GET) [token]
+  - getSwapsByPairAddress (GET) [evm-docs]
+
+## /profile/:profileId/addresses
+  - getAddresses (GET) [auth]
+
+## /resolve/:address/domain
+  - resolveAddressToDomain (GET) [resolve]
+  - resolveAddressToDomain (GET) [evm-docs]
+
+## /resolve/:address/reverse
+  - resolveAddress (GET) [resolve]
+  - resolveAddress (GET) [evm-docs]
+
+## /resolve/:domain
+  - resolveDomain (GET) [resolve]
+  - resolveDomain (GET) [evm-docs]
+
+## /resolve/ens/:domain
+  - resolveENSDomain (GET) [resolve]
+  - resolveENSDomain (GET) [evm-docs]
+
+## /settings
+  - SetSettings (POST) [streams]
+  - GetSettings (GET) [streams]
+
+## /stats
+  - GetStats (GET) [streams]
+
+## /stats/:streamId
+  - GetStatsByStreamId (GET) [streams]
+
+## /streams/aptos
+  - aptosStreamsGetAll (GET) [streams]
+  - aptosStreamsCreate (PUT) [streams]
+
+## /streams/aptos/:id
+  - aptosStreamsGet (GET) [streams]
+  - aptosStreamsUpdate (POST) [streams]
+  - aptosStreamsDelete (DELETE) [streams]
+
+## /streams/aptos/:id/address
+  - aptosStreamsAddAddresses (POST) [streams]
+  - aptosStreamsDeleteAddresses (DELETE) [streams]
+  - aptosStreamsGetAddresses (GET) [streams]
+
+## /streams/aptos/:id/status
+  - aptosStreamsUpdateStatus (POST) [streams]
+
+## /streams/evm
+  - GetStreams (GET) [streams]
+  - CreateStream (PUT) [streams]
+
+## /streams/evm/:chainId/block-to-webhook/:blockNumber/:streamId
+  - GetStreamBlockDataToWebhookByNumber (POST) [streams]
+
+## /streams/evm/:chainId/block/:blockNumber
+  - GetStreamBlockDataByNumber (POST) [streams]
+
+## /streams/evm/:id
+  - GetStream (GET) [streams]
+  - UpdateStream (POST) [streams]
+  - DeleteStream (DELETE) [streams]
+
+## /streams/evm/:id/address
+  - GetAddresses (GET) [streams]
+  - AddAddressToStream (POST) [streams]
+  - ReplaceAddressFromStream (PATCH) [streams]
+  - DeleteAddressFromStream (DELETE) [streams]
+
+## /streams/evm/:id/duplicate
+  - DuplicateStream (POST) [streams]
+
+## /streams/evm/:id/status
+  - UpdateStreamStatus (POST) [streams]
+
+## /token/:network/:address/bonding-status
+  - getTokenBondingStatus (GET) [solana]
+
+## /token/:network/:address/metadata
+  - getTokenMetadata (GET) [solana]
+
+## /token/:network/:address/pairs
+  - getTokenPairs (GET) [solana]
+
+## /token/:network/:address/pairs/stats
+  - getAggregatedTokenPairStats (GET) [solana]
+
+## /token/:network/:address/price
+  - getTokenPrice (GET) [solana]
+
+## /token/:network/:address/swaps
+  - getSwapsByTokenAddress (GET) [solana]
+
+## /token/:network/:address/top-holders
+  - getTopHolders (GET) [solana]
+
+## /token/:network/exchange/:exchange/bonding
+  - getBondingTokensByExchange (GET) [solana]
+
+## /token/:network/exchange/:exchange/graduated
+  - getGraduatedTokensByExchange (GET) [solana]
+
+## /token/:network/exchange/:exchange/new
+  - getNewTokensByExchange (GET) [solana]
+
+## /token/:network/holders/:address
+  - getTokenHolders (GET) [solana]
+
+## /token/:network/holders/:address/historical
+  - getHistoricalTokenHolders (GET) [solana]
+
+## /token/:network/pairs/:address/ohlcv
+  - getCandleSticks (GET) [solana]
+
+## /token/:network/pairs/:pairAddress/snipers
+  - getSnipersByPairAddress (GET) [solana]
+
+## /token/:network/pairs/:pairAddress/stats
+  - getPairStats (GET) [solana]
+
+## /token/:network/pairs/:pairAddress/swaps
+  - getSwapsByPairAddress (GET) [solana]
+
+## /token/:network/prices
+  - getMultipleTokenPrices (POST) [solana]
+
+## /tokens/:address/analytics
+  - getTokenAnalytics (GET) [token]
+
+## /tokens/:tokenAddress/analytics
+  - getTokenAnalytics (GET) [evm-docs]
+
+## /tokens/:tokenAddress/score
+  - getTokenScore (GET) [token]
+  - getTokenScore (GET) [evm-docs]
+
+## /tokens/analytics
+  - getMultipleTokenAnalytics (POST) [token]
+  - getMultipleTokenAnalytics (POST) [evm-docs]
+
+## /tokens/analytics/timeseries
+  - getTimeSeriesTokenAnalytics (POST) [token]
+  - getTimeSeriesTokenAnalytics (POST) [evm-docs]
+
+## /tokens/categories
+  - getTokenCategories (GET) [evm-docs]
+
+## /tokens/search
+  - searchTokens (GET) [evm-docs]
+
+## /tokens/trending
+  - getTrendingTokens (GET) [token]
+  - getTrendingTokensV2 (GET) [evm-docs]
+
+## /transaction/:transaction_hash
+  - getTransaction (GET) [transaction]
+  - getTransaction (GET) [evm-docs]
+
+## /transaction/:transaction_hash/internal-transactions
+  - getInternalTransactions (GET) [transaction]
+
+## /transaction/:transaction_hash/verbose
+  - getTransactionVerbose (GET) [transaction]
+  - getTransactionVerbose (GET) [evm-docs]
+
+## /volume/categories
+  - getVolumeStatsByCategory (GET) [token]
+  - getVolumeStatsByCategory (GET) [evm-docs]
+
+## /volume/chains
+  - getVolumeStatsByChain (GET) [token]
+  - getVolumeStatsByChain (GET) [evm-docs]
+
+## /volume/timeseries
+  - getTimeSeriesVolume (GET) [token]
+  - getTimeSeriesVolume (GET) [evm-docs]
+
+## /volume/timeseries/:categoryId
+  - getTimeSeriesVolumeByCategory (GET) [token]
+  - getTimeSeriesVolumeByCategory (GET) [evm-docs]
+
+## /wallets/:address/approvals
+  - getWalletTokenApprovals (GET) [wallet]
+  - getWalletApprovals (GET) [evm-docs]
+
+## /wallets/:address/chains
+  - getWalletActiveChains (GET) [wallet]
+  - getWalletActiveChains (GET) [evm-docs]
+
+## /wallets/:address/defi/:protocol/positions
+  - getDefiPositionsByProtocol (GET) [token]
+  - getDefiPositionsByProtocol (GET) [evm-docs]
+
+## /wallets/:address/defi/positions
+  - getDefiPositionsSummary (GET) [token]
+  - getDefiPositionsSummary (GET) [evm-docs]
+
+## /wallets/:address/defi/summary
+  - getDefiSummary (GET) [token]
+  - getDefiSummary (GET) [evm-docs]
+
+## /wallets/:address/history
+  - getWalletHistory (GET) [wallet]
+  - getWalletHistory (GET) [evm-docs]
+
+## /wallets/:address/net-worth
+  - getWalletNetWorth (GET) [wallet]
+  - getWalletNetWorth (GET) [evm-docs]
+
+## /wallets/:address/nfts/trades
+  - getNFTTradesByWallet (GET) [nft]
+  - getNFTTradesByWallet (GET) [evm-docs]
+
+## /wallets/:address/profitability
+  - getWalletProfitability (GET) [wallet]
+  - getWalletProfitability (GET) [evm-docs]
+
+## /wallets/:address/profitability/summary
+  - getWalletProfitabilitySummary (GET) [wallet]
+  - getWalletProfitabilitySummary (GET) [evm-docs]
+
+## /wallets/:address/stats
+  - getWalletStats (GET) [wallet]
+  - getWalletStats (GET) [evm-docs]
+
+## /wallets/:address/swaps
+  - getSwapsByWalletAddress (GET) [token]
+  - getSwapsByWalletAddress (GET) [evm-docs]
+
+## /wallets/:address/tokens
+  - getWalletTokenBalancesPrice (GET) [token]
+  - getWalletTokenBalancesPrice (GET) [evm-docs]
+
+## /wallets/balances
+  - getNativeBalancesForAddresses (GET) [balance]
+  - getNativeBalancesForAddresses (GET) [evm-docs]
+
+## /web3/version
+  - web3ApiVersion (GET) [utils]
+  - web3ApiVersion (GET) [evm-docs]
+

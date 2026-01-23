@@ -27,6 +27,7 @@
 ## Get Token Price
 
 - **Endpoint:** `GET /token/:network/:address/price`
+- **Function Name:** `getTokenPrice`
 - **Description:** Get token price. Retrieves the current price of a Solana SPL token in USD.
 - **API Reference:** https://solana-gateway.moralis.io/token/:network/:address/price
 - **Use this endpoint when:** User asks "Solana token price", "SPL token price", "how much is this token", "token price USD"
@@ -38,6 +39,7 @@
 ## Get Multiple Token Prices
 
 - **Endpoint:** `POST /token/:network/prices`
+- **Function Name:** `getMultipleTokenPrices`
 - **Description:** Get multiple token prices. Retrieves prices for multiple SPL tokens in a single request.
 - **API Reference:** https://solana-gateway.moralis.io/token/:network/prices
 - **Use this endpoint when:** User asks "multiple Solana token prices", "batch SPL prices", "prices for several tokens"
@@ -50,11 +52,20 @@
 ## Get OHLCV Candlesticks
 
 - **Endpoint:** `GET /token/:network/pairs/:address/ohlcv`
+- **Function Name:** `getCandleSticks`
 - **Description:** Get OHLCV candlesticks by pair address. Retrieves Open-High-Low-Close-Volume data for a Solana DEX trading pair.
 - **API Reference:** https://solana-gateway.moralis.io/token/:network/pairs/:address/ohlcv
 - **Use this endpoint when:** User asks "candlesticks", "OHLCV", "price chart data", "candle data"
 - **Networks:** mainnet, devnet
-- **Params:**- `network` (required, string) - The network to query- `address` (required, string) - The address to query (pair address)- `fromDate` (required, string) - The starting date (format in seconds or datestring)- `toDate` (required, string) - The ending date (format in seconds or datestring)- `timeframe` (required, string) - The interval of the candle stick- `currency` (required, string) - The currency format- `cursor` (optional, string) - The cursor to the next page- `limit` (optional, integer) - The limit per page
+- **Params:**
+  - `network` (required, string) - The network to query
+  - `address` (required, string) - The address to query (pair address)
+  - `fromDate` (optional, string) - The starting date (format in seconds or datestring)
+  - `toDate` (optional, string) - The ending date (format in seconds or datestring)
+  - `timeframe` (optional, string) - The interval of the candle stick
+  - `currency` (optional, string) - The currency format
+  - `cursor` (optional, string) - The cursor to the next page
+  - `limit` (optional, integer) - The limit per page
 
 ---
 
