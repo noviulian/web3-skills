@@ -289,25 +289,6 @@
 
 ---
 
-### Get DEX Token Pair Address
-
-- **Endpoint:** `GET /:token0_address/:token1_address/pairAddress`
-- **Description:** Get DEX token pair address. Finds the pair address for two tokens on a DEX.
-- **API Reference:** https://deep-index.moralis.io/api/v2.2/:token0_address/:token1_address/pairAddress
-- **Use this endpoint when:** User asks "pair address", "find pair", "get pair for two tokens"
-- **Auto-chain:** Yes
-
----
-
-### Get DEX Token Pair Reserves
-
-- **Endpoint:** `GET /:pair_address/reserves`
-- **Description:** Get DEX token pair reserves. Retrieves the current reserves in a DEX pair.
-- **API Reference:** https://deep-index.moralis.io/api/v2.2/:pair_address/reserves
-- **Use this endpoint when:** User asks "pair reserves", "liquidity reserves", "pool reserves"
-- **Auto-chain:** Yes
-
----
 
 ## Get Token Analytics
 
