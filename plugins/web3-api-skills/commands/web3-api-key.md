@@ -1,6 +1,8 @@
 ---
 name: web3-api-key
 description: Set your Moralis API key for Web3 skills. Usage: /web3-api-key <your_api_key_here>
+argument-hint: [api-key]
+disable-model-invocation: true
 ---
 
 # Web3 API Key Setup

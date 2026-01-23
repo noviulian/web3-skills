@@ -1,19 +1,56 @@
 {
-  "name": "web3-skills-marketplace",
+  "name": "moralis-api",
   "owner": {
     "name": "noviulian",
     "email": "noviulian@icloud.com"
   },
   "metadata": {
-    "description": "Web3 development skills for Moralis API integration",
+    "description": "Moralis API skills marketplace - plugins for Web3 Streams API and EVM/Solana data APIs",
     "version": "1.0.0"
   },
   "plugins": [
     {
-      "name": "web3-skills",
+      "name": "web3-api-skills",
       "description": "Comprehensive Web3 development suite including wallet, NFT, token, DeFi, blockchain APIs, and specialized utilities for Moralis integration",
-      "source": "./",
-      "strict": true
+      "source": "./plugins/web3-api-skills/",
+      "strict": true,
+      "version": "1.0.1",
+      "author": {
+        "name": "noviulian",
+        "email": "noviulian@icloud.com"
+      },
+      "keywords": [
+        "web3",
+        "blockchain",
+        "crypto",
+        "defi",
+        "nft",
+        "ethereum",
+        "solana",
+        "evm",
+        "moralis"
+      ],
+      "category": "web3"
+    },
+    {
+      "name": "streams-api-skill",
+      "description": "Moralis Streams API for real-time blockchain event monitoring with webhooks and custom filters",
+      "source": "./plugins/streams-api-skill/",
+      "strict": true,
+      "version": "1.0.0",
+      "author": {
+        "name": "noviulian",
+        "email": "noviulian@icloud.com"
+      },
+      "keywords": [
+        "streams",
+        "webhooks",
+        "real-time",
+        "events",
+        "monitoring",
+        "moralis"
+      ],
+      "category": "web3"
     }
   ]
 }

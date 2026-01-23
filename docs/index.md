@@ -22,12 +22,12 @@ The easiest way to install all Web3 skills at once:
 
 **Step 1:** Add the marketplace
 ```bash
-/plugin marketplace add noviulian/web3-skills
+/plugin marketplace add noviulian/moralis-skills
 ```
 
 **Step 2:** Install the plugin
 ```bash
-/plugin install web3-skills
+/plugin install web3-api-skills@moralis-api
 ```
 
 **Step 3:** Restart Claude Code, then set your API key
@@ -53,11 +53,11 @@ If you prefer to install individual skills or want more control:
 ```bash
 # Add to Claude Code skills directory
 cd ~/.claude/skills
-git clone https://github.com/noviulian/web3-skills.git
+git clone https://github.com/noviulian/moralis-skills.git
 
 # Or install individual skills
-cp -r web3-skills/skills/web3-wallet-api ~/.claude/skills/
-cp -r web3-skills/skills/web3-token-api ~/.claude/skills/
+cp -r moralis-skills/skills/web3-wallet-api ~/.claude/skills/
+cp -r moralis-skills/skills/web3-token-api ~/.claude/skills/
 # ... etc for other skills
 ```
 
@@ -68,7 +68,7 @@ cp -r web3-skills/skills/web3-token-api ~/.claude/skills/
 echo "MORALIS_API_KEY=your_actual_key_here" > ~/.claude/skills/web3-wallet-api/.env
 
 # Or set for all skills
-cd ~/.claude/skills/web3-skills/skills
+cd ~/.claude/skills/moralis-skills/skills
 for dir in web3-*; do
   echo "MORALIS_API_KEY=your_actual_key_here" > "$dir/.env"
 done
@@ -120,4 +120,4 @@ Simply ask Claude about Web3 data:
 
 ## License
 
-MIT License - see [LICENSE](https://github.com/noviulian/web3-skills/blob/main/LICENSE) for details.
+MIT License - see [LICENSE](https://github.com/noviulian/moralis-skills/blob/main/LICENSE) for details.

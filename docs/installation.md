@@ -22,12 +22,12 @@ The easiest way to install all Web3 skills at once:
 
 **Step 1:** Add the marketplace
 ```bash
-/plugin marketplace add noviulian/web3-skills
+/plugin marketplace add noviulian/moralis-skills
 ```
 
 **Step 2:** Install the plugin
 ```bash
-/plugin install web3-skills
+/plugin install web3-api-skills@moralis-api
 ```
 
 **Step 3:** Restart Claude Code, then set your API key
@@ -44,7 +44,7 @@ The easiest way to install all Web3 skills at once:
 ```bash
 # Clone to Claude skills directory
 cd ~/.claude/skills
-git clone https://github.com/noviulian/web3-skills.git
+git clone https://github.com/noviulian/moralis-skills.git
 
 # The skills are now in ~/.claude/skills/web3-skills/skills/
 ```
@@ -60,9 +60,9 @@ Then set your API key (see below).
 mkdir -p ~/.claude/skills
 
 # Copy specific skills
-git clone https://github.com/noviulian/web3-skills.git /tmp/web3-skills
-cp -r /tmp/web3-skills/skills/web3-wallet-api ~/.claude/skills/
-cp -r /tmp/web3-skills/skills/web3-token-api ~/.claude/skills/
+git clone https://github.com/noviulian/moralis-skills.git /tmp/moralis-skills
+cp -r /tmp/moralis-skills/skills/web3-wallet-api ~/.claude/skills/
+cp -r /tmp/moralis-skills/skills/web3-token-api ~/.claude/skills/
 # ... add more skills as needed
 ```
 
