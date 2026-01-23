@@ -8,13 +8,13 @@
 |---------------|----------|---------|
 | "Solana token price?" | `/token/:network/:address/price` | SPL token price |
 | "Multiple token prices?" | `/token/:network/prices` | Batch prices |
-| "OHLCV data?" | `/token/:network/pairs/:pairAddress/ohlcv` | Candlesticks |
+| "OHLCV data?" | `/token/:network/pairs/:address/ohlcv` | Candlesticks |
 
 ## Key Endpoint Patterns
 
 - **Token prices:** `/token/:network/:address/price` (current price)
 - **Batch prices:** `/token/:network/prices` (multiple tokens)
-- **OHLCV data:** `/token/:network/pairs/:pairAddress/ohlcv` (candlesticks)
+- **OHLCV data:** `/token/:network/pairs/:address/ohlcv` (candlesticks)
 - **Network parameter:** `mainnet` or `devnet`
 
 **⚠️ IMPORTANT Limitations:**
@@ -31,6 +31,9 @@
 - **API Reference:** https://solana-gateway.moralis.io/token/:network/:address/price
 - **Use this endpoint when:** User asks "Solana token price", "SPL token price", "how much is this token", "token price USD"
 - **Networks:** mainnet, devnet
+- **Params:**
+  - `network` (required) - The network to query
+  - `address` (required) - The address to query
 
 ---
 
@@ -42,17 +45,27 @@
 - **Use this endpoint when:** User asks "multiple Solana token prices", "batch SPL prices", "prices for several tokens"
 - **Method:** POST with body `{"addresses": ["...", ...]}`
 - **Networks:** mainnet, devnet
+- **Params:**
+  - `network` (required) - The network to query
 
 ---
 
 ## Get OHLCV Candlesticks
 
-- **Endpoint:** `GET /token/:network/pairs/:pairAddress/ohlcv`
+- **Endpoint:** `GET /token/:network/pairs/:address/ohlcv`
 - **Description:** Get OHLCV candlesticks by pair address. Retrieves Open-High-Low-Close-Volume data for a Solana DEX trading pair.
-- **API Reference:** https://solana-gateway.moralis.io/token/:network/pairs/:pairAddress/ohlcv
+- **API Reference:** https://solana-gateway.moralis.io/token/:network/pairs/:address/ohlcv
 - **Use this endpoint when:** User asks "candlesticks", "OHLCV", "price chart data", "candle data"
 - **Networks:** mainnet, devnet
-- **Params:** `timeframe`, `fromDate`, `toDate`
+- **Params:**
+  - `network` (required) - The network to query
+  - `address` (required) - The address to query (pair address)
+  - `fromDate` (required) - The starting date (format in seconds or datestring)
+  - `toDate` (required) - The ending date (format in seconds or datestring)
+  - `timeframe` (required) - The interval of the candle stick
+  - `currency` (required) - The currency format
+  - `cursor` (optional) - The cursor to the next page
+  - `limit` (optional) - The limit per page
 
 ---
 
