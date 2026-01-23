@@ -30,6 +30,9 @@
 - **API Reference:** https://solana-gateway.moralis.io/account/:network/:address/balance
 - **Use this endpoint when:** User asks "SOL balance", "native balance", "how much SOL", "Solana balance"
 - **Networks:** mainnet, devnet
+- **Params:**
+  - `network` (required) - The network to query
+  - `address` (required) - The address to query
 
 ---
 
@@ -40,7 +43,10 @@
 - **API Reference:** https://solana-gateway.moralis.io/account/:network/:address/tokens
 - **Use this endpoint when:** User asks "SPL tokens", "token balances", "what tokens", "Solana tokens"
 - **Networks:** mainnet, devnet
-- **Params:** `limit`, `cursor`
+- **Params:**
+  - `network` (required) - The network to query
+  - `address` (required) - The address to query
+  - `excludeSpam` (optional) - Should exclude spam tokens
 
 ---
 
@@ -51,6 +57,12 @@
 - **API Reference:** https://solana-gateway.moralis.io/account/:network/:address/portfolio
 - **Use this endpoint when:** User asks "portfolio", "full portfolio", "complete holdings", "wallet value"
 - **Networks:** mainnet, devnet
+- **Params:**
+  - `network` (required) - The network to query
+  - `address` (required) - The address to query
+  - `nftMetadata` (optional) - Should return the full NFT metadata
+  - `mediaItems` (optional) - Should return media items
+  - `excludeSpam` (optional) - Should exclude spam NFTs
 
 ---
 
@@ -61,7 +73,13 @@
 - **API Reference:** https://solana-gateway.moralis.io/account/:network/:address/nft
 - **Use this endpoint when:** User asks "wallet NFTs", "what NFTs does this wallet own", "Solana NFT portfolio"
 - **Networks:** mainnet, devnet
-- **Params:** `limit`, `cursor`, `nftMetadata`, `mediaItems`, `excludeSpam`, `includeFungibleAssets`
+- **Params:**
+  - `network` (required) - The network to query
+  - `address` (required) - The address to query
+  - `nftMetadata` (optional) - Should return the full NFT metadata
+  - `mediaItems` (optional) - Should return media items
+  - `excludeSpam` (optional) - Should exclude spam NFTs
+  - `includeFungibleAssets` (optional) - Should include fungible assets (tokenStandard:1)
 
 ---
 
@@ -72,7 +90,16 @@
 - **API Reference:** https://solana-gateway.moralis.io/account/:network/:address/swaps
 - **Use this endpoint when:** User asks "wallet swaps", "swap history", "trading history", "DEX trades"
 - **Networks:** mainnet, devnet
-- **Params:** `limit`, `cursor`
+- **Params:**
+  - `network` (required) - The network to query
+  - `address` (required) - The address to query
+  - `limit` (optional) - The limit per page
+  - `cursor` (optional) - The cursor to the next page
+  - `order` (optional) - The order of items
+  - `fromDate` (optional) - The starting date (format in seconds or datestring)
+  - `toDate` (optional) - The ending date (format in seconds or datestring)
+  - `transactionTypes` (optional) - Transaction types to fetch (possible values: 'buy', 'sell')
+  - `tokenAddress` (optional) - Token address to get transactions for
 
 ---
 
