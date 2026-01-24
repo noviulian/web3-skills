@@ -414,8 +414,8 @@ function httpsRequest(fullUrl, headers, method = "GET", body = null) {
       });
 
       res.on("end", () => {
+        const data = Buffer.concat(chunks).toString("utf8");
         try {
-          const data = Buffer.concat(chunks).toString("utf8");
           const parsed = JSON.parse(data);
           if (res.statusCode >= 400) {
             reject(

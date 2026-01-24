@@ -268,4 +268,4 @@ streams-api query '/streams/evm', {
 
 ## Additional resources
 
-- [Streams API endpoints reference](references/STREAMS_ENDPOINTS.md)
+- [Streams API endpoints reference](references/evm_endpoints.md)

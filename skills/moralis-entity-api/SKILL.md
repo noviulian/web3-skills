@@ -5,7 +5,7 @@ license: MIT
 compatibility: Requires Node.js (built-in modules only, no npm install needed). EVM chains only - not supported on Solana.
 metadata:
   version: "1.1.0"
-  author: web3-skills
+  author: noviulian
   tags: [web3, blockchain, entity, labels, exchange, funds, evm]
   context:
     fork: false
@@ -137,4 +137,4 @@ query('/entities/:entityId')
 
 ## See Also
 
-- [EVM Endpoints Reference](references/EVM_ENDPOINTPOINTS.md)
+- [EVM Endpoints Reference](references/evm_endpoints.md)

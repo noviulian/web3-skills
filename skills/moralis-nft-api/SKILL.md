@@ -5,7 +5,7 @@ license: MIT
 compatibility: Requires Node.js (built-in modules only, no npm install needed)
 metadata:
   version: "1.2.0"
-  author: web3-skills
+  author: noviulian
   tags: [web3, blockchain, nft, metadata, traits, rarity, evm, solana]
   context:
     fork: false
@@ -362,5 +362,5 @@ getAllNFTs().catch(console.error);
 
 ## See Also
 
-- [EVM Endpoints Reference](references/EVM_ENDPOINTPOINTS.md)
-- [Solana Endpoints Reference](references/SOLANA_ENDPOINTPOINTS.md)
+- [EVM Endpoints Reference](references/evm_endpoints.md)
+- [Solana Endpoints Reference](references/solana_endpoints.md)

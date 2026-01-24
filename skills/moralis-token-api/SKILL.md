@@ -5,7 +5,7 @@ license: MIT
 compatibility: Requires Node.js (built-in modules only, no npm install needed)
 metadata:
   version: "2.0.0"
-  author: web3-skills
+  author: noviulian
   tags: [web3, blockchain, token, price, dex, swap, analytics, security, sniper, evm, solana]
   context:
     fork: false
@@ -352,7 +352,7 @@ query('/token/:network/:address/bonding-status', {
 
 ## Pagination
 
-Many endpoints support cursor-based pagination. See [Pagination Examples](references/PAGINATION_EXAMPLES.md) for details.
+Many endpoints support cursor-based pagination. See [Pagination Examples](references/pagination_examples.md) for details.
 
 ## Response Format
 
@@ -373,6 +373,6 @@ Many endpoints support cursor-based pagination. See [Pagination Examples](refere
 
 ## See Also
 
-- [EVM Endpoints Reference](references/EVM_ENDPOINTPOINTS.md)
-- [Solana Endpoints Reference](references/SOLANA_ENDPOINTPOINTS.md)
-- [Pagination Examples](references/PAGINATION_EXAMPLES.md)
+- [EVM Endpoints Reference](references/evm_endpoints.md)
+- [Solana Endpoints Reference](references/solana_endpoints.md)
+- [Pagination Examples](references/pagination_examples.md)
