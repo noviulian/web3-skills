@@ -28,14 +28,15 @@ const missingSuffix = [];
 const missingFiles = [];
 
 for (const op of collisions) {
-  const evmFile = path.join(RULES_DIR, op + ".md");
+  // For collisions, EVM gets __evm suffix, Solana gets __solana suffix
+  const evmFile = path.join(RULES_DIR, op + "__evm.md");
   const solanaFile = path.join(RULES_DIR, op + "__solana.md");
 
   const evmExists = fs.existsSync(evmFile);
   const solanaExists = fs.existsSync(solanaFile);
 
   console.log("- " + op);
-  console.log("  EVM file exists: " + evmExists + " (" + op + ".md)");
+  console.log("  EVM file exists: " + evmExists + " (" + op + "__evm.md)");
   console.log(
     "  Solana file exists: " + solanaExists + " (" + op + "__solana.md)",
   );

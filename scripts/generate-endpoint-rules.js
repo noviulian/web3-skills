@@ -29,6 +29,21 @@ const SKILL_MAPPINGS = {
 // Track operationId collisions
 const operationRegistry = {};
 
+// Endpoints to ignore (don't generate rule files for these)
+const IGNORED_ENDPOINTS = new Set([
+  "runContractFunction",
+  "web3ApiVersion",
+  "reviewContracts",
+  "syncNFTContract",
+]);
+
+/**
+ * Check if an endpoint should be ignored
+ */
+function shouldIgnoreEndpoint(operationId) {
+  return IGNORED_ENDPOINTS.has(operationId);
+}
+
 /**
  * Get the filename for an operation
  * - Solana endpoints always get __solana suffix
@@ -499,6 +514,11 @@ function generateDataApiCatalog(apiConfigs) {
   }
 
   for (const [opId, endpoint] of Object.entries(evm)) {
+    // Skip ignored endpoints
+    if (shouldIgnoreEndpoint(opId)) {
+      continue;
+    }
+
     let categorized = false;
 
     for (const { pattern, category, exclude } of categoryPatterns) {
@@ -515,15 +535,37 @@ function generateDataApiCatalog(apiConfigs) {
     }
   }
 
+  // Count non-ignored endpoints
+  const evmCount = Object.keys(evm).filter(
+    (id) => !shouldIgnoreEndpoint(id),
+  ).length;
+  const solanaNativeCount = Object.keys(solana).filter(
+    (id) => !shouldIgnoreEndpoint(id),
+  ).length;
+
+  // Count EVM endpoints with Solana chain support (for variants)
+  const solanaOps = new Set(Object.keys(solana || {}));
+  let evmSolanaVariantCount = 0;
+  for (const [opId, endpoint] of Object.entries(evm)) {
+    if (shouldIgnoreEndpoint(opId)) continue;
+    if (solanaOps.has(opId)) continue;
+    if (supportsSolanaChain(endpoint)) {
+      evmSolanaVariantCount++;
+    }
+  }
+
+  const totalSolana = solanaNativeCount + evmSolanaVariantCount;
+  const totalCount = evmCount + totalSolana;
+
   // Generate catalog markdown
   let md = "## Endpoint Catalog\n\n";
   md +=
     "Complete list of all " +
-    (Object.keys(evm).length + Object.keys(solana).length) +
+    totalCount +
     " endpoints (" +
-    Object.keys(evm).length +
+    evmCount +
     " EVM + " +
-    Object.keys(solana).length +
+    totalSolana +
     " Solana) organized by category.\n\n";
 
   // EVM categories
@@ -548,15 +590,54 @@ function generateDataApiCatalog(apiConfigs) {
   }
 
   // Solana section
+  // Collect EVM endpoints with Solana chain support
+  const evmSolanaVariants = [];
+
+  for (const [opId, endpoint] of Object.entries(evm)) {
+    // Skip ignored endpoints
+    if (shouldIgnoreEndpoint(opId)) {
+      continue;
+    }
+    // Skip if there's already a native Solana endpoint with this name
+    if (solanaOps.has(opId)) {
+      continue;
+    }
+    // Check if this EVM endpoint supports Solana chain
+    if (supportsSolanaChain(endpoint)) {
+      evmSolanaVariants.push({ opId, endpoint });
+    }
+  }
+
   md += "### Solana Endpoints\n\n";
   md +=
-    "Solana-specific endpoints (" + Object.keys(solana).length + " total).\n\n";
+    "Solana-specific endpoints (" +
+    solanaNativeCount +
+    " native + " +
+    evmSolanaVariants.length +
+    " EVM variants that support Solana chain = " +
+    totalSolana +
+    " total).\n\n";
   md += "| Endpoint | Description |\n";
   md += "|----------|-------------|\n";
 
+  // Native Solana endpoints
   for (const [opId, endpoint] of Object.entries(solana).sort()) {
+    // Skip ignored endpoints
+    if (shouldIgnoreEndpoint(opId)) {
+      continue;
+    }
     const desc = (endpoint.summary || "").substring(0, 80);
     const filename = getFilename(opId, "solana");
+    md += "| [" + opId + "](rules/" + filename + ") | " + desc + " |\n";
+  }
+
+  // EVM endpoints with Solana chain support
+  for (const { opId, endpoint } of evmSolanaVariants.sort((a, b) =>
+    a.opId.localeCompare(b.opId),
+  )) {
+    const desc =
+      "**Solana variant:** " + (endpoint.summary || "").substring(0, 60);
+    const filename = opId + "__solana.md";
     md += "| [" + opId + "](rules/" + filename + ") | " + desc + " |\n";
   }
 
@@ -704,11 +785,13 @@ function updateSkillMdFile(skillPath, newCatalog) {
  */
 function processSource(sourceName, sourceData, rulesDir) {
   const operationIds = Object.keys(sourceData);
-  console.log(
-    "  Processing " + sourceName + ": " + operationIds.length + " endpoints",
-  );
+  const ignored = [];
 
   for (const operationId of operationIds) {
+    if (shouldIgnoreEndpoint(operationId)) {
+      ignored.push(operationId);
+      continue;
+    }
     const endpoint = sourceData[operationId];
     const filename = getFilename(operationId, sourceName);
     const filepath = path.join(rulesDir, filename);
@@ -717,6 +800,123 @@ function processSource(sourceName, sourceData, rulesDir) {
       operationId,
       endpoint,
       sourceName,
+    );
+
+    writeFileIfChanged(filepath, markdown);
+  }
+
+  console.log(
+    "  Processing " +
+      sourceName +
+      ": " +
+      (operationIds.length - ignored.length) +
+      " endpoints" +
+      (ignored.length > 0 ? " (ignored: " + ignored.length + ")" : ""),
+  );
+  if (ignored.length > 0) {
+    console.log("    Ignored: " + ignored.join(", "));
+  }
+}
+
+/**
+ * Check if an EVM endpoint supports Solana in its chain enum
+ */
+function supportsSolanaChain(endpoint) {
+  if (!endpoint.queryParams) return false;
+  const chainParam = endpoint.queryParams.find((p) => p.name === "chain");
+  if (!chainParam || !chainParam.enum) return false;
+  return chainParam.enum.includes("solana");
+}
+
+/**
+ * Generate a Solana variant of an EVM endpoint
+ * This creates a __solana version for EVM endpoints that support Solana chain
+ */
+function generateSolanaVariant(operationId, evmEndpoint) {
+  // Create a modified endpoint for Solana
+  const solanaEndpoint = { ...evmEndpoint };
+
+  // Update description to indicate Solana support
+  if (solanaEndpoint.description) {
+    solanaEndpoint.description =
+      "**Solana variant:** " +
+      solanaEndpoint.description +
+      "\n\nThis EVM endpoint supports Solana via the `chain=solana` parameter.";
+  } else if (solanaEndpoint.summary) {
+    solanaEndpoint.description =
+      "**Solana variant:** " +
+      solanaEndpoint.summary +
+      "\n\nThis EVM endpoint supports Solana via the `chain=solana` parameter.";
+  }
+
+  // Set chain param example to "solana"
+  if (solanaEndpoint.queryParams) {
+    const chainParam = solanaEndpoint.queryParams.find(
+      (p) => p.name === "chain",
+    );
+    if (chainParam) {
+      // Create a new param object with solana as example
+      const updatedParams = solanaEndpoint.queryParams.map((p) => {
+        if (p.name === "chain") {
+          return { ...p, example: "solana" };
+        }
+        return p;
+      });
+      solanaEndpoint.queryParams = updatedParams;
+    }
+  }
+
+  return solanaEndpoint;
+}
+
+/**
+ * Process EVM endpoints that support Solana chain
+ * Creates __solana variants for endpoints that have "solana" in chain enum
+ */
+function processEvmEndpointsWithSolanaSupport(evmData, solanaData, rulesDir) {
+  const evmOps = Object.keys(evmData);
+  const solanaOps = new Set(Object.keys(solanaData || {}));
+
+  const solanaVariants = [];
+
+  for (const operationId of evmOps) {
+    // Skip ignored endpoints
+    if (shouldIgnoreEndpoint(operationId)) {
+      continue;
+    }
+
+    const endpoint = evmData[operationId];
+
+    // Skip if there's already a native Solana endpoint with this name
+    if (solanaOps.has(operationId)) {
+      continue;
+    }
+
+    // Check if this EVM endpoint supports Solana chain
+    if (supportsSolanaChain(endpoint)) {
+      solanaVariants.push({ operationId, endpoint });
+    }
+  }
+
+  if (solanaVariants.length === 0) {
+    return;
+  }
+
+  console.log(
+    "\n  EVM endpoints with Solana chain support: " +
+      solanaVariants.length +
+      " (creating __solana variants)",
+  );
+
+  for (const { operationId, endpoint } of solanaVariants) {
+    const filename = operationId + "__solana.md";
+    const filepath = path.join(rulesDir, filename);
+
+    const solanaEndpoint = generateSolanaVariant(operationId, endpoint);
+    const markdown = generateEndpointMarkdown(
+      operationId,
+      solanaEndpoint,
+      "solana-variant",
     );
 
     writeFileIfChanged(filepath, markdown);
@@ -758,6 +958,16 @@ function main() {
         );
       }
     }
+  }
+
+  // Third pass: generate __solana variants for EVM endpoints that support Solana chain
+  const dataApiConfig = SKILL_MAPPINGS["moralis-data-api"];
+  if (dataApiConfig && apiConfigs.evm) {
+    processEvmEndpointsWithSolanaSupport(
+      apiConfigs.evm,
+      apiConfigs.solana,
+      dataApiConfig.rulesDir,
+    );
   }
 
   console.log("\nDone! Generated rules:");
