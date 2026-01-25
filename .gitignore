@@ -11,6 +11,7 @@ todo/
 .env
 **/.env
 .claude
+.backup
 # No node_modules needed!
 node_modules/
 
