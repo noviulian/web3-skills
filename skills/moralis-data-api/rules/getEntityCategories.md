@@ -1,0 +1,33 @@
+# Get Entity Categories
+
+List available categories for blockchain entities.
+
+## Method
+
+GET
+
+## Base URL
+
+`https://deep-index.moralis.io/api/v2.2`
+
+## Path
+
+`/entities/categories`
+
+## Query Params
+
+| Name | Type | Required | Description | Example |
+|------|------|----------|-------------|----------|
+| limit | number | No | The desired page size of the result. | - |
+
+## Cursor/Pagination
+
+- **limit**: The desired page size of the result.
+
+## Example (curl)
+
+```bash
+curl -X GET "https://deep-index.moralis.io/api/v2.2/entities/categories" \
+  -H "accept: application/json" \
+  -H "X-API-Key: $MORALIS_API_KEY"
+```

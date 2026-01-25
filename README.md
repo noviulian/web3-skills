@@ -106,6 +106,18 @@ The query clients automatically discover the `.env` file from the skill director
 
 **Solana:** mainnet, devnet
 
+## Development
+
+### Regenerating REST Rules
+
+The skill rules are generated from the swagger documentation:
+
+```bash
+node scripts/generate-endpoint-rules.js
+```
+
+This reads `swagger/api-configs.json` and creates per-endpoint markdown files in `skills/*/rules/`.
+
 ## Documentation
 
 - **Get API Key:** Register at [admin.moralis.io/register](https://admin.moralis.io/register), then get your key at [admin.moralis.com/api-keys](https://admin.moralis.com/api-keys)
