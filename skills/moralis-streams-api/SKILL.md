@@ -79,6 +79,48 @@ rules/DeleteAddressFromStream.md  # Remove addresses
 # ... and 13 more
 ```
 
+## Endpoint Catalog
+
+### Stream Management
+
+| Endpoint | Description |
+|----------|-------------|
+| [GetStreams](rules/GetStreams.md) | Get all evm streams for the current project |
+| [CreateStream](rules/CreateStream.md) | Create a new evm stream |
+| [GetStream](rules/GetStream.md) | Get a specific evm stream |
+| [UpdateStream](rules/UpdateStream.md) | Update an existing evm stream |
+| [DeleteStream](rules/DeleteStream.md) | Delete an existing evm stream |
+| [DuplicateStream](rules/DuplicateStream.md) | Duplicate an existing evm stream |
+
+### Address Management
+
+| Endpoint | Description |
+|----------|-------------|
+| [GetAddresses](rules/GetAddresses.md) | Get all addresses that are being monitored by a stream |
+| [AddAddressToStream](rules/AddAddressToStream.md) | Add an address to be monitored by a stream |
+| [ReplaceAddressFromStream](rules/ReplaceAddressFromStream.md) | Replace an address that is being monitored by a stream |
+| [DeleteAddressFromStream](rules/DeleteAddressFromStream.md) | Remove an address from being monitored by a stream |
+
+### Status & Settings
+
+| Endpoint | Description |
+|----------|-------------|
+| [UpdateStreamStatus](rules/UpdateStreamStatus.md) | Update the status (active/paused) of a stream |
+| [SetSettings](rules/SetSettings.md) | Set settings for streams |
+| [GetSettings](rules/GetSettings.md) | Get settings for streams |
+
+### History & Analytics
+
+| Endpoint | Description |
+|----------|-------------|
+| [GetHistory](rules/GetHistory.md) | Get the history of a stream |
+| [ReplayHistory](rules/ReplayHistory.md) | Replay historical data for a stream |
+| [GetStats](rules/GetStats.md) | Get statistics for all streams |
+| [GetStatsByStreamId](rules/GetStatsByStreamId.md) | Get statistics for a specific stream |
+| [GetLogs](rules/GetLogs.md) | Get logs for a stream |
+| [GetStreamBlockDataByNumber](rules/GetStreamBlockDataByNumber.md) | Get the block data for a specific block number that was processed by a stream |
+| [GetStreamBlockDataToWebhookByNumber](rules/GetStreamBlockDataToWebhookByNumber.md) | Get the block data that was sent to the webhook for a specific block number |
+
 ## HTTP Methods
 
 | Action | HTTP Method |
