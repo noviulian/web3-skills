@@ -89,22 +89,7 @@ X-API-Key: <your_api_key>
 
 ## Pagination
 
-Many endpoints support cursor-based pagination:
-
-- **limit**: Number of results per page
-- **cursor**: Use the cursor from the previous response to get the next page
-
-Example pagination pattern:
-
-```bash
-# First request
-curl "https://deep-index.moralis.io/api/v2.2/0x.../nft?limit=100" \
-  -H "X-API-Key: YOUR_API_KEY"
-
-# Next page (use cursor from response)
-curl "https://deep-index.moralis.io/api/v2.2/0x.../nft?limit=100&cursor=<cursor_from_response>" \
-  -H "X-API-Key: YOUR_API_KEY"
-```
+Many endpoints support cursor-based pagination. See [Pagination](rules/Pagination.md) for details.
 
 ## When to Use This Skill
 
@@ -162,6 +147,8 @@ Complete list of all 136 endpoints (102 EVM + 34 Solana) organized by category.
 
 Balances, tokens, NFTs, transaction history, profitability, and net worth data.
 
+> See [WalletHistory](rules/WalletHistory.md) for transaction categories and classifications
+
 | Endpoint | Description |
 |----------|-------------|
 | [getNativeBalance](rules/getNativeBalance.md) | Get native balance by wallet |
@@ -185,6 +172,8 @@ Balances, tokens, NFTs, transaction history, profitability, and net worth data.
 ### Token
 
 Token prices, metadata, pairs, DEX swaps, analytics, security scores, and sniper detection.
+
+> See [SupportedDexs](rules/SupportedDexs.md) for supported DEXs per chain | [TokenSearch](rules/TokenSearch.md) for token search functionality | [TokenHoldersFaq](rules/TokenHoldersFaq.md) for token holders FAQ | [SpamDetection](rules/SpamDetection.md) for spam detection
 
 | Endpoint | Description |
 |----------|-------------|
@@ -215,6 +204,8 @@ Token prices, metadata, pairs, DEX swaps, analytics, security scores, and sniper
 
 NFT metadata, transfers, traits, rarity, floor prices, and trades.
 
+> See [NftMarketplaces](rules/NftMarketplaces.md) for supported NFT marketplaces per chain | [SpamDetection](rules/SpamDetection.md) for spam detection
+
 | Endpoint | Description |
 |----------|-------------|
 | [getContractNFTs](rules/getContractNFTs.md) | Get NFTs by contract address |
@@ -243,6 +234,8 @@ NFT metadata, transfers, traits, rarity, floor prices, and trades.
 ### DeFi
 
 DeFi protocol positions, liquidity, and exposure data.
+
+> See [DefiProtocols](rules/DefiProtocols.md) for supported DeFi protocols per chain
 
 | Endpoint | Description |
 |----------|-------------|
@@ -392,6 +385,12 @@ curl "https://deep-index.moralis.io/api/v2.2/0xd8dA6BF26964aF9D7eEd9e03E53415D37
 **EVM (40+ chains):** Ethereum (0x1), Polygon (0x89), BSC (0x38), Arbitrum (0xa4b1), Optimism (0xa), Base (0x2105), Avalanche (0xa86a), and more
 
 **Solana:** Mainnet, Devnet
+
+> See [SupportedApisAndChains](rules/SupportedApisAndChains.md) for complete list of supported APIs and chains
+
+## Reference Documentation
+
+- [ApiResponseCodes](rules/ApiResponseCodes.md) - Common response formats, status codes, and field descriptions
 
 ## See Also
 
