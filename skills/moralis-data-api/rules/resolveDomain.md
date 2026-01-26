@@ -26,6 +26,18 @@ GET
 |------|------|----------|-------------|----------|
 | currency | string | No | The currency to query | \`eth\` |
 
+## Response Example
+
+Status: 200
+
+Returns an address
+
+```json
+{
+  "address": "0x057Ec652A4F150f7FF94f089A38008f49a0DF88e"
+}
+```
+
 ## Example (curl)
 
 ```bash

@@ -22,6 +22,16 @@ GET
 | min_market_cap | number | No | The minimum market cap in usd of a token | \`50000000\` |
 | security_score | number | No | The minimum security score of a token | \`80\` |
 
+## Response Example
+
+Status: 200
+
+Returns the token details
+
+```json
+[]
+```
+
 ## Example (curl)
 
 ```bash

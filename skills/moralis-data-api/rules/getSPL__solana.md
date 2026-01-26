@@ -27,6 +27,29 @@ GET
 |------|------|----------|-------------|----------|
 | excludeSpam | boolean | No | Should exclude spam tokens | - |
 
+## Response Example
+
+Status: 200
+
+```json
+[
+  {
+    "associatedTokenAddress": "associatedTokenAddress_example",
+    "mint": "mint_example",
+    "name": "name_example",
+    "symbol": "symbol_example",
+    "tokenStandard": 0,
+    "score": 0,
+    "amount": "amount_example",
+    "amountRaw": "amountRaw_example",
+    "decimals": 0,
+    "logo": "logo_example",
+    "isVerifiedContract": true,
+    "possibleSpam": true
+  }
+]
+```
+
 ## Example (curl)
 
 ```bash

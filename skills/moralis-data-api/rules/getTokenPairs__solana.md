@@ -35,6 +35,47 @@ GET
 
 The response includes a **cursor** field for pagination. Use this cursor in the next request to get the next page of results.
 
+## Response Example
+
+Status: 200
+
+```json
+{
+  "cursor": "cursor_example",
+  "pageSize": 0,
+  "page": 0,
+  "pairs": [
+    {
+      "exchangeAddress": "exchangeAddress_example",
+      "exchangeName": "exchangeName_example",
+      "exchangeLogo": "exchangeLogo_example",
+      "pairAddress": "pairAddress_example",
+      "pairLabel": "pairLabel_example",
+      "usdPrice": 0,
+      "usdPrice24hrPercentChange": 0,
+      "usdPrice24hrUsdChange": 0,
+      "volume24hrNative": 0,
+      "volume24hrUsd": 0,
+      "liquidityUsd": 0,
+      "inactivePair": true,
+      "baseToken": "baseToken_example",
+      "quoteToken": "quoteToken_example",
+      "pair": [
+        {
+          "tokenAddress": "tokenAddress_example",
+          "tokenName": "tokenName_example",
+          "tokenSymbol": "tokenSymbol_example",
+          "tokenLogo": "tokenLogo_example",
+          "tokenDecimals": "tokenDecimals_example",
+          "pairTokenType": "pairTokenType_example",
+          "liquidityUsd": 0
+        }
+      ]
+    }
+  ]
+}
+```
+
 ## Example (curl)
 
 ```bash

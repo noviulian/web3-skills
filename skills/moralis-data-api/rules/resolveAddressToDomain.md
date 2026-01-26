@@ -26,6 +26,18 @@ GET
 |------|------|----------|-------------|----------|
 | currency | string | No | The currency to query | \`eth\` |
 
+## Response Example
+
+Status: 200
+
+Returns an unstoppable domain
+
+```json
+{
+  "name": "sandy.nft"
+}
+```
+
 ## Example (curl)
 
 ```bash

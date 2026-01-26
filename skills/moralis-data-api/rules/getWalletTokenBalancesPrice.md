@@ -42,6 +42,45 @@ GET
 
 The response includes a **cursor** field for pagination. Use this cursor in the next request to get the next page of results.
 
+## Response Example
+
+Status: 200
+
+Returns token balances with prices for a specific address
+
+```json
+{
+  "page": "2",
+  "page_size": "100",
+  "block_number": "13680123",
+  "cursor": "cursor_example",
+  "result": [
+    {
+      "token_address": "token_address_example",
+      "name": "name_example",
+      "symbol": "symbol_example",
+      "logo": "logo_example",
+      "thumbnail": "thumbnail_example",
+      "decimals": 0,
+      "balance": "balance_example",
+      "possible_spam": true,
+      "verified_contract": true,
+      "usd_price": "usd_price_example",
+      "usd_price_24hr_percent_change": "usd_price_24hr_percent_change_example",
+      "usd_price_24hr_usd_change": "usd_price_24hr_usd_change_example",
+      "usd_value_24hr_usd_change": "usd_value_24hr_usd_change_example",
+      "usd_value": 0,
+      "portfolio_percentage": 0,
+      "balance_formatted": "balance_formatted_example",
+      "native_token": true,
+      "total_supply": "total_supply_example",
+      "total_supply_formatted": "total_supply_formatted_example",
+      "percentage_relative_to_total_supply": 0
+    }
+  ]
+}
+```
+
 ## Example (curl)
 
 ```bash

@@ -30,6 +30,60 @@ GET
 | excludeSpam | boolean | No | Should exclude spam NFTs | - |
 | includeFungibleAssets | boolean | No | Should include fungible assets (tokenStandard:1) | - |
 
+## Response Example
+
+Status: 200
+
+```json
+[
+  {
+    "associatedTokenAddress": "associatedTokenAddress_example",
+    "mint": "mint_example",
+    "name": "name_example",
+    "symbol": "symbol_example",
+    "tokenStandard": 0,
+    "amount": "amount_example",
+    "amountRaw": "amountRaw_example",
+    "decimals": 0,
+    "possibleSpam": true,
+    "totalSupply": "totalSupply_example",
+    "attributes": [
+      {
+        "traitType": "traitType_example",
+        "value": {}
+      }
+    ],
+    "contract": {
+      "type": "type_example",
+      "name": "name_example",
+      "symbol": "symbol_example"
+    },
+    "collection": {
+      "collectionAddress": "collectionAddress_example",
+      "name": "name_example",
+      "description": "description_example",
+      "imageOriginalUrl": "imageOriginalUrl_example",
+      "externalUrl": "externalUrl_example",
+      "metaplexMint": "metaplexMint_example",
+      "sellerFeeBasisPoints": 0
+    },
+    "firstCreated": {
+      "mintTimestamp": 0,
+      "mintBlockNumber": 0,
+      "mintTransaction": "mintTransaction_example"
+    },
+    "creators": [
+      {
+        "address": "address_example",
+        "share": 0,
+        "verified": true
+      }
+    ],
+    "properties": {}
+  }
+]
+```
+
 ## Example (curl)
 
 ```bash

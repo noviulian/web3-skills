@@ -36,6 +36,29 @@ GET
 
 The response includes a **cursor** field for pagination. Use this cursor in the next request to get the next page of results.
 
+## Response Example
+
+Status: 200
+
+Returns the traits
+
+```json
+{
+  "page": "2",
+  "page_size": "100",
+  "cursor": "cursor_example",
+  "result": [
+    {
+      "trait_type": "Background",
+      "trait_value": "Lavendar",
+      "count": 18593,
+      "percentage": 85.8,
+      "rarity_label": "Top 4% trait"
+    }
+  ]
+}
+```
+
 ## Example (curl)
 
 ```bash

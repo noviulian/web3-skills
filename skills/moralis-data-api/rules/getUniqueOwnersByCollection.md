@@ -35,6 +35,21 @@ GET
 
 The response includes a **cursor** field for pagination. Use this cursor in the next request to get the next page of results.
 
+## Response Example
+
+Status: 200
+
+Returns a collection of unique NFT owners
+
+```json
+{
+  "page": "2",
+  "pageSize": "100",
+  "cursor": "cursor_example",
+  "walletAddresses": []
+}
+```
+
 ## Example (curl)
 
 ```bash

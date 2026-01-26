@@ -14,6 +14,16 @@ GET
 
 `/market-data/global/market-cap`
 
+## Response Example
+
+Status: 200
+
+Returns the top crypto currencies by market cap
+
+```json
+[]
+```
+
 ## Example (curl)
 
 ```bash

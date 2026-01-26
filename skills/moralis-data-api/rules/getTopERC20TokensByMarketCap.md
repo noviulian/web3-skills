@@ -14,6 +14,16 @@ GET
 
 `/market-data/erc20s/top-tokens`
 
+## Response Example
+
+Status: 200
+
+Returns the top ERC20 tokens by market cap
+
+```json
+[]
+```
+
 ## Example (curl)
 
 ```bash

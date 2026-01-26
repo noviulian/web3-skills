@@ -21,6 +21,29 @@ GET
 | network | string (mainnet) | Yes | The network to query | - |
 | pairAddress | string | Yes | The address of the pair to query | \`Czfq3xZZDmsdGdUyrNLtRhGc47cXcZtLG4crryfu44zE\` |
 
+## Response Example
+
+Status: 200
+
+```json
+{
+  "tokenAddress": "tokenAddress_example",
+  "tokenName": "tokenName_example",
+  "tokenSymbol": "tokenSymbol_example",
+  "tokenLogo": "tokenLogo_example",
+  "pairCreated": "pairCreated_example",
+  "pairLabel": "pairLabel_example",
+  "pairAddress": "pairAddress_example",
+  "exchange": "exchange_example",
+  "exchangeAddress": "exchangeAddress_example",
+  "exchangeLogo": "exchangeLogo_example",
+  "exchangeUrl": "exchangeUrl_example",
+  "currentUsdPrice": "currentUsdPrice_example",
+  "currentNativePrice": "currentNativePrice_example",
+  "totalLiquidityUsd": "totalLiquidityUsd_example"
+}
+```
+
 ## Example (curl)
 
 ```bash

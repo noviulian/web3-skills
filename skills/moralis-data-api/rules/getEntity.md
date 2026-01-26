@@ -20,6 +20,27 @@ GET
 |------|------|----------|-------------|----------|
 | entityId | string | Yes | - | \`1\` |
 
+## Response Example
+
+Status: 200
+
+Returns the entity.
+
+```json
+{
+  "addresses": [
+    {
+      "additional_labels": [
+        [
+          "Uniswap",
+          "Uniswap V3"
+        ]
+      ]
+    }
+  ]
+}
+```
+
 ## Example (curl)
 
 ```bash

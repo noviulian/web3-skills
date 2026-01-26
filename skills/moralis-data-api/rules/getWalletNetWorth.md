@@ -30,6 +30,34 @@ GET
 | max_token_inactivity | number | No | Exclude tokens inactive for more than the given amount of days | \`1\` |
 | min_pair_side_liquidity_usd | number | No | Exclude tokens with liquidity less than the specified amount in USD. This parameter refers to the liquidity on a single side of the pair. | \`1000\` |
 
+## Response Example
+
+Status: 200
+
+Returns the net worth of a wallet in USD
+
+```json
+{
+  "total_networth_usd": "3879851.41",
+  "chains": [
+    {
+      "chain": "eth",
+      "native_balance": "1085513807021271641379",
+      "native_balance_formatted": "1085.513807021271641379",
+      "native_balance_usd": "3158392.48",
+      "token_balance_usd": "721458.93",
+      "networth_usd": "3879851.41"
+    }
+  ],
+  "unsupported_chain_ids": [],
+  "unavailable_chains": [
+    {
+      "chain_id": "0x1"
+    }
+  ]
+}
+```
+
 ## Example (curl)
 
 ```bash

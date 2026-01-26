@@ -26,6 +26,42 @@ POST
 |------|------|----------|-------------|----------|
 | addresses | array | No | - | \`So11111111111111111111111111111111111111112\` |
 
+## Response Example
+
+Status: default
+
+```json
+[
+  {
+    "mint": "mint_example",
+    "standard": "standard_example",
+    "name": "name_example",
+    "symbol": "symbol_example",
+    "logo": "logo_example",
+    "decimals": "decimals_example",
+    "tokenStandard": 0,
+    "score": 0,
+    "totalSupply": "totalSupply_example",
+    "totalSupplyFormatted": "totalSupplyFormatted_example",
+    "fullyDilutedValue": "fullyDilutedValue_example",
+    "marketCap": "marketCap_example",
+    "circulatingSupply": "circulatingSupply_example",
+    "metaplex": {
+      "metadataUri": "metadataUri_example",
+      "masterEdition": true,
+      "isMutable": true,
+      "primarySaleHappened": 0,
+      "sellerFeeBasisPoints": 0,
+      "updateAuthority": "updateAuthority_example"
+    },
+    "links": {},
+    "description": "description_example",
+    "isVerifiedContract": true,
+    "possibleSpam": true
+  }
+]
+```
+
 ## Example (curl)
 
 ```bash

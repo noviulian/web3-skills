@@ -36,6 +36,34 @@ GET
 
 The response includes a **cursor** field for pagination. Use this cursor in the next request to get the next page of results.
 
+## Response Example
+
+Status: 200
+
+Returns a collection of owners of an ERC20 token
+
+```json
+{
+  "page": "2",
+  "page_size": "100",
+  "cursor": "cursor_example",
+  "total_supply": "total_supply_example",
+  "result": [
+    {
+      "owner_address": "0x244...",
+      "owner_address_label": "Coinbase 1",
+      "balance": "57888888888888888888880",
+      "balance_formatted": "5.78",
+      "usd_value": "57888888888888888888880",
+      "is_contract": true,
+      "percentage_relative_to_total_supply": 10,
+      "entity": "Opensea",
+      "entity_logo": "https://opensea.io/favicon.ico"
+    }
+  ]
+}
+```
+
 ## Example (curl)
 
 ```bash

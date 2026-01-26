@@ -50,6 +50,39 @@ GET
 
 The response includes a **cursor** field for pagination. Use this cursor in the next request to get the next page of results.
 
+## Response Example
+
+Status: 200
+
+Returns the trades
+
+```json
+{
+  "page": "2",
+  "page_size": "100",
+  "cursor": "cursor_example",
+  "result": [
+    {
+      "transaction_hash": "0x057Ec652A4F150f7FF94f089A38008f49a0DF88e",
+      "transaction_index": "transaction_index_example",
+      "token_ids": [
+        "15",
+        "54"
+      ],
+      "seller_address": "0x057Ec652A4F150f7FF94f089A38008f49a0DF88e",
+      "buyer_address": "0x057Ec652A4F150f7FF94f089A38008f49a0DF88e",
+      "token_address": "0x4ad3785ec7eed7589fa86538244a4530f962434f",
+      "marketplace_address": "0x057Ec652A4F150f7FF94f089A38008f49a0DF88e",
+      "price_token_address": "0x60e4d786628fea6478f785a6d7e704777c86a7c6",
+      "price": "1000000000000000",
+      "block_timestamp": "2021-06-04T16:00:15",
+      "block_number": "13680123",
+      "block_hash": "0x4a7c916ca4a970358b9df90051008f729685ff05e9724a9dddba32630c37cb96"
+    }
+  ]
+}
+```
+
 ## Example (curl)
 
 ```bash

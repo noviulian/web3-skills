@@ -31,6 +31,19 @@ GET
 * If 'to_date' and 'to_block' are provided, 'to_block' will be used.
  | - |
 
+## Response Example
+
+Status: 200
+
+Returns the pair reserves
+
+```json
+{
+  "reserve0": "220969226548536862025877",
+  "reserve1": "844810441191293211036"
+}
+```
+
 ## Example (curl)
 
 ```bash

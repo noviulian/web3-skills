@@ -17,6 +17,19 @@ POST
 ## Body
 
 
+## Response Example
+
+Status: 200
+
+Returns the token details
+
+```json
+{
+  "metadata": {},
+  "metrics": {}
+}
+```
+
 ## Example (curl)
 
 ```bash

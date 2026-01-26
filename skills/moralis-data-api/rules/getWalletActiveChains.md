@@ -26,6 +26,24 @@ GET
 |------|------|----------|-------------|----------|
 | chains | array | No | The chains to query | - |
 
+## Response Example
+
+Status: 200
+
+Returns the active chains for the wallet address.
+
+```json
+{
+  "address": "0x057Ec652A4F150f7FF94f089A38008f49a0DF88e",
+  "active_chains": [
+    {
+      "chain": "eth",
+      "chain_id": "0x1"
+    }
+  ]
+}
+```
+
 ## Example (curl)
 
 ```bash

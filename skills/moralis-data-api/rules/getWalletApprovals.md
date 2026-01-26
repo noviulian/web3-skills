@@ -35,6 +35,48 @@ GET
 
 The response includes a **cursor** field for pagination. Use this cursor in the next request to get the next page of results.
 
+## Response Example
+
+Status: 200
+
+Returns active ERC20 token approvals for the specified wallet address
+
+```json
+{
+  "page": "2",
+  "page_size": "100",
+  "cursor": "cursor_example",
+  "result": [
+    {
+      "block_number": 12526958,
+      "block_timestamp": "2021-04-02T10:07:54.000Z",
+      "transaction_hash": "0x2d30ca6f024dbc1307ac8a1a44ca27de6f797ec22ef20627a1307243b0ab7d09",
+      "value": "8409770570506626",
+      "value_formatted": "0.1",
+      "token": {
+        "address": "0x67b6d479c7bb412c54e03dca8e1bc6740ce6b99c",
+        "address_label": "address_label_example",
+        "name": "Tether USD",
+        "symbol": "USDT",
+        "logo": "https://opensea.io/favicon.ico",
+        "possible_spam": false,
+        "verified_contract": false,
+        "current_balance": "1000000000000000",
+        "current_balance_formatted": "0.1",
+        "usd_price": "1000000000000000",
+        "usd_at_risk": "1000000000000000"
+      },
+      "spender": {
+        "address": "0x67b6d479c7bb412c54e03dca8e1bc6740ce6b99c",
+        "address_label": "Binance 1",
+        "entity": "Opensea",
+        "entity_logo": "https://opensea.io/favicon.ico"
+      }
+    }
+  ]
+}
+```
+
 ## Example (curl)
 
 ```bash

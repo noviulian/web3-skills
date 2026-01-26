@@ -21,6 +21,17 @@ GET
 | network | string (mainnet) | Yes | The network to query | - |
 | address | string | Yes | The address to query | \`kXB7FfzdrfZpAZEW3TZcp8a8CwQbsowa6BdfAHZ4gVs\` |
 
+## Response Example
+
+Status: 200
+
+```json
+{
+  "solana": "solana_example",
+  "lamports": "lamports_example"
+}
+```
+
 ## Example (curl)
 
 ```bash

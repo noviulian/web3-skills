@@ -28,6 +28,49 @@ GET
 | blocksAfterCreation | number | No | Number of blocks after the creation
  | - |
 
+## Response Example
+
+Status: 200
+
+Returns snipers by pair address.
+
+```json
+{
+  "transactionHash": "0x2bfcba4715774420936669cd0ff2241d70e9abecab76c9db813602015b3134ad",
+  "blockTimestamp": "2022-02-22T00:00:00Z",
+  "blockNumber": 21093423,
+  "result": [
+    {
+      "walletAddress": "0x2bfcba4715774420936669cd0ff2241d70e9abec",
+      "totalTokensSniped": 0,
+      "totalSnipedUsd": 0,
+      "totalSnipedTransactions": 0,
+      "totalTokensSold": 0,
+      "totalSoldUsd": 0,
+      "totalSellTransactions": 0,
+      "currentBalance": 0,
+      "currentBalanceUsdValue": 0,
+      "realizedProfitPercentage": 0,
+      "realizedProfitUsd": 0,
+      "snipedTransactions": [
+        {
+          "transactionHash": "0x2bfcba4715774420936669cd0ff2241d70e9abec",
+          "blocksAfterCreation": 0,
+          "transactionTimestamp": 0
+        }
+      ],
+      "sellTransactions": [
+        {
+          "transactionHash": "0x2bfcba4715774420936669cd0ff2241d70e9abec",
+          "blocksAfterCreation": 0,
+          "transactionTimestamp": 0
+        }
+      ]
+    }
+  ]
+}
+```
+
 ## Example (curl)
 
 ```bash

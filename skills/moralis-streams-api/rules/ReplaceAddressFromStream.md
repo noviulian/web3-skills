@@ -26,6 +26,18 @@ PATCH
 |------|------|----------|-------------|----------|
 | address | - | No | The address or a list of addresses to be removed from the Stream. | \`string\` |
 
+## Response Example
+
+Status: 200
+
+Ok
+
+```json
+{
+  "streamId": "streamId_example"
+}
+```
+
 ## Example (curl)
 
 ```bash

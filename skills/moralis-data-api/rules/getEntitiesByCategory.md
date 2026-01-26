@@ -30,6 +30,24 @@ GET
 
 - **limit**: The desired page size of the result.
 
+## Response Example
+
+Status: 200
+
+Returns the entities belonging to the category.
+
+```json
+{
+  "page": "1",
+  "page_size": "100",
+  "result": [
+    {
+      "total_addresses": 100
+    }
+  ]
+}
+```
+
 ## Example (curl)
 
 ```bash

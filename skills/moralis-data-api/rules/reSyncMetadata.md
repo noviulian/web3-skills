@@ -29,6 +29,18 @@ GET
 | flag | string | No | The type of resync to operate | \`uri\` |
 | mode | string | No | To define the behaviour of the endpoint | \`sync\` |
 
+## Response Example
+
+Status: 200
+
+(In sync mode) Resync request executed.
+
+```json
+{
+  "status": "status_example"
+}
+```
+
 ## Example (curl)
 
 ```bash

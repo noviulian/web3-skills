@@ -14,6 +14,16 @@ GET
 
 `/market-data/global/volume`
 
+## Response Example
+
+Status: 200
+
+Returns the top crypto currencies by trading volume
+
+```json
+[]
+```
+
 ## Example (curl)
 
 ```bash

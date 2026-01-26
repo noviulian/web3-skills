@@ -14,6 +14,19 @@ GET
 
 `/settings`
 
+## Response Example
+
+Status: 200
+
+Ok
+
+```json
+{
+  "region": "region_example",
+  "secretKey": "secretKey_example"
+}
+```
+
 ## Example (curl)
 
 ```bash

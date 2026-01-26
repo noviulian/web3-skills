@@ -386,6 +386,170 @@ function buildBodySection(endpoint) {
 }
 
 /**
+ * Build example JSON from response schema fields
+ * Handles both 'fields' array and 'properties' object with $ref
+ */
+function buildExampleFromSchema(body) {
+  if (!body) return null;
+
+  // Handle array type at the top level (response body is an array)
+  if (body.type === "array") {
+    const arraySchema = body.items || body.field;
+    if (arraySchema) {
+      if (arraySchema.properties) {
+        return [
+          buildExampleFromSchema({
+            type: "object",
+            properties: arraySchema.properties,
+          }),
+        ];
+      } else if (arraySchema.fields) {
+        return [
+          buildExampleFromSchema({
+            type: "object",
+            fields: arraySchema.fields,
+          }),
+        ];
+      } else if (arraySchema.example !== undefined) {
+        return [arraySchema.example];
+      }
+    }
+    return [];
+  }
+
+  const example = {};
+  const items = body.fields || body.properties;
+
+  if (!items) return null;
+
+  // Handle both array (fields) and object (properties)
+  const entries = Array.isArray(items) ? items : Object.entries(items);
+
+  for (const entry of entries) {
+    let name, field;
+
+    if (Array.isArray(entry)) {
+      // Object.entries format: [name, field]
+      [name, field] = entry;
+    } else {
+      // Array format: field with name property
+      field = entry;
+      name = field.name;
+    }
+
+    // Skip $ref fields without examples (we can't resolve them)
+    if (field.$ref) {
+      if (field.example !== undefined) {
+        example[name] = field.example;
+      }
+      continue;
+    }
+
+    // Use the example value if provided
+    if (field.example !== undefined) {
+      example[name] = field.example;
+    } else if (field.type === "object" && field.properties) {
+      // Recursively build nested objects from properties
+      example[name] = buildExampleFromSchema({
+        type: "object",
+        properties: field.properties,
+      });
+    } else if (
+      field.type === "object" &&
+      field.fields &&
+      Array.isArray(field.fields)
+    ) {
+      // Recursively build nested objects from fields array
+      example[name] = buildExampleFromSchema({
+        type: "object",
+        fields: field.fields,
+      });
+    } else if (field.type === "object") {
+      // Object type without nested schema - use empty object
+      example[name] = {};
+    } else if (field.type === "array") {
+      // Build array example from items or field schema (some schemas use 'field' instead of 'items')
+      const arraySchema = field.items || field.field;
+      if (arraySchema) {
+        if (arraySchema.properties) {
+          example[name] = [
+            buildExampleFromSchema({
+              type: "object",
+              properties: arraySchema.properties,
+            }),
+          ];
+        } else if (arraySchema.fields) {
+          example[name] = [
+            buildExampleFromSchema({
+              type: "object",
+              fields: arraySchema.fields,
+            }),
+          ];
+        } else if (arraySchema.example !== undefined) {
+          example[name] = [arraySchema.example];
+        } else if (arraySchema.type) {
+          // Simple type array
+          example[name] = [];
+        } else {
+          example[name] = [];
+        }
+      } else {
+        example[name] = [];
+      }
+    } else if (field.type === "string") {
+      example[name] = name + "_example";
+    } else if (field.type === "number") {
+      example[name] = 0;
+    } else if (field.type === "boolean") {
+      example[name] = true;
+    }
+  }
+
+  return example;
+}
+
+/**
+ * Build response example section
+ */
+function buildResponseExampleSection(endpoint) {
+  const { responses = [] } = endpoint;
+
+  // Find a response with a body schema, checking in priority order
+  // Priority: 200 > 201 > default (any status with a body schema)
+  const successResponse =
+    responses.find((r) => r.status === "200" && r.body) ||
+    responses.find((r) => r.status === "201" && r.body) ||
+    responses.find((r) => r.status === "default" && r.body);
+
+  if (!successResponse) {
+    return null;
+  }
+
+  // Build example from body schema
+  const example = buildExampleFromSchema(successResponse.body);
+
+  if (!example) {
+    return null;
+  }
+
+  // Allow empty arrays as valid examples, but filter empty objects
+  if (!Array.isArray(example) && Object.keys(example).length === 0) {
+    return null;
+  }
+
+  let section = "## Response Example\n\n";
+  section += "Status: " + successResponse.status + "\n\n";
+
+  if (successResponse.description) {
+    section += successResponse.description + "\n\n";
+  }
+
+  section += "```json\n" + JSON.stringify(example, null, 2) + "\n```\n";
+
+  return section;
+}
+
+/**
  * Generate markdown content for a single endpoint
  */
 function generateEndpointMarkdown(operationId, endpoint, source) {
@@ -431,6 +595,12 @@ function generateEndpointMarkdown(operationId, endpoint, source) {
   const paginationSection = buildPaginationSection(endpoint);
   if (paginationSection) {
     md += paginationSection + "\n";
+  }
+
+  // Response example (if available)
+  const responseExampleSection = buildResponseExampleSection(endpoint);
+  if (responseExampleSection) {
+    md += responseExampleSection + "\n";
   }
 
   // Example

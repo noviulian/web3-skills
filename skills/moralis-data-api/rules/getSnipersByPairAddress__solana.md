@@ -27,6 +27,47 @@ GET
 |------|------|----------|-------------|----------|
 | blocksAfterCreation | number | No | - | - |
 
+## Response Example
+
+Status: 200
+
+```json
+{
+  "transactionHash": "transactionHash_example",
+  "blockNumber": 0,
+  "blockTimestamp": "blockTimestamp_example",
+  "result": [
+    {
+      "walletAddress": "walletAddress_example",
+      "totalTokensSniped": 0,
+      "totalSnipedUsd": 0,
+      "totalSnipedTransactions": 0,
+      "snipedTransactions": [
+        {
+          "transactionHash": "transactionHash_example",
+          "transactionTimestamp": "transactionTimestamp_example",
+          "blocksAfterCreation": 0
+        }
+      ],
+      "totalTokensSold": 0,
+      "totalSoldUsd": 0,
+      "totalSellTransactions": 0,
+      "sellTransactions": [
+        {
+          "transactionHash": "transactionHash_example",
+          "transactionTimestamp": "transactionTimestamp_example",
+          "blocksAfterCreation": 0
+        }
+      ],
+      "currentBalance": 0,
+      "currentBalanceUsdValue": 0,
+      "realizedProfitPercentage": 0,
+      "realizedProfitUsd": 0
+    }
+  ]
+}
+```
+
 ## Example (curl)
 
 ```bash

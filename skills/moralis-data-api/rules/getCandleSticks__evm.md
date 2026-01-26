@@ -45,6 +45,34 @@ GET
 
 The response includes a **cursor** field for pagination. Use this cursor in the next request to get the next page of results.
 
+## Response Example
+
+Status: 200
+
+Returns the OHLCV data.
+
+```json
+{
+  "cursor": "cursor_example",
+  "page": "2",
+  "pairAddress": "0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640",
+  "tokenAddress": "0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640",
+  "timeframe": "30min",
+  "currency": "usd",
+  "result": [
+    {
+      "timestamp": "timestamp_example",
+      "open": 0,
+      "high": 0,
+      "low": 0,
+      "close": 0,
+      "volume": 0,
+      "trades": 0
+    }
+  ]
+}
+```
+
 ## Example (curl)
 
 ```bash

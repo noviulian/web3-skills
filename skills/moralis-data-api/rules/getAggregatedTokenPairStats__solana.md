@@ -21,6 +21,54 @@ GET
 | network | string (mainnet) | Yes | The network to query | - |
 | address | string | Yes | The address to query | \`So11111111111111111111111111111111111111112\` |
 
+## Response Example
+
+Status: 200
+
+```json
+{
+  "totalLiquidityUsd": 0,
+  "totalActivePairs": 0,
+  "totalActiveDexes": 0,
+  "totalSwaps": {
+    "5min": 0,
+    "1h": 0,
+    "4h": 0,
+    "24h": 0
+  },
+  "totalVolume": {
+    "5min": 0,
+    "1h": 0,
+    "4h": 0,
+    "24h": 0
+  },
+  "totalBuyVolume": {
+    "5min": 0,
+    "1h": 0,
+    "4h": 0,
+    "24h": 0
+  },
+  "totalSellVolume": {
+    "5min": 0,
+    "1h": 0,
+    "4h": 0,
+    "24h": 0
+  },
+  "totalBuyers": {
+    "5min": 0,
+    "1h": 0,
+    "4h": 0,
+    "24h": 0
+  },
+  "totalSellers": {
+    "5min": 0,
+    "1h": 0,
+    "4h": 0,
+    "24h": 0
+  }
+}
+```
+
 ## Example (curl)
 
 ```bash

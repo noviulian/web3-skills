@@ -52,6 +52,70 @@ GET
 
 The response includes a **cursor** field for pagination. Use this cursor in the next request to get the next page of results.
 
+## Response Example
+
+Status: 200
+
+Returns a collection of NFT transfers
+
+```json
+{
+  "page": "2",
+  "page_size": "100",
+  "cursor": "cursor_example",
+  "result": [
+    {
+      "token_address": "0x057Ec652A4F150f7FF94f089A38008f49a0DF88e",
+      "token_id": "15",
+      "token_name": "Tether USD",
+      "token_symbol": "USDT",
+      "from_address_entity": "Opensea",
+      "from_address_entity_logo": "https://opensea.io/favicon.ico",
+      "from_address": "0x057Ec652A4F150f7FF94f089A38008f49a0DF88e",
+      "from_address_label": "Binance 1",
+      "to_address_entity": "Beaver Build",
+      "to_address_entity_logo": "https://beaverbuild.com/favicon.ico",
+      "to_address": "0x057Ec652A4F150f7FF94f089A38008f49a0DF88e",
+      "to_address_label": "Binance 2",
+      "value": "1000000000000000",
+      "amount": "1",
+      "contract_type": "ERC721",
+      "block_number": "88256",
+      "block_timestamp": "2021-06-04T16:00:15",
+      "block_hash": "block_hash_example",
+      "transaction_hash": "0x057Ec652A4F150f7FF94f089A38008f49a0DF88e",
+      "transaction_type": "transaction_type_example",
+      "transaction_index": 0,
+      "log_index": 0,
+      "operator": "0x057Ec652A4F150f7FF94f089A38008f49a0DF88e",
+      "possible_spam": "false",
+      "verified_collection": "false",
+      "last_sale": {
+        "transaction_hash": "0x19e14f34b8f120c980f7ba05338d64c00384857fb9c561e2c56d0f575424a95c",
+        "block_timestamp": "2023-04-04T15:59:11.000Z",
+        "buyer_address": "0xcb1c1fde09f811b294172696404e88e658659905",
+        "seller_address": "0x497a7dee2f13db161eb2fec060fa783cb041419f",
+        "price": "7300000000000000",
+        "price_formatted": "0.0073",
+        "usd_price_at_sale": "13.61",
+        "current_usd_value": "15.53",
+        "token_address": "0xe8778996e096b39705c6a0a937eb587a1ebbda17",
+        "token_id": "170",
+        "payment_token": {
+          "token_name": "Ether",
+          "token_symbol": "ETH",
+          "token_logo": "https://cdn.moralis.io/eth/0x.png",
+          "token_decimals": "18",
+          "token_address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+        }
+      }
+    }
+  ],
+  "block_exists": true,
+  "index_complete": true
+}
+```
+
 ## Example (curl)
 
 ```bash

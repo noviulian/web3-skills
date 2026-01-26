@@ -50,6 +50,60 @@ GET
 
 The response includes a **cursor** field for pagination. Use this cursor in the next request to get the next page of results.
 
+## Response Example
+
+Status: 200
+
+Returns swap transactions by pair address.
+
+```json
+{
+  "page": "2",
+  "pageSize": "100",
+  "cursor": "cursor_example",
+  "exchangeAddress": "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f",
+  "exchangeName": "Uniswap v2",
+  "exchangeLogo": "https://entities-logos.s3.us-east-1.amazonaws.com/uniswap.png",
+  "pairLabel": "BRETT/WETH",
+  "pairAddress": "0x36a46dff597c5a444bbc521d26787f57867d2214",
+  "baseToken": {
+    "address": "0x003dde3494f30d861d063232c6a8c04394b686ff",
+    "name": "BRETT",
+    "symbol": "BRETT",
+    "logo": "https://cdn.moralis.io/tokens/0x0000000000085d4780b73119b644ae5ecd22b376.png",
+    "amount": "14811.98",
+    "usdPrice": 0.078634,
+    "usdAmount": 1155.33
+  },
+  "quoteToken": {
+    "address": "0x003dde3494f30d861d063232c6a8c04394b686ff",
+    "name": "BRETT",
+    "symbol": "BRETT",
+    "logo": "https://cdn.moralis.io/tokens/0x0000000000085d4780b73119b644ae5ecd22b376.png",
+    "amount": "14811.98",
+    "usdPrice": 0.078634,
+    "usdAmount": 1155.33
+  },
+  "result": [
+    {
+      "transactionHash": "0x2bfcba4715774420936669cd0ff2241d70e9abecab76c9db813602015b3134ad",
+      "transactionIndex": 1,
+      "transactionType": "buy",
+      "blockTimestamp": "2022-02-22T00:00:00Z",
+      "blockNumber": 21093423,
+      "subCategory": "accumulation",
+      "walletAddress": "0x2bfcba4715774420936669cd0ff2241d70e9abec",
+      "baseTokenAmount": "1481.00",
+      "quoteTokenAmount": "0.634",
+      "baseTokenPriceUsd": 0.0734634,
+      "quoteTokenPriceUsd": 23330,
+      "baseQuotePrice": "0.00003376480687",
+      "totalValueUsd": 1165
+    }
+  ]
+}
+```
+
 ## Example (curl)
 
 ```bash

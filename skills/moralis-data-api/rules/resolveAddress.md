@@ -20,6 +20,18 @@ GET
 |------|------|----------|-------------|----------|
 | address | string | Yes | The address to be resolved | \`0xd8da6bf26964af9d7eed9e03e53415d37aa96045\` |
 
+## Response Example
+
+Status: 200
+
+Returns an ENS
+
+```json
+{
+  "name": "Vitalik.eth"
+}
+```
+
 ## Example (curl)
 
 ```bash

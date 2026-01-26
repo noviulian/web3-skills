@@ -40,6 +40,51 @@ GET
 
 The response includes a **cursor** field for pagination. Use this cursor in the next request to get the next page of results.
 
+## Response Example
+
+Status: 200
+
+Returns token
+
+```json
+{
+  "page": "1",
+  "pageSize": "100",
+  "cursor": "cursor_example",
+  "result": [
+    {
+      "timestamp": "2021-05-07T11:08:35.000Z",
+      "totalHolders": "100",
+      "netHolderChange": 0,
+      "holderPercentChange": 0,
+      "newHoldersByAcquisition": {
+        "swap": "10",
+        "transfer": "10",
+        "airdrop": "10"
+      },
+      "holdersIn": {
+        "whales": "100",
+        "sharks": "100",
+        "dolphins": "100",
+        "fish": "100",
+        "octopus": "100",
+        "crabs": "100",
+        "shrimps": "100"
+      },
+      "holdersOut": {
+        "whales": "100",
+        "sharks": "100",
+        "dolphins": "100",
+        "fish": "100",
+        "octopus": "100",
+        "crabs": "100",
+        "shrimps": "100"
+      }
+    }
+  ]
+}
+```
+
 ## Example (curl)
 
 ```bash

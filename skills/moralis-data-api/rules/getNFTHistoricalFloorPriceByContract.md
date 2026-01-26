@@ -34,6 +34,29 @@ GET
 
 The response includes a **cursor** field for pagination. Use this cursor in the next request to get the next page of results.
 
+## Response Example
+
+Status: 200
+
+Returns the conract's historical floor price
+
+```json
+{
+  "page": "1",
+  "page_size": "100",
+  "cursor": "cursor_example",
+  "result": [
+    {
+      "floor_price": "0.2176",
+      "floor_price_usd": "564.24",
+      "currency": "eth",
+      "marketplace": "blur",
+      "timestamp": "2024-08-21T15:59:11.000Z"
+    }
+  ]
+}
+```
+
 ## Example (curl)
 
 ```bash

@@ -35,6 +35,36 @@ GET
 
 The response includes a **cursor** field for pagination. Use this cursor in the next request to get the next page of results.
 
+## Response Example
+
+Status: 200
+
+Ok
+
+```json
+{
+  "result": [
+    {
+      "id": "id_example",
+      "date": "date_example",
+      "tinyPayload": {
+        "chainId": "chainId_example",
+        "confirmed": true,
+        "block": "block_example",
+        "records": 0,
+        "retries": 0
+      },
+      "errorMessage": "errorMessage_example",
+      "webhookUrl": "webhookUrl_example",
+      "streamId": "streamId_example",
+      "tag": "tag_example"
+    }
+  ],
+  "cursor": "cursor_example",
+  "total": 0
+}
+```
+
 ## Example (curl)
 
 ```bash

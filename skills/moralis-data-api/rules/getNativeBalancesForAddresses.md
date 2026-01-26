@@ -22,6 +22,16 @@ GET
 | to_block | number | No | The block number on which the balances should be checked | - |
 | wallet_addresses | array | Yes | The addresses to get metadata for | - |
 
+## Response Example
+
+Status: 200
+
+Returns a collection of balances
+
+```json
+[]
+```
+
 ## Example (curl)
 
 ```bash

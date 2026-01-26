@@ -53,6 +53,64 @@ GET
 
 The response includes a **cursor** field for pagination. Use this cursor in the next request to get the next page of results.
 
+## Response Example
+
+Status: 200
+
+Returns a collection of native transactions.
+
+```json
+{
+  "cursor": "cursor_example",
+  "page": "2",
+  "page_size": "100",
+  "result": [
+    {
+      "hash": "0x057Ec652A4F150f7FF94f089A38008f49a0DF88e",
+      "nonce": 326595425,
+      "transaction_index": 25,
+      "from_address_entity": "Opensea",
+      "from_address_entity_logo": "https://opensea.io/favicon.ico",
+      "from_address": "0xd4a3BebD824189481FC45363602b83C9c7e9cbDf",
+      "from_address_label": "Binance 1",
+      "to_address_entity": "Beaver Build",
+      "to_address_entity_logo": "https://beaverbuild.com/favicon.ico",
+      "to_address": "0xa71db868318f0a0bae9411347cd4a6fa23d8d4ef",
+      "to_address_label": "Binance 2",
+      "value": 650000000000000000,
+      "gas": 6721975,
+      "gas_price": 20000000000,
+      "input": "input_example",
+      "receipt_cumulative_gas_used": 1340925,
+      "receipt_gas_used": 1340925,
+      "receipt_contract_address": "0x1d6a4cf64b52f6c73f201839aded7379ce58059c",
+      "receipt_root": "receipt_root_example",
+      "receipt_status": 1,
+      "transaction_fee": "0.00034",
+      "block_timestamp": "2021-04-02T10:07:54.000Z",
+      "block_number": 12526958,
+      "block_hash": "0x0372c302e3c52e8f2e15d155e2c545e6d802e479236564af052759253b20fd86",
+      "internal_transactions": [
+        {
+          "transaction_hash": "0x057Ec652A4F150f7FF94f089A38008f49a0DF88e",
+          "block_number": 12526958,
+          "block_hash": "0x0372c302e3c52e8f2e15d155e2c545e6d802e479236564af052759253b20fd86",
+          "type": "CALL",
+          "from": "0xd4a3BebD824189481FC45363602b83C9c7e9cbDf",
+          "to": "0xa71db868318f0a0bae9411347cd4a6fa23d8d4ef",
+          "value": "650000000000000000",
+          "gas": "6721975",
+          "gas_used": "6721975",
+          "input": "0x",
+          "output": "0x",
+          "error": "Execution reverted"
+        }
+      ]
+    }
+  ]
+}
+```
+
 ## Example (curl)
 
 ```bash

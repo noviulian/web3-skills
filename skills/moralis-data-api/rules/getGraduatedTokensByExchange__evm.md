@@ -35,6 +35,35 @@ GET
 
 The response includes a **cursor** field for pagination. Use this cursor in the next request to get the next page of results.
 
+## Response Example
+
+Status: 200
+
+Returns the graduated tokens for the specified exchange.
+
+```json
+{
+  "total": 10,
+  "page": 1,
+  "page_size": 100,
+  "cursor": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
+  "result": [
+    {
+      "tokenAddress": "0x6b175474e89094c44da98b954eedeac495271d0f",
+      "name": "Test Token",
+      "symbol": "TEST",
+      "logo": "https://example.com/logo.png",
+      "decimals": 18,
+      "priceNative": "0.5",
+      "priceUsd": "2.0",
+      "liquidity": "500000",
+      "fullyDilutedValuation": "2000000",
+      "graduatedAt": "2023-01-15T12:30:45.000Z"
+    }
+  ]
+}
+```
+
 ## Example (curl)
 
 ```bash

@@ -25,6 +25,16 @@ GET
 | security_score | number | No | The minimum security score of a token | \`80\` |
 | time_frame | string (1h, 1d, 1w, 1M) | No | The time frame used for price percent change ordering in response | \`1d\` |
 
+## Response Example
+
+Status: 200
+
+Returns the token details
+
+```json
+[]
+```
+
 ## Example (curl)
 
 ```bash

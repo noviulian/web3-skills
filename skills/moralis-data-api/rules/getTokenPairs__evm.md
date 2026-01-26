@@ -35,6 +35,50 @@ GET
 
 The response includes a **cursor** field for pagination. Use this cursor in the next request to get the next page of results.
 
+## Response Example
+
+Status: 200
+
+Returns the supported pairs for the token.
+
+```json
+{
+  "pairs": [
+    {
+      "exchange_address": "exchange_address_example",
+      "exchange_name": "exchange_name_example",
+      "exchange_logo": "exchange_logo_example",
+      "pair_label": "pair_label_example",
+      "pair_address": "pair_address_example",
+      "usd_price": 0,
+      "usd_price_24hr": 0,
+      "usd_price_24hr_percent_change": 0,
+      "usd_price_24hr_usd_change": 0,
+      "liquidity_usd": 0,
+      "inactive_pair": true,
+      "base_token": "base_token_example",
+      "quote_token": "quote_token_example",
+      "volume_24h_native": 0,
+      "volume_24h_usd": 0,
+      "pair": [
+        {
+          "token_address": "token_address_example",
+          "token_name": "token_name_example",
+          "token_symbol": "token_symbol_example",
+          "token_logo": "token_logo_example",
+          "token_decimals": "token_decimals_example",
+          "pair_token_type": "pair_token_type_example",
+          "liquidity_usd": "liquidity_usd_example"
+        }
+      ]
+    }
+  ],
+  "cursor": "cursor_example",
+  "page_size": "50",
+  "page": "2"
+}
+```
+
 ## Example (curl)
 
 ```bash

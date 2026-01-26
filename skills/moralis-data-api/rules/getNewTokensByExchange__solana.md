@@ -35,6 +35,32 @@ GET
 
 The response includes a **cursor** field for pagination. Use this cursor in the next request to get the next page of results.
 
+## Response Example
+
+Status: 200
+
+```json
+{
+  "cursor": "cursor_example",
+  "pageSize": 0,
+  "page": 0,
+  "result": [
+    {
+      "tokenAddress": "tokenAddress_example",
+      "name": "name_example",
+      "symbol": "symbol_example",
+      "logo": "logo_example",
+      "decimals": "decimals_example",
+      "priceNative": "priceNative_example",
+      "priceUsd": "priceUsd_example",
+      "liquidity": "liquidity_example",
+      "fullyDilutedValuation": "fullyDilutedValuation_example",
+      "createdAt": "2024-11-28T09:44:55.000Z"
+    }
+  ]
+}
+```
+
 ## Example (curl)
 
 ```bash

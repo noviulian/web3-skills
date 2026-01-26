@@ -33,6 +33,84 @@ GET
  | - |
 | exchange | string | No | The factory name or address of the token exchange | - |
 
+## Response Example
+
+Status: 200
+
+Returns the pair price
+
+```json
+{
+  "pair_address": "0x4028daac072e492d34a3afdbef0ba7e35d8b55c4",
+  "pair_label": "stETH/WETH",
+  "exchange": "Uniswap v2",
+  "quote_price": "1.000094331827400707",
+  "price_usd": "2905.023454928171304346",
+  "base_token": {
+    "address": "0x6982508145454ce325ddbe47a25d4ec3d2311933",
+    "address_label": "Binance 1",
+    "name": "Kylin Network",
+    "symbol": "KYL",
+    "decimals": "18",
+    "logo": "https://cdn.moralis.io/eth/0x67b6d479c7bb412c54e03dca8e1bc6740ce6b99c.png",
+    "logo_hash": "ee7aa2cdf100649a3521a082116258e862e6971261a39b5cd4e4354fcccbc54d",
+    "thumbnail": "https://cdn.moralis.io/eth/0x67b6d479c7bb412c54e03dca8e1bc6740ce6b99c_thumb.png",
+    "total_supply": "420689899999994793099999999997400",
+    "total_supply_formatted": "420689899999994.7930999999999974",
+    "implementations": [
+      {
+        "chainId": "0x1",
+        "chain": "eth",
+        "chainName": "Ethereum",
+        "address": "0x6982508145454ce325ddbe47a25d4ec3d2311933"
+      }
+    ],
+    "fully_diluted_valuation": "3407271444.05",
+    "block_number": "block_number_example",
+    "validated": 0,
+    "created_at": "created_at_example",
+    "possible_spam": "false",
+    "verified_contract": false,
+    "categories": [
+      "stablecoin"
+    ],
+    "circulating_supply": "4206864.7489303",
+    "market_cap": "3407271444.05"
+  },
+  "quote_token": {
+    "address": "0x6982508145454ce325ddbe47a25d4ec3d2311933",
+    "address_label": "Binance 1",
+    "name": "Kylin Network",
+    "symbol": "KYL",
+    "decimals": "18",
+    "logo": "https://cdn.moralis.io/eth/0x67b6d479c7bb412c54e03dca8e1bc6740ce6b99c.png",
+    "logo_hash": "ee7aa2cdf100649a3521a082116258e862e6971261a39b5cd4e4354fcccbc54d",
+    "thumbnail": "https://cdn.moralis.io/eth/0x67b6d479c7bb412c54e03dca8e1bc6740ce6b99c_thumb.png",
+    "total_supply": "420689899999994793099999999997400",
+    "total_supply_formatted": "420689899999994.7930999999999974",
+    "implementations": [
+      {
+        "chainId": "0x1",
+        "chain": "eth",
+        "chainName": "Ethereum",
+        "address": "0x6982508145454ce325ddbe47a25d4ec3d2311933"
+      }
+    ],
+    "fully_diluted_valuation": "3407271444.05",
+    "block_number": "block_number_example",
+    "validated": 0,
+    "created_at": "created_at_example",
+    "possible_spam": "false",
+    "verified_contract": false,
+    "categories": [
+      "stablecoin"
+    ],
+    "circulating_supply": "4206864.7489303",
+    "market_cap": "3407271444.05"
+  }
+}
+```
+
 ## Example (curl)
 
 ```bash

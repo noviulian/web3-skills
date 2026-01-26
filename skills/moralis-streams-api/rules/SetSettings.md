@@ -21,6 +21,19 @@ POST
 | region | string (us-east-1, us-west-2, eu-central-1, ap-southeast-1) | No | The region from where all the webhooks will be posted for this project | \`string\` |
 | secretKey | string | No | The secret key to validate the webhooks | \`string\` |
 
+## Response Example
+
+Status: 200
+
+Ok
+
+```json
+{
+  "region": "region_example",
+  "secretKey": "secretKey_example"
+}
+```
+
 ## Example (curl)
 
 ```bash

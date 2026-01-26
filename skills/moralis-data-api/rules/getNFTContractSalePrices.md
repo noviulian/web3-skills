@@ -29,6 +29,78 @@ GET
 If not provided 7 days will be the default and 365 is the maximum
  | - |
 
+## Response Example
+
+Status: 200
+
+Returns the sold price details
+
+```json
+{
+  "last_sale": {
+    "transaction_hash": "transaction_hash_example",
+    "block_timestamp": "block_timestamp_example",
+    "buyer_address": "buyer_address_example",
+    "seller_address": "seller_address_example",
+    "price": "price_example",
+    "price_formatted": "price_formatted_example",
+    "usd_price_at_sale": "usd_price_at_sale_example",
+    "current_usd_value": "current_usd_value_example",
+    "token_id": "token_id_example",
+    "payment_token": {
+      "token_name": "token_name_example",
+      "token_symbol": "token_symbol_example",
+      "token_logo": "token_logo_example",
+      "token_decimals": "token_decimals_example",
+      "token_address": "token_address_example"
+    }
+  },
+  "lowest_sale": {
+    "transaction_hash": "transaction_hash_example",
+    "block_timestamp": "block_timestamp_example",
+    "buyer_address": "buyer_address_example",
+    "seller_address": "seller_address_example",
+    "price": "price_example",
+    "price_formatted": "price_formatted_example",
+    "usd_price_at_sale": "usd_price_at_sale_example",
+    "current_usd_value": "current_usd_value_example",
+    "token_id": "token_id_example",
+    "payment_token": {
+      "token_name": "token_name_example",
+      "token_symbol": "token_symbol_example",
+      "token_logo": "token_logo_example",
+      "token_decimals": "token_decimals_example",
+      "token_address": "token_address_example"
+    }
+  },
+  "highest_sale": {
+    "transaction_hash": "transaction_hash_example",
+    "block_timestamp": "block_timestamp_example",
+    "buyer_address": "buyer_address_example",
+    "seller_address": "seller_address_example",
+    "price": "price_example",
+    "price_formatted": "price_formatted_example",
+    "usd_price_at_sale": "usd_price_at_sale_example",
+    "current_usd_value": "current_usd_value_example",
+    "token_id": "token_id_example",
+    "payment_token": {
+      "token_name": "token_name_example",
+      "token_symbol": "token_symbol_example",
+      "token_logo": "token_logo_example",
+      "token_decimals": "token_decimals_example",
+      "token_address": "token_address_example"
+    }
+  },
+  "average_sale": {
+    "price": "price_example",
+    "price_formatted": "price_formatted_example",
+    "current_usd_value": "current_usd_value_example"
+  },
+  "total_trades": 0,
+  "message": "message_example"
+}
+```
+
 ## Example (curl)
 
 ```bash

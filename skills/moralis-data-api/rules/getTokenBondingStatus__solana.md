@@ -21,6 +21,18 @@ GET
 | network | string (mainnet) | Yes | The network to query | - |
 | address | string | Yes | The address to query | \`So11111111111111111111111111111111111111112\` |
 
+## Response Example
+
+Status: default
+
+```json
+{
+  "mint": "So11111111111111111111111111111111111111112",
+  "bondingProgress": 50,
+  "graduatedAt": "2024-11-28T09:44:55.000Z"
+}
+```
+
 ## Example (curl)
 
 ```bash

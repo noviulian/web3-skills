@@ -29,6 +29,28 @@ GET
 | token_addresses | array | No | The addresses to get balances for (optional) | - |
 | exclude_spam | boolean | No | Exclude spam tokens from the result | - |
 
+## Response Example
+
+Status: 200
+
+Returns token balances for a specific address
+
+```json
+[
+  {
+    "token_address": "0x2d30ca6f024dbc1307ac8a1a44ca27de6f797ec22ef20627a1307243b0ab7d09",
+    "name": "Kylin Network",
+    "symbol": "KYL",
+    "logo": "https://cdn.moralis.io/eth/0x67b6d479c7bb412c54e03dca8e1bc6740ce6b99c.png",
+    "thumbnail": "https://cdn.moralis.io/eth/0x67b6d479c7bb412c54e03dca8e1bc6740ce6b99c_thumb.png",
+    "decimals": 18,
+    "balance": "123456789",
+    "possible_spam": "false",
+    "verified_contract": "false"
+  }
+]
+```
+
 ## Example (curl)
 
 ```bash

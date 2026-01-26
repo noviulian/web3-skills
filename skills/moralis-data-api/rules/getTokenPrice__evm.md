@@ -31,6 +31,36 @@ GET
 | max_token_inactivity | number | No | Exclude tokens inactive for more than the given amount of days | - |
 | min_pair_side_liquidity_usd | number | No | Exclude tokens with liquidity less than the specified amount in USD. This parameter refers to the liquidity on a single side of the pair. | - |
 
+## Response Example
+
+Status: 200
+
+Returns the price denominated in the blockchain's native token and USD for a given token contract address
+
+```json
+{
+  "tokenName": "Kylin Network",
+  "tokenSymbol": "KYL",
+  "tokenLogo": "https://cdn.moralis.io/eth/0x67b6d479c7bb412c54e03dca8e1bc6740ce6b99c.png",
+  "tokenDecimals": "18",
+  "usdPrice": 19.722370676,
+  "usdPriceFormatted": "19.722370676",
+  "24hrPercentChange": "-0.8842730258590583",
+  "exchangeAddress": "0x1f98431c8ad98523631ae4a59f267346ea31f984",
+  "exchangeName": "Uniswap v3",
+  "tokenAddress": "0x67b6d479c7bb412c54e03dca8e1bc6740ce6b99c",
+  "toBlock": "16314545",
+  "possibleSpam": "false",
+  "verifiedContract": true,
+  "pairAddress": "0x1f98431c8ad98523631ae4a59f267346ea31f984",
+  "pairTotalLiquidityUsd": "123.45",
+  "usdPrice24h": 1,
+  "usdPrice24hrUsdChange": -0.00008615972490000345,
+  "usdPrice24hrPercentChange": -0.008615972490000345,
+  "securityScore": 1
+}
+```
+
 ## Example (curl)
 
 ```bash

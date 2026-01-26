@@ -29,6 +29,49 @@ GET
 
 - **limit**: The desired page size of the result.
 
+## Response Example
+
+Status: 200
+
+Returns the search results
+
+```json
+{
+  "total": 10000,
+  "result": [
+    {
+      "tokenAddress": "0x6982508145454ce325ddbe47a25d4ec3d2311933",
+      "chainId": "0x1",
+      "name": "Pepe",
+      "symbol": "PEPE",
+      "blockNumber": 17046105,
+      "blockTimestamp": 1681483883,
+      "usdPrice": 0.000024509478199144,
+      "marketCap": 9825629287.860994,
+      "experiencedNetBuyers": {},
+      "netVolumeUsd": {},
+      "liquidityChangeUSD": {},
+      "usdPricePercentChange": {},
+      "volumeUsd": {},
+      "securityScore": 92,
+      "logo": "https://adds-token-info-29a861f.s3.eu-central-1.amazonaws.com/marketing/evm/0x6982508145454ce325ddbe47a25d4ec3d2311933_icon.png",
+      "isVerifiedContract": false,
+      "fullyDilutedValuation": 71242582.97741453,
+      "totalHolders": 18908,
+      "totalLiquidityUsd": 18908.234,
+      "implementations": [
+        {
+          "chainId": "0x1",
+          "chain": "eth",
+          "chainName": "Ethereum",
+          "address": "0x6982508145454ce325ddbe47a25d4ec3d2311933"
+        }
+      ]
+    }
+  ]
+}
+```
+
 ## Example (curl)
 
 ```bash

@@ -25,6 +25,24 @@ GET
 
 - **limit**: The desired page size of the result.
 
+## Response Example
+
+Status: 200
+
+Returns the search results.
+
+```json
+{
+  "page": "1",
+  "page_size": "100",
+  "result": {
+    "entities": [],
+    "addresses": [],
+    "categories": []
+  }
+}
+```
+
 ## Example (curl)
 
 ```bash

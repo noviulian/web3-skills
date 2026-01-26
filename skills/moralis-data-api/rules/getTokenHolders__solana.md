@@ -19,6 +19,32 @@ GET
 | network | string (mainnet) | Yes | The network to query | - |
 | address | string | Yes | The address to query | \`6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN\` |
 
+## Response Example
+
+Status: 200
+
+```json
+{
+  "totalHolders": 5000,
+  "holdersByAcquisition": {
+    "swap": 150,
+    "transfer": 50,
+    "airdrop": 20
+  },
+  "holderChange": {},
+  "holderDistribution": {
+    "whales": 150,
+    "sharks": 150,
+    "dolphins": 150,
+    "fish": 150,
+    "octopus": 150,
+    "crabs": 150,
+    "shrimps": 150
+  },
+  "holderSupply": {}
+}
+```
+
 ## Example (curl)
 
 ```bash

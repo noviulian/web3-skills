@@ -14,6 +14,16 @@ GET
 
 `/market-data/nfts/top-collections`
 
+## Response Example
+
+Status: 200
+
+Returns the top NFT collections by market cap
+
+```json
+[]
+```
+
 ## Example (curl)
 
 ```bash
