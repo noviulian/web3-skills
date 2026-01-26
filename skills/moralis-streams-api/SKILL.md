@@ -213,6 +213,7 @@ Stream history, replay, statistics, logs, and block data.
 | Endpoint | Description |
 |----------|-------------|
 | [ReplayHistory](rules/ReplayHistory.md) | Replay history |
+| [ReplayFailedWebhooks](rules/ReplayFailedWebhooks.md) | Replay failed webhook deliveries |
 
 
 ## HTTP Methods
