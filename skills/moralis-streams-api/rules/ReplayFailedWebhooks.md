@@ -19,12 +19,14 @@ curl -X GET \
 ```
 
 **Query Parameters:**
+
 - `streamId` - Your stream ID (UUID format)
 - `deliveryStatus=failed` - Filter for failed deliveries only
 - `limit` - Max results (up to 100)
 - `cursor` - For pagination (from response)
 
 **Response contains:**
+
 - `blockNumber` - The block that failed
 - `chain` - Chain identifier (e.g., "0x1" for Ethereum)
 - `errorMessage` - Why delivery failed
@@ -41,6 +43,7 @@ curl -X POST \
 ```
 
 **Path Parameters:**
+
 - `0x1` - Chain ID (replace with actual chain from failed log)
 - `12345678` - Block number (from failed log response)
 - `YOUR_STREAM_ID` - Your stream ID
@@ -65,12 +68,12 @@ curl -X POST \
 
 ## Response Status Codes
 
-| Code | Meaning |
-|------|---------|
-| 200 | Webhook sent successfully |
-| 204 | Success (no content) |
-| 500 | Internal server error - retry later |
-| 504 | Gateway timeout - may succeed on retry |
+| Code | Meaning                                |
+| ---- | -------------------------------------- |
+| 200  | Webhook sent successfully              |
+| 204  | Success (no content)                   |
+| 500  | Internal server error - retry later    |
+| 504  | Gateway timeout - may succeed on retry |
 
 ## Related Endpoints
 

@@ -46,6 +46,26 @@ Failure to follow this process will result in:
 
 ---
 
+## 🔒 MANDATORY READING ORDER
+
+Before implementing ANY stream endpoint, you MUST read these files in this order:
+
+1. **ALWAYS read this SKILL.md first** - Contains critical warnings and 60-70% of patterns
+2. **For specific endpoint** - Read the endpoint's rule file in `rules/{EndpointName}.md`
+3. **For complex/edge-case patterns** - Read these pattern reference files:
+   - [StreamConfiguration.md](rules/StreamConfiguration.md) - Complete stream config reference
+   - [CommonPitfalls.md](rules/CommonPitfalls.md) - Complete pitfalls reference
+
+**For 95% of use cases**, condensed examples in this SKILL.md are sufficient.
+**Only read pattern files when:** configuring streams, handling edge cases, or troubleshooting issues.
+
+**DO NOT SKIP** - Skipping pattern files causes:
+- Wrong HTTP methods (POST instead of PUT for creating streams)
+- Invalid stream configurations
+- Runtime errors (accessing undefined properties)
+
+---
+
 # Moralis Streams API
 
 Real-time blockchain event monitoring with webhook delivery. Monitor transactions, logs, token transfers, NFT transfers, and internal transactions across EVM chains.
@@ -242,7 +262,6 @@ Stream history, replay, statistics, logs, and block data.
 | Endpoint | Description |
 |----------|-------------|
 | [ReplayHistory](rules/ReplayHistory.md) | Replay history |
-| [ReplayFailedWebhooks](rules/ReplayFailedWebhooks.md) | Replay failed webhook deliveries |
 
 
 ## HTTP Methods
@@ -256,9 +275,23 @@ Stream history, replay, statistics, logs, and block data.
 
 ## Common Pitfalls
 
-### HTTP Method Confusion
+### Top 4 Most Common Bugs
 
-The Streams API uses different HTTP methods than typical REST APIs:
+1. **Using POST to create streams** - Streams API uses `PUT` for create
+2. **Wrong base URL** - Streams uses `api.moralis-streams.com`, NOT `deep-index.moralis.io`
+3. **Wrong stream ID format** - Must be UUID, not hex string
+4. **Chain IDs as strings** - Use hex (0x1, 0x89) not names (eth, polygon)
+
+### Critical Checks Before Creating/Updating Streams
+
+Before writing ANY code:
+1. ✅ Read the endpoint rule file (`rules/{EndpointName}.md`)
+2. ✅ Verify HTTP method (PUT for create, POST for update, DELETE for delete)
+3. ✅ Check stream ID is UUID format (e.g., `a1b2c3d4-e5f6-7890-abcd-ef1234567890`)
+4. ✅ Use hex chain IDs (0x1, 0x89) not string names (eth, polygon)
+5. ✅ Use lowercase status values ("active", "paused") not uppercase
+
+### HTTP Method Confusion
 
 | Action | HTTP Method | Endpoint |
 |--------|-------------|----------|
@@ -269,51 +302,15 @@ The Streams API uses different HTTP methods than typical REST APIs:
 
 ⚠️ **Common mistake:** Using POST to create streams. Use PUT instead.
 
-### Stream Configuration Gotchas
-
-When creating streams, always check the rule file for required fields:
-
-- **Different base URL:** Streams uses `api.moralis-streams.com`, NOT `deep-index.moralis.io`
-- **Limit required:** `GET /streams/evm` requires `limit` parameter (max 100)
-- **Stream IDs:** UUIDs, not hex strings (e.g., `a1b2c3d4-e5f6-7890-abcd-ef1234567890`)
-- **Chain IDs:** Use hex format (e.g., `0x1` for Ethereum, `0x89` for Polygon)
-- **Topic0 format:** Event signatures must be exact: `Transfer(address,address,uint256)`
-
-### Response Structure Variations
-
-Different endpoints return different structures:
-
-```typescript
-// GetStreams returns array directly
-{ result: Stream[] }
-
-// GetStream returns wrapped object
-{ stream: { id, webhookUrl, ... } }
-
-// GetStats returns nested structure
-{ totalStreams, activeStreams, ... }
-```
-
-### Webhook Payload Fields
-
-Webhook payloads have different field names than API responses:
-
-- `method_label` (not `method`) in transaction history webhooks
-- `synced_at` (not `sync_at`) in NFT metadata webhooks
-- `chainId` is hex string in webhooks, decimal in some API responses
-
-### Other Common Issues
-
-- **AllAddresses:** When `true`, monitors ALL addresses on specified chains (resource-intensive)
-- **Advanced options:** Some features like `includeNativeHash` require advanced options configuration
-- **Status values:** Use `"active"` or `"paused"` exactly (lowercase, not `"ACTIVE"` or `"PAUSED"`)
+> See [CommonPitfalls.md](rules/CommonPitfalls.md) for complete reference including response structure variations, webhook payload field differences, and more edge cases.
 
 ## Quick Reference: Stream Configuration
 
-### Stream ID Format
+**For most common stream configs, see examples below. For complete reference, see [StreamConfiguration.md](rules/StreamConfiguration.md).**
 
-**ALWAYS UUID, never hex:**
+### Most Common Patterns
 
+**Stream ID is ALWAYS UUID:**
 ```typescript
 // ❌ WRONG - Hex format
 "0x1234567890abcdef"
@@ -322,12 +319,8 @@ Webhook payloads have different field names than API responses:
 "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 ```
 
-### Chain IDs
-
-**ALWAYS hex strings:**
-
+**Common chain IDs (always hex):**
 ```typescript
-// Common chain IDs
 "0x1"     // Ethereum
 "0x89"    // Polygon
 "0x38"    // BSC
@@ -336,28 +329,16 @@ Webhook payloads have different field names than API responses:
 "0x2105"  // Base
 ```
 
-### Topic0 (Event Signature) Format
-
-**Must be exact Solidity event signature:**
-
+**Event signature (topic0) format:**
 ```typescript
-// ERC20 Transfer
-"Transfer(address,address,uint256)"
-
-// ERC20 Approval
-"Approval(address,address,uint256)"
-
-// NFT Transfer
-"Transfer(address,address,uint256)"
-
-// Custom event
-"MyEvent(address,uint256,bytes)"
+// Must be exact Solidity event signature
+"Transfer(address,address,uint256)"  // ERC20 Transfer
+"Approval(address,address,uint256)"  // ERC20 Approval
+"Transfer(address,address,uint256)"  // NFT Transfer
+"MyEvent(address,uint256,bytes)"  // Custom event
 ```
 
-### Stream Status Values
-
-**Lowercase only:**
-
+**Status values (lowercase only):**
 ```typescript
 // ✅ CORRECT
 "active"
@@ -370,8 +351,7 @@ Webhook payloads have different field names than API responses:
 "Paused"
 ```
 
-### Common Stream Field Mappings
-
+**Common field mappings:**
 ```typescript
 // API response → TypeScript interface
 {
@@ -389,6 +369,8 @@ Webhook payloads have different field names than API responses:
   includeNativeHash: boolean;
 }
 ```
+
+> See [StreamConfiguration.md](rules/StreamConfiguration.md) for complete reference with all advanced configuration options.
 
 ## Testing Stream Endpoints
 

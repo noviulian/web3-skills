@@ -29,7 +29,7 @@ For EVERY endpoint you implement:
 
 1. [ ] Read `rules/{EndpointName}.md`
 2. [ ] Find the "Example Response" section
-3. [ ] Copy the EXACT JSON structure
+3. [ ] Copy the EXACT JSON structure schema
 4. [ ] Note EVERY field name (snake_case vs camelCase)
 5. [ ] Note EVERY data type (string vs number vs boolean)
 6. [ ] Note the HTTP method (GET vs POST)
@@ -44,6 +44,27 @@ Failure to follow this process will result in:
 - Missing fields (not transferring API data to UI)
 - Runtime errors (accessing undefined properties)
 - Incorrect endpoint paths (404 errors)
+
+---
+
+## 🔒 MANDATORY READING ORDER
+
+Before implementing ANY endpoint, you MUST read these files in this order:
+
+1. **ALWAYS read this SKILL.md first** - Contains critical warnings and 60-70% of patterns
+2. **For specific endpoint** - Read the endpoint's rule file in `rules/{EndpointName}.md`
+3. **For complex/edge-case patterns** - Read these pattern reference files:
+   - [DataTransformations.md](rules/DataTransformations.md) - Complete type conversion reference
+   - [ResponsePatterns.md](rules/ResponsePatterns.md) - Complete pagination reference
+   - [CommonPitfalls.md](rules/CommonPitfalls.md) - Complete pitfalls reference
+
+**For 95% of use cases**, condensed examples in this SKILL.md are sufficient.
+**Only read pattern files when:** encountering edge cases, complex transformations, or unexpected behavior.
+
+**DO NOT SKIP** - Skipping pattern files causes:
+- Wrong type conversions (parsing decimal as hex)
+- Missing fields (not transferring API data)
+- Runtime errors (accessing undefined properties)
 
 ---
 
@@ -71,7 +92,7 @@ Claude stores the key in memory throughout the session:
 
 ```javascript
 // When user provides the key
-const MORALIS_API_KEY = "user_provided_key";
+MORALIS_API_KEY = "user_provided_key";
 
 // Use in all curl commands
 curl "https://deep-index.moralis.io/api/v2.2/..." \
@@ -251,39 +272,32 @@ If the rule file lacks a clear example response:
 
 ## Quick Reference: Common Data Transformations
 
-### Block Number Handling
+**For most common transformations, see examples below. For complete reference including edge cases, see [DataTransformations.md](rules/DataTransformations.md).**
 
-**NEVER hex, always decimal:**
+### Most Common Patterns
 
+**Block numbers are NEVER hex, always decimal:**
 ```typescript
 // Most endpoints return decimal (NOT hex)
 block_number: 12386788           → number (use directly)
 block_number: "12386788"         → parseInt(block_number, 10)
 ```
 
-### Timestamp Conversions
-
+**Timestamps are usually ISO 8601 strings:**
 ```typescript
 // ISO 8601 string → Unix timestamp (milliseconds)
 "2021-05-07T11:08:35.000Z" → new Date(timestamp).getTime()
-
-// Unix timestamp (seconds) → milliseconds
-1620394115 → timestamp * 1000
 ```
 
-### Balance/Amount Handling
-
+**Balances are strings (BigInt territory):**
 ```typescript
 // Native token balances: Wei/Smallest unit → Formatted
 balance: "1000000000000000000"
   → (Number(BigInt(balance)) / 1e18).toFixed(6)
   → ethers.formatUnits(balance, 18)  // if using ethers
-
-// ERC20 token balances: Use getWalletTokenBalancesPrice which returns formatted field
 ```
 
-### snake_case → camelCase Patterns
-
+**Common field mappings:**
 ```typescript
 // API response → TypeScript interface
 {
@@ -300,67 +314,22 @@ balance: "1000000000000000000"
 }
 ```
 
-### Boolean String Handling
-
+**Boolean strings:**
 ```typescript
 // API returns "1" or "0", not boolean
 receipt_status: "1"   → status: receipt_status === "1" ? "success" : "failed"
 possible_spam: "false" → possibleSpam === "true"
 ```
 
-## Common Field Mappings
-
-Quick reference for common API response fields:
-
-### Entity/Label Fields
-
-```typescript
-from_address_entity       → fromAddressEntity
-from_address_entity_logo  → fromAddressEntityLogo
-from_address_label        → fromAddressLabel
-to_address_entity         → toAddressEntity
-to_address_entity_logo    → toAddressEntityLogo
-to_address_label          → toAddressLabel
-owner_of_entity           → ownerOfEntity
-owner_of_entity_logo      → ownerOfEntityLogo
-owner_of_label            → ownerOfLabel
-```
-
-### Transaction Fields
-
-```typescript
-block_number        → blockNumber
-block_timestamp     → blockTimestamp (ISO string!)
-transaction_hash    → hash (or txHash)
-receipt_gas_used    → receiptGasUsed
-receipt_status      → status ("1" = success)
-transaction_index   → transactionIndex
-```
-
-### Token/NFT Fields
-
-```typescript
-token_address       → tokenAddress
-token_id            → tokenId (keep as string!)
-token_decimal       → tokenIdDecimal (when in decimal format)
-contract_type       → contractType
-possible_spam       → possibleSpam (string "true"/"false")
-verified_collection → verifiedCollection (string "true"/"false")
-```
+> See [DataTransformations.md](rules/DataTransformations.md) for complete reference including all entity, transaction, and token field mappings.
 
 ## Pagination Patterns
 
-Moralis uses **4 different pagination patterns**. Verify which one your endpoint uses:
+Moralis uses **4 different pagination patterns**. Before writing code, verify which one your endpoint uses by reading the endpoint rule file.
 
-### Pattern 1: No Pagination (Single Result)
+### Most Common Patterns
 
-```typescript
-// Example: getBlock, getTransaction, getNativeBalance
-{ "hash": "...", "block_number": 123 }
-```
-
-### Pattern 2: Simple Cursor/Page
-
+**Pattern 2: Simple Cursor/Page** (most wallet/history endpoints):
 ```typescript
 // Example: getWalletTransactions
 {
@@ -375,25 +344,9 @@ const { result, cursor, page } = await getWalletTransactions(address, chain, lim
 // For next page: getWalletTransactions(address, chain, limit, cursor)
 ```
 
-### Pattern 3: Full Pagination with Metadata
-
+**Pattern 4: Direct Array** (some endpoints):
 ```typescript
-// Example: getWalletHistory, getNFTTransfers, getErc20Transfers
-{
-  page: "1",
-  page_size: "100",
-  cursor: "eyJw...",
-  result: [...]  // ← Data is in .result
-}
-
-// Usage:
-const { result, cursor, page, pageSize } = await getWalletHistory(address, chain, limit);
-```
-
-### Pattern 4: Direct Array (No Wrapper)
-
-```typescript
-// Example: getWalletTokenBalances, getTokenMetadata (sometimes)
+// Example: getWalletTokenBalances, getTokenMetadata
 [
   { "token_address": "...", ... },
   { "token_address": "...", ... }
@@ -403,12 +356,7 @@ const { result, cursor, page, pageSize } = await getWalletHistory(address, chain
 const tokens = await getWalletTokens(address, chain);
 ```
 
-### How to Detect Which Pattern
-
-1. Read the rule file - Look for "Example Response"
-2. Check if `result` key exists - If yes, data is wrapped
-3. Check if `cursor` key exists - If yes, pagination is supported
-4. Check if top-level is array - If yes, direct array response
+> See [ResponsePatterns.md](rules/ResponsePatterns.md) for complete reference to all 4 patterns with detection guide.
 
 ## Testing Endpoints
 
@@ -654,207 +602,207 @@ Complete list of all 136 endpoints (102 EVM + 34 Solana) organized by category.
 
 Balances, tokens, NFTs, transaction history, profitability, and net worth data.
 
-| Endpoint                                                                | Description                                              |
-| ----------------------------------------------------------------------- | -------------------------------------------------------- |
-| [getNativeBalance](rules/getNativeBalance.md)                           | Get native balance by wallet                             |
-| [getNativeBalancesForAddresses](rules/getNativeBalancesForAddresses.md) | Get native balance for a set of wallets                  |
-| [getWalletActiveChains](rules/getWalletActiveChains.md)                 | Get active chains by wallet address                      |
-| [getWalletApprovals](rules/getWalletApprovals.md)                       | Get ERC20 approvals by wallet                            |
-| [getWalletHistory](rules/getWalletHistory.md)                           | Get the complete decoded transaction history of a wallet |
-| [getWalletNetWorth](rules/getWalletNetWorth.md)                         | Get wallet net worth                                     |
-| [getWalletNFTCollections](rules/getWalletNFTCollections.md)             | Get NFT collections by wallet address                    |
-| [getWalletNFTs](rules/getWalletNFTs.md)                                 | Get NFTs by wallet address                               |
-| [getWalletNFTTransfers](rules/getWalletNFTTransfers.md)                 | Get NFT Transfers by wallet address                      |
-| [getWalletProfitability](rules/getWalletProfitability.md)               | Get detailed profit and loss by wallet address           |
-| [getWalletProfitabilitySummary](rules/getWalletProfitabilitySummary.md) | Get profit and loss summary by wallet address            |
-| [getWalletStats](rules/getWalletStats.md)                               | Get summary stats by wallet address                      |
-| [getWalletTokenBalances](rules/getWalletTokenBalances.md)               | Get ERC20 token balances by wallet                       |
-| [getWalletTokenBalancesPrice](rules/getWalletTokenBalancesPrice.md)     | Get token balances with prices by wallet address         |
-| [getWalletTokenTransfers](rules/getWalletTokenTransfers.md)             | Get ERC20 token transfers by wallet address              |
-| [getWalletTransactions](rules/getWalletTransactions.md)                 | Get native transactions by wallet                        |
-| [getWalletTransactionsVerbose](rules/getWalletTransactionsVerbose.md)   | Get decoded transactions by wallet                       |
+| Endpoint | Description |
+|----------|-------------|
+| [getNativeBalance](rules/getNativeBalance.md) | Get native balance by wallet |
+| [getNativeBalancesForAddresses](rules/getNativeBalancesForAddresses.md) | Get native balance for a set of wallets |
+| [getWalletActiveChains](rules/getWalletActiveChains.md) | Get active chains by wallet address |
+| [getWalletApprovals](rules/getWalletApprovals.md) | Get ERC20 approvals by wallet |
+| [getWalletHistory](rules/getWalletHistory.md) | Get the complete decoded transaction history of a wallet |
+| [getWalletNetWorth](rules/getWalletNetWorth.md) | Get wallet net worth |
+| [getWalletNFTCollections](rules/getWalletNFTCollections.md) | Get NFT collections by wallet address |
+| [getWalletNFTs](rules/getWalletNFTs.md) | Get NFTs by wallet address |
+| [getWalletNFTTransfers](rules/getWalletNFTTransfers.md) | Get NFT Transfers by wallet address |
+| [getWalletProfitability](rules/getWalletProfitability.md) | Get detailed profit and loss by wallet address |
+| [getWalletProfitabilitySummary](rules/getWalletProfitabilitySummary.md) | Get profit and loss summary by wallet address |
+| [getWalletStats](rules/getWalletStats.md) | Get summary stats by wallet address |
+| [getWalletTokenBalances](rules/getWalletTokenBalances.md) | Get ERC20 token balances by wallet |
+| [getWalletTokenBalancesPrice](rules/getWalletTokenBalancesPrice.md) | Get token balances with prices by wallet address |
+| [getWalletTokenTransfers](rules/getWalletTokenTransfers.md) | Get ERC20 token transfers by wallet address |
+| [getWalletTransactions](rules/getWalletTransactions.md) | Get native transactions by wallet |
+| [getWalletTransactionsVerbose](rules/getWalletTransactionsVerbose.md) | Get decoded transactions by wallet |
 
 ### Token
 
 Token prices, metadata, pairs, DEX swaps, analytics, security scores, and sniper detection.
 
-| Endpoint                                                                 | Description                                          |
-| ------------------------------------------------------------------------ | ---------------------------------------------------- |
-| [getAggregatedTokenPairStats](rules/getAggregatedTokenPairStats__evm.md) | Get aggregated token pair statistics by address      |
-| [getHistoricalTokenScore](rules/getHistoricalTokenScore.md)              | Get historical token score by token address          |
-| [getMultipleTokenAnalytics](rules/getMultipleTokenAnalytics.md)          | Get token analytics for a list of token addresses    |
-| [getPairAddress](rules/getPairAddress.md)                                | Get DEX token pair address                           |
-| [getPairReserves](rules/getPairReserves.md)                              | Get DEX token pair reserves                          |
-| [getPairStats](rules/getPairStats__evm.md)                               | Get stats by pair address                            |
-| [getSnipersByPairAddress](rules/getSnipersByPairAddress__evm.md)         | Get snipers by pair address                          |
-| [getSwapsByPairAddress](rules/getSwapsByPairAddress__evm.md)             | Get swap transactions by pair address                |
-| [getSwapsByTokenAddress](rules/getSwapsByTokenAddress__evm.md)           | Get swap transactions by token address               |
-| [getSwapsByWalletAddress](rules/getSwapsByWalletAddress__evm.md)         | Get swap transactions by wallet address              |
-| [getTimeSeriesTokenAnalytics](rules/getTimeSeriesTokenAnalytics.md)      | Retrieve timeseries trading stats by token addresses |
-| [getTokenAnalytics](rules/getTokenAnalytics.md)                          | Get token analytics by token address                 |
-| [getTokenBondingStatus](rules/getTokenBondingStatus__evm.md)             | Get the token bonding status                         |
-| [getTokenCategories](rules/getTokenCategories.md)                        | Get ERC20 token categories                           |
-| [getTokenHolders](rules/getTokenHolders__evm.md)                         | Get a holders summary by token address               |
-| [getTokenMetadata](rules/getTokenMetadata__evm.md)                       | Get ERC20 token metadata by contract                 |
-| [getTokenMetadataBySymbol](rules/getTokenMetadataBySymbol.md)            | Get ERC20 token metadata by symbols                  |
-| [getTokenOwners](rules/getTokenOwners.md)                                | Get ERC20 token owners by contract                   |
-| [getTokenPairs](rules/getTokenPairs__evm.md)                             | Get token pairs by address                           |
-| [getTokenScore](rules/getTokenScore.md)                                  | Get token score by token address                     |
-| [getTokenStats](rules/getTokenStats.md)                                  | Get ERC20 token stats                                |
-| [getTokenTransfers](rules/getTokenTransfers.md)                          | Get ERC20 token transfers by contract address        |
+| Endpoint | Description |
+|----------|-------------|
+| [getAggregatedTokenPairStats](rules/getAggregatedTokenPairStats__evm.md) | Get aggregated token pair statistics by address |
+| [getHistoricalTokenScore](rules/getHistoricalTokenScore.md) | Get historical token score by token address |
+| [getMultipleTokenAnalytics](rules/getMultipleTokenAnalytics.md) | Get token analytics for a list of token addresses |
+| [getPairAddress](rules/getPairAddress.md) | Get DEX token pair address |
+| [getPairReserves](rules/getPairReserves.md) | Get DEX token pair reserves |
+| [getPairStats](rules/getPairStats__evm.md) | Get stats by pair address |
+| [getSnipersByPairAddress](rules/getSnipersByPairAddress__evm.md) | Get snipers by pair address |
+| [getSwapsByPairAddress](rules/getSwapsByPairAddress__evm.md) | Get swap transactions by pair address |
+| [getSwapsByTokenAddress](rules/getSwapsByTokenAddress__evm.md) | Get swap transactions by token address |
+| [getSwapsByWalletAddress](rules/getSwapsByWalletAddress__evm.md) | Get swap transactions by wallet address |
+| [getTimeSeriesTokenAnalytics](rules/getTimeSeriesTokenAnalytics.md) | Retrieve timeseries trading stats by token addresses |
+| [getTokenAnalytics](rules/getTokenAnalytics.md) | Get token analytics by token address |
+| [getTokenBondingStatus](rules/getTokenBondingStatus__evm.md) | Get the token bonding status |
+| [getTokenCategories](rules/getTokenCategories.md) | Get ERC20 token categories |
+| [getTokenHolders](rules/getTokenHolders__evm.md) | Get a holders summary by token address |
+| [getTokenMetadata](rules/getTokenMetadata__evm.md) | Get ERC20 token metadata by contract |
+| [getTokenMetadataBySymbol](rules/getTokenMetadataBySymbol.md) | Get ERC20 token metadata by symbols |
+| [getTokenOwners](rules/getTokenOwners.md) | Get ERC20 token owners by contract |
+| [getTokenPairs](rules/getTokenPairs__evm.md) | Get token pairs by address |
+| [getTokenScore](rules/getTokenScore.md) | Get token score by token address |
+| [getTokenStats](rules/getTokenStats.md) | Get ERC20 token stats |
+| [getTokenTransfers](rules/getTokenTransfers.md) | Get ERC20 token transfers by contract address |
 
 ### NFT
 
 NFT metadata, transfers, traits, rarity, floor prices, and trades.
 
-| Endpoint                                                                              | Description                                |
-| ------------------------------------------------------------------------------------- | ------------------------------------------ |
-| [getContractNFTs](rules/getContractNFTs.md)                                           | Get NFTs by contract address               |
-| [getMultipleNFTs](rules/getMultipleNFTs.md)                                           | Get Metadata for NFTs                      |
-| [getNFTBulkContractMetadata](rules/getNFTBulkContractMetadata.md)                     | Get metadata for multiple NFT contracts    |
-| [getNFTByContractTraits](rules/getNFTByContractTraits.md)                             | Get NFTs by traits                         |
-| [getNFTCollectionStats](rules/getNFTCollectionStats.md)                               | Get summary stats by NFT collection        |
-| [getNFTContractMetadata](rules/getNFTContractMetadata.md)                             | Get NFT collection metadata                |
-| [getNFTContractSalePrices](rules/getNFTContractSalePrices.md)                         | Get NFT sale prices by collection          |
-| [getNFTContractTransfers](rules/getNFTContractTransfers.md)                           | Get NFT transfers by contract address      |
-| [getNFTFloorPriceByContract](rules/getNFTFloorPriceByContract.md)                     | Get NFT floor price by contract            |
-| [getNFTFloorPriceByToken](rules/getNFTFloorPriceByToken.md)                           | Get NFT floor price by token               |
+| Endpoint | Description |
+|----------|-------------|
+| [getContractNFTs](rules/getContractNFTs.md) | Get NFTs by contract address |
+| [getMultipleNFTs](rules/getMultipleNFTs.md) | Get Metadata for NFTs |
+| [getNFTBulkContractMetadata](rules/getNFTBulkContractMetadata.md) | Get metadata for multiple NFT contracts |
+| [getNFTByContractTraits](rules/getNFTByContractTraits.md) | Get NFTs by traits |
+| [getNFTCollectionStats](rules/getNFTCollectionStats.md) | Get summary stats by NFT collection |
+| [getNFTContractMetadata](rules/getNFTContractMetadata.md) | Get NFT collection metadata |
+| [getNFTContractSalePrices](rules/getNFTContractSalePrices.md) | Get NFT sale prices by collection |
+| [getNFTContractTransfers](rules/getNFTContractTransfers.md) | Get NFT transfers by contract address |
+| [getNFTFloorPriceByContract](rules/getNFTFloorPriceByContract.md) | Get NFT floor price by contract |
+| [getNFTFloorPriceByToken](rules/getNFTFloorPriceByToken.md) | Get NFT floor price by token |
 | [getNFTHistoricalFloorPriceByContract](rules/getNFTHistoricalFloorPriceByContract.md) | Get historical NFT floor price by contract |
-| [getNFTMetadata](rules/getNFTMetadata__evm.md)                                        | Get NFT metadata                           |
-| [getNFTOwners](rules/getNFTOwners.md)                                                 | Get NFT owners by contract address         |
-| [getNFTSalePrices](rules/getNFTSalePrices.md)                                         | Get NFT sale prices by token               |
-| [getNFTTokenIdOwners](rules/getNFTTokenIdOwners.md)                                   | Get NFT owners by token ID                 |
-| [getNFTTrades](rules/getNFTTrades.md)                                                 | Get NFT trades by collection               |
-| [getNFTTradesByToken](rules/getNFTTradesByToken.md)                                   | Get NFT trades by token                    |
-| [getNFTTradesByWallet](rules/getNFTTradesByWallet.md)                                 | Get NFT trades by wallet address           |
-| [getNFTTraitsByCollection](rules/getNFTTraitsByCollection.md)                         | Get NFT traits by collection               |
-| [getNFTTraitsByCollectionPaginate](rules/getNFTTraitsByCollectionPaginate.md)         | Get NFT traits by collection paginate      |
-| [getNFTTransfers](rules/getNFTTransfers.md)                                           | Get NFT transfers by token ID              |
-| [getTopNFTCollectionsByMarketCap](rules/getTopNFTCollectionsByMarketCap.md)           | Get top NFT collections by market cap      |
+| [getNFTMetadata](rules/getNFTMetadata__evm.md) | Get NFT metadata |
+| [getNFTOwners](rules/getNFTOwners.md) | Get NFT owners by contract address |
+| [getNFTSalePrices](rules/getNFTSalePrices.md) | Get NFT sale prices by token |
+| [getNFTTokenIdOwners](rules/getNFTTokenIdOwners.md) | Get NFT owners by token ID |
+| [getNFTTrades](rules/getNFTTrades.md) | Get NFT trades by collection |
+| [getNFTTradesByToken](rules/getNFTTradesByToken.md) | Get NFT trades by token |
+| [getNFTTradesByWallet](rules/getNFTTradesByWallet.md) | Get NFT trades by wallet address |
+| [getNFTTraitsByCollection](rules/getNFTTraitsByCollection.md) | Get NFT traits by collection |
+| [getNFTTraitsByCollectionPaginate](rules/getNFTTraitsByCollectionPaginate.md) | Get NFT traits by collection paginate |
+| [getNFTTransfers](rules/getNFTTransfers.md) | Get NFT transfers by token ID |
+| [getTopNFTCollectionsByMarketCap](rules/getTopNFTCollectionsByMarketCap.md) | Get top NFT collections by market cap |
 
 ### DeFi
 
 DeFi protocol positions, liquidity, and exposure data.
 
-| Endpoint                                                          | Description                                          |
-| ----------------------------------------------------------------- | ---------------------------------------------------- |
+| Endpoint | Description |
+|----------|-------------|
 | [getDefiPositionsByProtocol](rules/getDefiPositionsByProtocol.md) | Get detailed DeFi positions by protocol for a wallet |
-| [getDefiPositionsSummary](rules/getDefiPositionsSummary.md)       | Get DeFi positions of a wallet                       |
-| [getDefiSummary](rules/getDefiSummary.md)                         | Get the DeFi summary of a wallet                     |
+| [getDefiPositionsSummary](rules/getDefiPositionsSummary.md) | Get DeFi positions of a wallet |
+| [getDefiSummary](rules/getDefiSummary.md) | Get the DeFi summary of a wallet |
 
 ### Entity
 
 Labeled addresses including exchanges, funds, protocols, and whales.
 
-| Endpoint                                            | Description              |
-| --------------------------------------------------- | ------------------------ |
-| [getEntity](rules/getEntity.md)                     | Get Entity Details By Id |
-| [getEntityCategories](rules/getEntityCategories.md) | Get Entity Categories    |
+| Endpoint | Description |
+|----------|-------------|
+| [getEntity](rules/getEntity.md) | Get Entity Details By Id |
+| [getEntityCategories](rules/getEntityCategories.md) | Get Entity Categories |
 
 ### Price
 
 Token and NFT prices, OHLCV candlestick data.
 
-| Endpoint                                                       | Description                     |
-| -------------------------------------------------------------- | ------------------------------- |
+| Endpoint | Description |
+|----------|-------------|
 | [getMultipleTokenPrices](rules/getMultipleTokenPrices__evm.md) | Get Multiple ERC20 token prices |
-| [getPairPrice](rules/getPairPrice.md)                          | Get DEX token pair price        |
-| [getTokenPrice](rules/getTokenPrice__evm.md)                   | Get ERC20 token price           |
+| [getPairPrice](rules/getPairPrice.md) | Get DEX token pair price |
+| [getTokenPrice](rules/getTokenPrice__evm.md) | Get ERC20 token price |
 
 ### Blockchain
 
 Blocks, transactions, date-to-block conversion, and contract functions.
 
-| Endpoint                                                | Description                     |
-| ------------------------------------------------------- | ------------------------------- |
-| [getBlock](rules/getBlock.md)                           | Get block by hash               |
-| [getDateToBlock](rules/getDateToBlock.md)               | Get block by date               |
-| [getLatestBlockNumber](rules/getLatestBlockNumber.md)   | Get latest block number         |
-| [getTransaction](rules/getTransaction.md)               | Get transaction by hash         |
+| Endpoint | Description |
+|----------|-------------|
+| [getBlock](rules/getBlock.md) | Get block by hash |
+| [getDateToBlock](rules/getDateToBlock.md) | Get block by date |
+| [getLatestBlockNumber](rules/getLatestBlockNumber.md) | Get latest block number |
+| [getTransaction](rules/getTransaction.md) | Get transaction by hash |
 | [getTransactionVerbose](rules/getTransactionVerbose.md) | Get decoded transaction by hash |
 
 ### Discovery
 
 Trending tokens, blue chips, market movers, and token discovery.
 
-| Endpoint                                                                                | Description                                                  |
-| --------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| [getDiscoveryToken](rules/getDiscoveryToken.md)                                         | Get token details                                            |
-| [getTimeSeriesVolume](rules/getTimeSeriesVolume.md)                                     | Retrieve timeseries trading stats by chain                   |
-| [getTimeSeriesVolumeByCategory](rules/getTimeSeriesVolumeByCategory.md)                 | Retrieve timeseries trading stats by category                |
-| [getTopCryptoCurrenciesByMarketCap](rules/getTopCryptoCurrenciesByMarketCap.md)         | Get top crypto currencies by market cap                      |
-| [getTopCryptoCurrenciesByTradingVolume](rules/getTopCryptoCurrenciesByTradingVolume.md) | Get top crypto currencies by trading volume                  |
-| [getTopERC20TokensByMarketCap](rules/getTopERC20TokensByMarketCap.md)                   | Get top ERC20 tokens by market cap                           |
-| [getTopERC20TokensByPriceMovers](rules/getTopERC20TokensByPriceMovers.md)               | Get top ERC20 tokens by price movements (winners and losers) |
-| [getTopGainersTokens](rules/getTopGainersTokens.md)                                     | Get tokens with top gainers                                  |
-| [getTopLosersTokens](rules/getTopLosersTokens.md)                                       | Get tokens with top losers                                   |
-| [getTopProfitableWalletPerToken](rules/getTopProfitableWalletPerToken.md)               | Get top traders for a given ERC20 token                      |
-| [getTrendingTokens](rules/getTrendingTokens.md)                                         | Get trending tokens                                          |
-| [getVolumeStatsByCategory](rules/getVolumeStatsByCategory.md)                           | Get trading stats by categories                              |
-| [getVolumeStatsByChain](rules/getVolumeStatsByChain.md)                                 | Get trading stats by chain                                   |
+| Endpoint | Description |
+|----------|-------------|
+| [getDiscoveryToken](rules/getDiscoveryToken.md) | Get token details |
+| [getTimeSeriesVolume](rules/getTimeSeriesVolume.md) | Retrieve timeseries trading stats by chain |
+| [getTimeSeriesVolumeByCategory](rules/getTimeSeriesVolumeByCategory.md) | Retrieve timeseries trading stats by category |
+| [getTopCryptoCurrenciesByMarketCap](rules/getTopCryptoCurrenciesByMarketCap.md) | Get top crypto currencies by market cap |
+| [getTopCryptoCurrenciesByTradingVolume](rules/getTopCryptoCurrenciesByTradingVolume.md) | Get top crypto currencies by trading volume |
+| [getTopERC20TokensByMarketCap](rules/getTopERC20TokensByMarketCap.md) | Get top ERC20 tokens by market cap |
+| [getTopERC20TokensByPriceMovers](rules/getTopERC20TokensByPriceMovers.md) | Get top ERC20 tokens by price movements (winners and losers) |
+| [getTopGainersTokens](rules/getTopGainersTokens.md) | Get tokens with top gainers |
+| [getTopLosersTokens](rules/getTopLosersTokens.md) | Get tokens with top losers |
+| [getTopProfitableWalletPerToken](rules/getTopProfitableWalletPerToken.md) | Get top traders for a given ERC20 token |
+| [getTrendingTokens](rules/getTrendingTokens.md) | Get trending tokens |
+| [getVolumeStatsByCategory](rules/getVolumeStatsByCategory.md) | Get trading stats by categories |
+| [getVolumeStatsByChain](rules/getVolumeStatsByChain.md) | Get trading stats by chain |
 
 ### Other
 
 Utility endpoints including API version, endpoint weights, and address resolution.
 
-| Endpoint                                                                   | Description                                                                      |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| [getBondingTokensByExchange](rules/getBondingTokensByExchange__evm.md)     | Get bonding tokens by exchange                                                   |
-| [getCandleSticks](rules/getCandleSticks__evm.md)                           | Get OHLCV by pair address                                                        |
-| [getEntitiesByCategory](rules/getEntitiesByCategory.md)                    | Get Entities By Category                                                         |
-| [getFilteredTokens](rules/getFilteredTokens.md)                            | Returns a list of tokens that match the specified filters and criteria           |
-| [getGraduatedTokensByExchange](rules/getGraduatedTokensByExchange__evm.md) | Get graduated tokens by exchange                                                 |
-| [getHistoricalTokenHolders](rules/getHistoricalTokenHolders__evm.md)       | Get timeseries holders data                                                      |
-| [getNewTokensByExchange](rules/getNewTokensByExchange__evm.md)             | Get new tokens by exchange                                                       |
-| [getUniqueOwnersByCollection](rules/getUniqueOwnersByCollection.md)        | Get unique wallet addresses owning NFTs from a contract.                         |
-| [resolveAddress](rules/resolveAddress.md)                                  | ENS lookup by address                                                            |
-| [resolveAddressToDomain](rules/resolveAddressToDomain.md)                  | Resolve Address to Unstoppable domain                                            |
-| [resolveDomain](rules/resolveDomain.md)                                    | Resolve Unstoppable domain                                                       |
-| [resolveENSDomain](rules/resolveENSDomain.md)                              | ENS lookup by domain                                                             |
-| [reSyncMetadata](rules/reSyncMetadata.md)                                  | Resync NFT metadata                                                              |
-| [searchEntities](rules/searchEntities.md)                                  | Search Entities, Organizations or Wallets                                        |
-| [searchTokens](rules/searchTokens.md)                                      | Search for tokens based on contract address, pair address, token name or token s |
+| Endpoint | Description |
+|----------|-------------|
+| [getBondingTokensByExchange](rules/getBondingTokensByExchange__evm.md) | Get bonding tokens by exchange |
+| [getCandleSticks](rules/getCandleSticks__evm.md) | Get OHLCV by pair address |
+| [getEntitiesByCategory](rules/getEntitiesByCategory.md) | Get Entities By Category |
+| [getFilteredTokens](rules/getFilteredTokens.md) | Returns a list of tokens that match the specified filters and criteria |
+| [getGraduatedTokensByExchange](rules/getGraduatedTokensByExchange__evm.md) | Get graduated tokens by exchange |
+| [getHistoricalTokenHolders](rules/getHistoricalTokenHolders__evm.md) | Get timeseries holders data |
+| [getNewTokensByExchange](rules/getNewTokensByExchange__evm.md) | Get new tokens by exchange |
+| [getUniqueOwnersByCollection](rules/getUniqueOwnersByCollection.md) | Get unique wallet addresses owning NFTs from a contract. |
+| [resolveAddress](rules/resolveAddress.md) | ENS lookup by address |
+| [resolveAddressToDomain](rules/resolveAddressToDomain.md) | Resolve Address to Unstoppable domain |
+| [resolveDomain](rules/resolveDomain.md) | Resolve Unstoppable domain |
+| [resolveENSDomain](rules/resolveENSDomain.md) | ENS lookup by domain |
+| [reSyncMetadata](rules/reSyncMetadata.md) | Resync NFT metadata |
+| [searchEntities](rules/searchEntities.md) | Search Entities, Organizations or Wallets |
+| [searchTokens](rules/searchTokens.md) | Search for tokens based on contract address, pair address, token name or token s |
 
 ### Solana Endpoints
 
 Solana-specific endpoints (24 native + 10 EVM variants that support Solana chain = 34 total).
 
-| Endpoint                                                                        | Description                                                                     |
-| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| [balance](rules/balance__solana.md)                                             | Gets native balance owned by the given address                                  |
-| [getAggregatedTokenPairStats](rules/getAggregatedTokenPairStats__solana.md)     | Get aggregated token pair statistics by address                                 |
-| [getBondingTokensByExchange](rules/getBondingTokensByExchange__solana.md)       | Get bonding tokens by exchange                                                  |
-| [getCandleSticks](rules/getCandleSticks__solana.md)                             | Get candlesticks for a pair address                                             |
-| [getGraduatedTokensByExchange](rules/getGraduatedTokensByExchange__solana.md)   | Get graduated tokens by exchange                                                |
-| [getHistoricalTokenHolders](rules/getHistoricalTokenHolders__solana.md)         | Get token holders overtime for a given tokens                                   |
-| [getMultipleTokenMetadata](rules/getMultipleTokenMetadata__solana.md)           | Get multiple token metadata                                                     |
-| [getMultipleTokenPrices](rules/getMultipleTokenPrices__solana.md)               | Get token price                                                                 |
-| [getNFTMetadata](rules/getNFTMetadata__solana.md)                               | Get the global metadata for a given contract                                    |
-| [getNFTs](rules/getNFTs__solana.md)                                             | Gets NFTs owned by the given address                                            |
-| [getNewTokensByExchange](rules/getNewTokensByExchange__solana.md)               | Get new tokens by exchange                                                      |
-| [getPairStats](rules/getPairStats__solana.md)                                   | Get stats for a pair address                                                    |
-| [getPortfolio](rules/getPortfolio__solana.md)                                   | Gets the portfolio of the given address                                         |
-| [getSPL](rules/getSPL__solana.md)                                               | Gets token balances owned by the given address                                  |
-| [getSnipersByPairAddress](rules/getSnipersByPairAddress__solana.md)             | Get snipers by pair address.                                                    |
-| [getSwapsByPairAddress](rules/getSwapsByPairAddress__solana.md)                 | Get all swap related transactions (buy, sell, add liquidity & remove liquidity) |
-| [getSwapsByTokenAddress](rules/getSwapsByTokenAddress__solana.md)               | Get all swap related transactions (buy, sell)                                   |
-| [getSwapsByWalletAddress](rules/getSwapsByWalletAddress__solana.md)             | Get all swap related transactions (buy, sell) for a specific wallet address.    |
-| [getTokenBondingStatus](rules/getTokenBondingStatus__solana.md)                 | Get Token Bonding Status                                                        |
-| [getTokenHolders](rules/getTokenHolders__solana.md)                             | Get the summary of holders for a given token token.                             |
-| [getTokenMetadata](rules/getTokenMetadata__solana.md)                           | Get Token metadata                                                              |
-| [getTokenPairs](rules/getTokenPairs__solana.md)                                 | Get token pairs by address                                                      |
-| [getTokenPrice](rules/getTokenPrice__solana.md)                                 | Get token price                                                                 |
-| [getTopHolders](rules/getTopHolders__solana.md)                                 | Get paginated top holders for a given token.                                    |
-| [getDiscoveryToken](rules/getDiscoveryToken__solana.md)                         | **Solana variant:** Get token details                                           |
-| [getHistoricalTokenScore](rules/getHistoricalTokenScore__solana.md)             | **Solana variant:** Get historical token score by token address                 |
-| [getTimeSeriesVolume](rules/getTimeSeriesVolume__solana.md)                     | **Solana variant:** Retrieve timeseries trading stats by chain                  |
-| [getTimeSeriesVolumeByCategory](rules/getTimeSeriesVolumeByCategory__solana.md) | **Solana variant:** Retrieve timeseries trading stats by category               |
-| [getTokenAnalytics](rules/getTokenAnalytics__solana.md)                         | **Solana variant:** Get token analytics by token address                        |
-| [getTokenScore](rules/getTokenScore__solana.md)                                 | **Solana variant:** Get token score by token address                            |
-| [getTopGainersTokens](rules/getTopGainersTokens__solana.md)                     | **Solana variant:** Get tokens with top gainers                                 |
-| [getTopLosersTokens](rules/getTopLosersTokens__solana.md)                       | **Solana variant:** Get tokens with top losers                                  |
-| [getTrendingTokens](rules/getTrendingTokens__solana.md)                         | **Solana variant:** Get trending tokens                                         |
-| [getVolumeStatsByCategory](rules/getVolumeStatsByCategory__solana.md)           | **Solana variant:** Get trading stats by categories                             |
+| Endpoint | Description |
+|----------|-------------|
+| [balance](rules/balance__solana.md) | Gets native balance owned by the given address |
+| [getAggregatedTokenPairStats](rules/getAggregatedTokenPairStats__solana.md) | Get aggregated token pair statistics by address |
+| [getBondingTokensByExchange](rules/getBondingTokensByExchange__solana.md) | Get bonding tokens by exchange |
+| [getCandleSticks](rules/getCandleSticks__solana.md) | Get candlesticks for a pair address |
+| [getGraduatedTokensByExchange](rules/getGraduatedTokensByExchange__solana.md) | Get graduated tokens by exchange |
+| [getHistoricalTokenHolders](rules/getHistoricalTokenHolders__solana.md) | Get token holders overtime for a given tokens |
+| [getMultipleTokenMetadata](rules/getMultipleTokenMetadata__solana.md) | Get multiple token metadata |
+| [getMultipleTokenPrices](rules/getMultipleTokenPrices__solana.md) | Get token price |
+| [getNFTMetadata](rules/getNFTMetadata__solana.md) | Get the global metadata for a given contract |
+| [getNFTs](rules/getNFTs__solana.md) | Gets NFTs owned by the given address |
+| [getNewTokensByExchange](rules/getNewTokensByExchange__solana.md) | Get new tokens by exchange |
+| [getPairStats](rules/getPairStats__solana.md) | Get stats for a pair address |
+| [getPortfolio](rules/getPortfolio__solana.md) | Gets the portfolio of the given address |
+| [getSPL](rules/getSPL__solana.md) | Gets token balances owned by the given address |
+| [getSnipersByPairAddress](rules/getSnipersByPairAddress__solana.md) | Get snipers by pair address. |
+| [getSwapsByPairAddress](rules/getSwapsByPairAddress__solana.md) | Get all swap related transactions (buy, sell, add liquidity & remove liquidity) |
+| [getSwapsByTokenAddress](rules/getSwapsByTokenAddress__solana.md) | Get all swap related transactions (buy, sell) |
+| [getSwapsByWalletAddress](rules/getSwapsByWalletAddress__solana.md) | Get all swap related transactions (buy, sell) for a specific wallet address. |
+| [getTokenBondingStatus](rules/getTokenBondingStatus__solana.md) | Get Token Bonding Status |
+| [getTokenHolders](rules/getTokenHolders__solana.md) | Get the summary of holders for a given token token. |
+| [getTokenMetadata](rules/getTokenMetadata__solana.md) | Get Token metadata |
+| [getTokenPairs](rules/getTokenPairs__solana.md) | Get token pairs by address |
+| [getTokenPrice](rules/getTokenPrice__solana.md) | Get token price |
+| [getTopHolders](rules/getTopHolders__solana.md) | Get paginated top holders for a given token. |
+| [getDiscoveryToken](rules/getDiscoveryToken__solana.md) | **Solana variant:** Get token details |
+| [getHistoricalTokenScore](rules/getHistoricalTokenScore__solana.md) | **Solana variant:** Get historical token score by token address |
+| [getTimeSeriesVolume](rules/getTimeSeriesVolume__solana.md) | **Solana variant:** Retrieve timeseries trading stats by chain |
+| [getTimeSeriesVolumeByCategory](rules/getTimeSeriesVolumeByCategory__solana.md) | **Solana variant:** Retrieve timeseries trading stats by category |
+| [getTokenAnalytics](rules/getTokenAnalytics__solana.md) | **Solana variant:** Get token analytics by token address |
+| [getTokenScore](rules/getTokenScore__solana.md) | **Solana variant:** Get token score by token address |
+| [getTopGainersTokens](rules/getTopGainersTokens__solana.md) | **Solana variant:** Get tokens with top gainers |
+| [getTopLosersTokens](rules/getTopLosersTokens__solana.md) | **Solana variant:** Get tokens with top losers |
+| [getTrendingTokens](rules/getTrendingTokens__solana.md) | **Solana variant:** Get trending tokens |
+| [getVolumeStatsByCategory](rules/getVolumeStatsByCategory__solana.md) | **Solana variant:** Get trading stats by categories |
 
 ## Common Pitfalls
 
@@ -917,28 +865,27 @@ interface TokenPrice {
 }
 ```
 
-### Other Common Issues
+> See [CommonPitfalls.md](rules/CommonPitfalls.md) for complete reference including endpoint path inconsistencies, HTTP method surprises, and TypeScript property name issues.
 
-- **Chain IDs:** Use hex (0x1, 0x89) to save API tokens, not names (eth, polygon)
-- **Address format:** EVM addresses start with `0x`, Solana addresses are base58
-- **Path parameters:** Replace `:address`, `:token_address` etc. with actual values
-- **Streams API:** Streams uses `api.moralis-streams.com`, a different base URL
+## Quick Troubleshooting
+
+### Most Common Issues
+
+| Issue | Cause | Solution |
+|-------|--------|----------|
+| "Property does not exist on type" | Field name mismatch | Re-read rule file, check snake_case vs camelCase |
+| "Cannot read property of undefined" | Missing optional field | Add `?.` optional chaining: `data.result?.[0]?.field` |
+| "blockNumber is NaN" | Parsing decimal as hex | Use radix 10, not 16: `parseInt(block_number, 10)` |
+| "Timestamp shows wrong year" | Parsing ISO as number | Use `new Date(timestamp).getTime()` for ISO strings |
+| "404 Not Found" | Wrong endpoint path | Verify exact path in rule file (watch for `/wallets/` prefix) |
+| "Type 'string' is not assignable to 'number'" | Type mismatch | Add type conversion: `String(value)` or `Number(value)` |
+
+> For complete troubleshooting guide with more edge cases, see:
+> - Endpoint rule file for endpoint-specific issues
+> - [CommonPitfalls.md](rules/CommonPitfalls.md) for general pitfalls
+> - [DataTransformations.md](rules/DataTransformations.md) for type conversion issues
 
 ## Example Requests
-
-```bash
-# Get NFTs for an EVM wallet
-curl "https://deep-index.moralis.io/api/v2.2/0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045/nft?chain=0x1" \
-  -H "X-API-Key: YOUR_API_KEY"
-
-# Get token price
-curl "https://deep-index.moralis.io/api/v2.2/erc20/0x6B175474E89094C44Da98b954EedeAC495271d0F/price?chain=0x1" \
-  -H "X-API-Key: YOUR_API_KEY"
-
-# Get wallet token balances
-curl "https://deep-index.moralis.io/api/v2.2/0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045/erc20?chain=0x1" \
-  -H "X-API-Key: YOUR_API_KEY"
-```
 
 ## Supported Chains
 
