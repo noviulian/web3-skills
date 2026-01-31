@@ -21,13 +21,13 @@ Follow these steps to install Moralis API Skills for Claude Code.
 The easiest way to install all Moralis API skills:
 
 ```bash
-npx skills add noviulian/moralis-api-skills
+npx skills add novnski/moralis-api-skills
 ```
 
 Optional: List all available skills before installing
 
 ```bash
-npx skills add noviulian/moralis-api-skills --list
+npx skills add novnski/moralis-api-skills --list
 ```
 
 ### Set Your API Key
@@ -70,7 +70,7 @@ If you prefer manual installation or want to install individual skills:
 ```bash
 # Clone to Claude skills directory
 cd ~/.claude/skills
-git clone https://github.com/noviulian/moralis-api-skills.git moralis-api-skills-temp
+git clone https://github.com/novnski/moralis-api-skills.git moralis-api-skills-temp
 
 # Copy individual skills you need
 cp -r moralis-api-skills-temp/skills/moralis-data-api ~/.claude/skills/
@@ -86,7 +86,7 @@ Then provide your API key when using either skill (see below).
 
 ### Manual Installation: Individual Skills
 
-1. Download the skill directory you want from [GitHub](https://github.com/noviulian/moralis-api-skills)
+1. Download the skill directory you want from [GitHub](https://github.com/novnski/moralis-api-skills)
 2. Copy it to `~/.claude/skills/` or `<project>/.claude/skills/`
 3. Ensure the directory contains `SKILL.md`
 4. Set your API key (see below)

@@ -28,13 +28,13 @@ Install all Moralis API skills:
 **Step 1:** Install the skills
 
 ```bash
-npx skills add noviulian/moralis-api-skills
+npx skills add novnski/moralis-api-skills
 ```
 
 Optional: List all available skills
 
 ```bash
-npx skills add noviulian/moralis-api-skills --list
+npx skills add novnski/moralis-api-skills --list
 ```
 
 **Step 2:** Set your API key when using either skill
@@ -61,7 +61,7 @@ If you prefer to install individual skills or want more control:
 ```bash
 # Add to Claude Code skills directory
 cd ~/.claude/skills
-git clone https://github.com/noviulian/moralis-api-skills.git moralis-api-skills-temp
+git clone https://github.com/novnski/moralis-api-skills.git moralis-api-skills-temp
 
 # Install individual skills
 cp -r moralis-api-skills-temp/skills/moralis-data-api ~/.claude/skills/
@@ -126,4 +126,4 @@ Or manage Streams:
 
 ## License
 
-MIT License - see [LICENSE](https://github.com/noviulian/moralis-api-skills/blob/main/LICENSE) for details.
+MIT License - see [LICENSE](https://github.com/novnski/moralis-api-skills/blob/main/LICENSE) for details.

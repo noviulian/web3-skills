@@ -8,7 +8,7 @@ metadata:
   author: web3-skills
   tags: [web3, blockchain, streaming, webhooks, events, realtime]
 context:
-  fork: noviulian/moralis-api-skills
+  fork: novnski/moralis-api-skills
   agent: claude-code
 allowed-tools:
   - Bash

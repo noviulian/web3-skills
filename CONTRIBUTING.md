@@ -5,7 +5,7 @@ Thank you for your interest in contributing!
 ## Setup
 
 1. Fork the repository
-2. Clone your fork: `git clone https://github.com/noviulian/moralis-api-skills.git`
+2. Clone your fork: `git clone https://github.com/novnski/moralis-api-skills.git`
 3. Create a branch: `git checkout -b feature/your-feature`
 
 ## Development
