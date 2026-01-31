@@ -46,7 +46,7 @@ Many endpoints support spam filtering:
 
 ## Related Endpoints
 
-- [getWalletTokenBalances](rules/getWalletTokenBalances.md) - Get ERC20 balances (supports spam filtering)
+- [getWalletTokenBalancesPrice](rules/getWalletTokenBalancesPrice.md) - Get ERC20 balances with prices (supports spam filtering)
 - [getWalletNFTs](rules/getWalletNFTs.md) - Get NFTs by wallet (supports spam filtering)
 - [getTokenMetadata](rules/getTokenMetadata__evm.md) - Get token metadata (includes spam flags)
 - [getNFTMetadata](rules/getNFTMetadata__evm.md) - Get NFT metadata (includes spam flags)

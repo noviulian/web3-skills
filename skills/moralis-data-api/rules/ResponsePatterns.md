@@ -123,7 +123,7 @@ result.forEach(item => {
 Returns an array directly at top level. No wrapper object.
 
 ### Common Endpoints
-- `getWalletTokenBalances`
+- `getWalletTokenBalancesPrice`
 - `getTokenMetadata` (sometimes, depends on endpoint)
 - `getTokenOwners`
 - `getWalletNFTs`
@@ -155,7 +155,7 @@ Returns an array directly at top level. No wrapper object.
 
 ```typescript
 // Direct array access - no .result needed
-const tokens = await getWalletTokenBalances(address, chain);
+const tokens = await getWalletTokenBalancesPrice(address, chain);
 
 tokens.forEach(token => {
   console.log(token.token_address);
@@ -211,7 +211,7 @@ const block: any = await getBlock(blockNumber);
 const { result: transactions } = await getWalletTransactions(address, chain);
 
 // Pattern 4: Direct array
-const tokens = await getWalletTokenBalances(address, chain);
+const tokens = await getWalletTokenBalancesPrice(address, chain);
 
 // Universal safe access
 function extractData<T = any>(response: any): T | T[] {
@@ -281,7 +281,7 @@ try {
 
 ```typescript
 try {
-  const tokens = await getWalletTokenBalances(address, chain);
+  const tokens = await getWalletTokenBalancesPrice(address, chain);
   if (!tokens || tokens.length === 0) {
     console.log('No tokens found');
     return [];

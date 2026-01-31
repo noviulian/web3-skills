@@ -274,11 +274,7 @@
                           "description": "The mimetype of the media file [see https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types]"
                         },
                         "category": {
-                          "enum": [
-                            "image",
-                            "audio",
-                            "video"
-                          ]
+                          "enum": ["image", "audio", "video"]
                         },
                         "status": {
                           "enum": [
@@ -750,11 +746,7 @@
                       "description": "The mimetype of the media file [see https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types]"
                     },
                     "category": {
-                      "enum": [
-                        "image",
-                        "audio",
-                        "video"
-                      ]
+                      "enum": ["image", "audio", "video"]
                     },
                     "status": {
                       "enum": [
@@ -1128,10 +1120,7 @@
           "required": false,
           "example": "DESC",
           "type": "string",
-          "enum": [
-            "ASC",
-            "DESC"
-          ]
+          "enum": ["ASC", "DESC"]
         },
         {
           "name": "cursor",
@@ -2051,11 +2040,7 @@
                           "description": "The mimetype of the media file [see https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types]"
                         },
                         "category": {
-                          "enum": [
-                            "image",
-                            "audio",
-                            "video"
-                          ]
+                          "enum": ["image", "audio", "video"]
                         },
                         "status": {
                           "enum": [
@@ -2709,11 +2694,7 @@
                           "description": "The mimetype of the media file [see https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types]"
                         },
                         "category": {
-                          "enum": [
-                            "image",
-                            "audio",
-                            "video"
-                          ]
+                          "enum": ["image", "audio", "video"]
                         },
                         "status": {
                           "enum": [
@@ -3080,10 +3061,7 @@
           "required": false,
           "example": "DESC",
           "type": "string",
-          "enum": [
-            "ASC",
-            "DESC"
-          ]
+          "enum": ["ASC", "DESC"]
         },
         {
           "name": "cursor",
@@ -3649,11 +3627,7 @@
                           "description": "The mimetype of the media file [see https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types]"
                         },
                         "category": {
-                          "enum": [
-                            "image",
-                            "audio",
-                            "video"
-                          ]
+                          "enum": ["image", "audio", "video"]
                         },
                         "status": {
                           "enum": [
@@ -4175,10 +4149,7 @@
           "required": false,
           "example": "DESC",
           "type": "string",
-          "enum": [
-            "ASC",
-            "DESC"
-          ]
+          "enum": ["ASC", "DESC"]
         }
       ],
       "responses": [
@@ -4540,10 +4511,7 @@
                       "name": "token_ids",
                       "type": "array",
                       "description": "The token ID(s) traded",
-                      "example": [
-                        "15",
-                        "54"
-                      ],
+                      "example": ["15", "54"],
                       "field": {
                         "type": "string",
                         "example": "15"
@@ -4795,10 +4763,7 @@
                       "name": "token_ids",
                       "type": "array",
                       "description": "The token ID(s) traded",
-                      "example": [
-                        "15",
-                        "54"
-                      ],
+                      "example": ["15", "54"],
                       "field": {
                         "type": "string",
                         "example": "15"
@@ -5043,10 +5008,7 @@
                       "name": "token_ids",
                       "type": "array",
                       "description": "The token ID(s) traded",
-                      "example": [
-                        "15",
-                        "54"
-                      ],
+                      "example": ["15", "54"],
                       "field": {
                         "type": "string",
                         "example": "15"
@@ -6000,11 +5962,7 @@
                     "description": "The mimetype of the media file [see https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types]"
                   },
                   "category": {
-                    "enum": [
-                      "image",
-                      "audio",
-                      "video"
-                    ]
+                    "enum": ["image", "audio", "video"]
                   },
                   "status": {
                     "enum": [
@@ -6385,10 +6343,7 @@
           "required": false,
           "example": "DESC",
           "type": "string",
-          "enum": [
-            "ASC",
-            "DESC"
-          ]
+          "enum": ["ASC", "DESC"]
         },
         {
           "name": "cursor",
@@ -6956,11 +6911,7 @@
                           "description": "The mimetype of the media file [see https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types]"
                         },
                         "category": {
-                          "enum": [
-                            "image",
-                            "audio",
-                            "video"
-                          ]
+                          "enum": ["image", "audio", "video"]
                         },
                         "status": {
                           "enum": [
@@ -8409,13 +8360,7 @@
               },
               {
                 "name": "nativePrice",
-                "required": [
-                  "value",
-                  "decimals",
-                  "name",
-                  "symbol",
-                  "address"
-                ],
+                "required": ["value", "decimals", "name", "symbol", "address"],
                 "properties": {
                   "value": {
                     "type": "string",
@@ -8644,10 +8589,7 @@
           "required": false,
           "example": "DESC",
           "type": "string",
-          "enum": [
-            "ASC",
-            "DESC"
-          ]
+          "enum": ["ASC", "DESC"]
         },
         {
           "name": "fromBlock",
@@ -9055,15 +8997,7 @@
                 "name": "holderChange",
                 "type": "object",
                 "description": "The holder change",
-                "required": [
-                  "5min",
-                  "1h",
-                  "6h",
-                  "24h",
-                  "7d",
-                  "3d",
-                  "30d"
-                ],
+                "required": ["5min", "1h", "6h", "24h", "7d", "3d", "30d"],
                 "properties": {
                   "5min": {
                     "type": "object",
@@ -9106,11 +9040,7 @@
                 "name": "holdersByAcquisition",
                 "type": "object",
                 "description": "The holder change",
-                "required": [
-                  "swap",
-                  "transfer",
-                  "airdrop"
-                ],
+                "required": ["swap", "transfer", "airdrop"],
                 "properties": {
                   "swap": {
                     "type": "number",
@@ -9364,11 +9294,7 @@
                       "name": "newHoldersByAcquisition",
                       "type": "object",
                       "description": "The new holders by acquisition",
-                      "required": [
-                        "swap",
-                        "transfer",
-                        "airdrop"
-                      ],
+                      "required": ["swap", "transfer", "airdrop"],
                       "properties": {
                         "swap": {
                           "type": "number",
@@ -9921,10 +9847,7 @@
           "required": false,
           "example": "DESC",
           "type": "string",
-          "enum": [
-            "ASC",
-            "DESC"
-          ]
+          "enum": ["ASC", "DESC"]
         }
       ],
       "responses": [
@@ -10019,186 +9942,6 @@
                 }
               }
             ]
-          }
-        }
-      ]
-    },
-    "getWalletTokenBalances": {
-      "apiHost": "https://deep-index.moralis.io/api/v2.2",
-      "summary": "Get ERC20 token balances by wallet",
-      "description": "Get an unpaginated list of token balances, without token prices, for a specific wallet address. Maximum of 2,000 tokens. Each token returned includes on-chain metadata, as well as off-chain metadata, logos, spam status and more.",
-      "method": "GET",
-      "path": "/:address/erc20",
-      "pathParams": [
-        {
-          "name": "address",
-          "description": "The address from which token balances will be checked",
-          "required": true,
-          "example": "0xcB1C1FdE09f811B294172696404e88E658659905",
-          "type": "string"
-        }
-      ],
-      "queryParams": [
-        {
-          "name": "chain",
-          "description": "The chain to query",
-          "required": false,
-          "example": "eth",
-          "type": "string",
-          "enum": [
-            "eth",
-            "0x1",
-            "sepolia",
-            "0xaa36a7",
-            "polygon",
-            "0x89",
-            "bsc",
-            "0x38",
-            "bsc testnet",
-            "0x61",
-            "avalanche",
-            "0xa86a",
-            "fantom",
-            "0xfa",
-            "cronos",
-            "0x19",
-            "arbitrum",
-            "0xa4b1",
-            "chiliz",
-            "0x15b38",
-            "chiliz testnet",
-            "0x15b32",
-            "gnosis",
-            "0x64",
-            "gnosis testnet",
-            "0x27d8",
-            "base",
-            "0x2105",
-            "base sepolia",
-            "0x14a34",
-            "optimism",
-            "0xa",
-            "polygon amoy",
-            "0x13882",
-            "linea",
-            "0xe708",
-            "moonbeam",
-            "0x504",
-            "moonriver",
-            "0x505",
-            "moonbase",
-            "0x507",
-            "linea sepolia",
-            "0xe705",
-            "flow",
-            "0x2eb",
-            "flow-testnet",
-            "0x221",
-            "ronin",
-            "0x7e4",
-            "ronin-testnet",
-            "0x7e5",
-            "lisk",
-            "0x46f",
-            "lisk-sepolia",
-            "0x106a",
-            "pulse",
-            "0x171",
-            "sei-testnet",
-            "0x530",
-            "sei",
-            "0x531",
-            "monad",
-            "0x8f"
-          ]
-        },
-        {
-          "name": "to_block",
-          "description": "The block number up to which the balances will be checked.",
-          "required": false,
-          "type": "number"
-        },
-        {
-          "name": "token_addresses",
-          "description": "The addresses to get balances for (optional)",
-          "required": false,
-          "type": "array",
-          "field": {
-            "type": "string"
-          }
-        },
-        {
-          "name": "exclude_spam",
-          "description": "Exclude spam tokens from the result",
-          "required": false,
-          "type": "boolean"
-        }
-      ],
-      "responses": [
-        {
-          "status": "200",
-          "description": "Returns token balances for a specific address",
-          "body": {
-            "type": "array",
-            "field": {
-              "type": "object",
-              "fields": [
-                {
-                  "name": "token_address",
-                  "type": "string",
-                  "description": "The address of the token contract",
-                  "example": "0x2d30ca6f024dbc1307ac8a1a44ca27de6f797ec22ef20627a1307243b0ab7d09"
-                },
-                {
-                  "name": "name",
-                  "type": "string",
-                  "description": "The name of the token contract",
-                  "example": "Kylin Network"
-                },
-                {
-                  "name": "symbol",
-                  "type": "string",
-                  "description": "The symbol of the NFT contract",
-                  "example": "KYL"
-                },
-                {
-                  "name": "logo",
-                  "type": "string",
-                  "description": "The logo of the token",
-                  "example": "https://cdn.moralis.io/eth/0x67b6d479c7bb412c54e03dca8e1bc6740ce6b99c.png"
-                },
-                {
-                  "name": "thumbnail",
-                  "type": "string",
-                  "description": "The thumbnail of the logo",
-                  "example": "https://cdn.moralis.io/eth/0x67b6d479c7bb412c54e03dca8e1bc6740ce6b99c_thumb.png"
-                },
-                {
-                  "name": "decimals",
-                  "type": "number",
-                  "description": "The number of decimals on the token",
-                  "example": 18
-                },
-                {
-                  "name": "balance",
-                  "type": "string",
-                  "description": "Timestamp of when the contract was last synced with the node",
-                  "example": "123456789"
-                },
-                {
-                  "name": "possible_spam",
-                  "type": "boolean",
-                  "description": "Indicates if a contract is possibly a spam contract",
-                  "example": "false"
-                },
-                {
-                  "name": "verified_contract",
-                  "type": "boolean",
-                  "description": "Indicates if a contract is verified",
-                  "example": "false"
-                }
-              ]
-            }
           }
         }
       ]
@@ -10336,10 +10079,7 @@
           "required": false,
           "example": "DESC",
           "type": "string",
-          "enum": [
-            "ASC",
-            "DESC"
-          ]
+          "enum": ["ASC", "DESC"]
         },
         {
           "name": "cursor",
@@ -10679,10 +10419,7 @@
                   "type": "array",
                   "field": {
                     "description": "The token addresses of the same symbol from another chains",
-                    "required": [
-                      "chainId",
-                      "address"
-                    ],
+                    "required": ["chainId", "address"],
                     "properties": {
                       "chainId": {
                         "type": "string",
@@ -10742,9 +10479,7 @@
                   "name": "categories",
                   "type": "array",
                   "description": "Categories of the token",
-                  "example": [
-                    "stablecoin"
-                  ],
+                  "example": ["stablecoin"],
                   "field": {
                     "type": "string"
                   }
@@ -10874,10 +10609,7 @@
                         "example": "stablecoin"
                       }
                     },
-                    "required": [
-                      "name",
-                      "id"
-                    ]
+                    "required": ["name", "id"]
                   }
                 }
               ]
@@ -11052,10 +10784,7 @@
                   "type": "array",
                   "field": {
                     "description": "The token addresses of the same symbol from another chains",
-                    "required": [
-                      "chainId",
-                      "address"
-                    ],
+                    "required": ["chainId", "address"],
                     "properties": {
                       "chainId": {
                         "type": "string",
@@ -11115,9 +10844,7 @@
                   "name": "categories",
                   "type": "array",
                   "description": "Categories of the token",
-                  "example": [
-                    "stablecoin"
-                  ],
+                  "example": ["stablecoin"],
                   "field": {
                     "type": "string"
                   }
@@ -11337,10 +11064,7 @@
           "required": false,
           "example": "DESC",
           "type": "string",
-          "enum": [
-            "ASC",
-            "DESC"
-          ]
+          "enum": ["ASC", "DESC"]
         },
         {
           "name": "cursor",
@@ -12152,10 +11876,7 @@
           "required": false,
           "example": "DESC",
           "type": "string",
-          "enum": [
-            "ASC",
-            "DESC"
-          ]
+          "enum": ["ASC", "DESC"]
         },
         {
           "name": "limit",
@@ -13606,10 +13327,7 @@
           "required": false,
           "example": "DESC",
           "type": "string",
-          "enum": [
-            "ASC",
-            "DESC"
-          ]
+          "enum": ["ASC", "DESC"]
         },
         {
           "name": "limit",
@@ -13623,9 +13341,7 @@
           "required": false,
           "example": "",
           "type": "string",
-          "enum": [
-            "internal_transactions"
-          ]
+          "enum": ["internal_transactions"]
         }
       ],
       "responses": [
@@ -14008,9 +13724,7 @@
           "required": false,
           "example": "",
           "type": "string",
-          "enum": [
-            "internal_transactions"
-          ]
+          "enum": ["internal_transactions"]
         },
         {
           "name": "cursor",
@@ -14023,10 +13737,7 @@
           "required": false,
           "example": "DESC",
           "type": "string",
-          "enum": [
-            "ASC",
-            "DESC"
-          ]
+          "enum": ["ASC", "DESC"]
         },
         {
           "name": "limit",
@@ -14457,9 +14168,7 @@
           "required": false,
           "example": "",
           "type": "string",
-          "enum": [
-            "internal_transactions"
-          ]
+          "enum": ["internal_transactions"]
         }
       ],
       "responses": [
@@ -14857,9 +14566,7 @@
           "required": false,
           "example": "",
           "type": "string",
-          "enum": [
-            "internal_transactions"
-          ]
+          "enum": ["internal_transactions"]
         }
       ],
       "responses": [
@@ -15258,9 +14965,7 @@
           "required": false,
           "example": "",
           "type": "string",
-          "enum": [
-            "internal_transactions"
-          ]
+          "enum": ["internal_transactions"]
         }
       ],
       "responses": [
@@ -16481,10 +16186,7 @@
                     "type": "array",
                     "items": {
                       "description": "The token addresses of the same symbol from another chains",
-                      "required": [
-                        "chainId",
-                        "address"
-                      ],
+                      "required": ["chainId", "address"],
                       "properties": {
                         "chainId": {
                           "type": "string",
@@ -16542,9 +16244,7 @@
                     },
                     "nullable": true,
                     "description": "Categories of the token",
-                    "example": [
-                      "stablecoin"
-                    ]
+                    "example": ["stablecoin"]
                   },
                   "links": {
                     "$ref": "#/components/schemas/discoveryTokenLinks"
@@ -16633,10 +16333,7 @@
                     "type": "array",
                     "items": {
                       "description": "The token addresses of the same symbol from another chains",
-                      "required": [
-                        "chainId",
-                        "address"
-                      ],
+                      "required": ["chainId", "address"],
                       "properties": {
                         "chainId": {
                           "type": "string",
@@ -16694,9 +16391,7 @@
                     },
                     "nullable": true,
                     "description": "Categories of the token",
-                    "example": [
-                      "stablecoin"
-                    ]
+                    "example": ["stablecoin"]
                   },
                   "links": {
                     "$ref": "#/components/schemas/discoveryTokenLinks"
@@ -18370,10 +18065,7 @@
                     },
                     {
                       "name": "first_transaction",
-                      "required": [
-                        "block_number",
-                        "block_timestamp"
-                      ],
+                      "required": ["block_number", "block_timestamp"],
                       "properties": {
                         "block_number": {
                           "type": "string",
@@ -18394,10 +18086,7 @@
                     },
                     {
                       "name": "last_transaction",
-                      "required": [
-                        "block_number",
-                        "block_timestamp"
-                      ],
+                      "required": ["block_number", "block_timestamp"],
                       "properties": {
                         "block_number": {
                           "type": "string",
@@ -18835,9 +18524,7 @@
               {
                 "name": "marketplace",
                 "description": "The marketplace in which the floor price is present",
-                "required": [
-                  "name"
-                ],
+                "required": ["name"],
                 "properties": {
                   "name": {
                     "type": "string",
@@ -18999,9 +18686,7 @@
               {
                 "name": "marketplace",
                 "description": "The marketplace in which the floor price is present",
-                "required": [
-                  "name"
-                ],
+                "required": ["name"],
                 "properties": {
                   "name": {
                     "type": "string",
@@ -19121,15 +18806,7 @@
           "required": true,
           "example": "1d",
           "type": "string",
-          "enum": [
-            "1d",
-            "7d",
-            "30d",
-            "60d",
-            "90d",
-            "1y",
-            "all"
-          ]
+          "enum": ["1d", "7d", "30d", "60d", "90d", "1y", "all"]
         },
         {
           "name": "cursor",
@@ -20116,12 +19793,7 @@
           "required": false,
           "example": "1d",
           "type": "string",
-          "enum": [
-            "1h",
-            "1d",
-            "1w",
-            "1M"
-          ]
+          "enum": ["1h", "1d", "1w", "1M"]
         }
       ],
       "responses": [
@@ -20236,12 +19908,7 @@
           "required": false,
           "example": "1d",
           "type": "string",
-          "enum": [
-            "1h",
-            "1d",
-            "1w",
-            "1M"
-          ]
+          "enum": ["1h", "1d", "1w", "1M"]
         }
       ],
       "responses": [
@@ -20356,12 +20023,7 @@
           "required": false,
           "example": "1d",
           "type": "string",
-          "enum": [
-            "1h",
-            "1d",
-            "1w",
-            "1M"
-          ]
+          "enum": ["1h", "1d", "1w", "1M"]
         }
       ],
       "responses": [
@@ -20752,12 +20414,7 @@
               {
                 "name": "holders_change",
                 "type": "object",
-                "required": [
-                  "1h",
-                  "1d",
-                  "1w",
-                  "1M"
-                ],
+                "required": ["1h", "1d", "1w", "1M"],
                 "properties": {
                   "1h": {
                     "type": "number",
@@ -20788,12 +20445,7 @@
               {
                 "name": "liquidity_change_usd",
                 "type": "object",
-                "required": [
-                  "1h",
-                  "1d",
-                  "1w",
-                  "1M"
-                ],
+                "required": ["1h", "1d", "1w", "1M"],
                 "properties": {
                   "1h": {
                     "type": "number",
@@ -20824,12 +20476,7 @@
               {
                 "name": "experienced_net_buyers_change",
                 "type": "object",
-                "required": [
-                  "1h",
-                  "1d",
-                  "1w",
-                  "1M"
-                ],
+                "required": ["1h", "1d", "1w", "1M"],
                 "properties": {
                   "1h": {
                     "type": "number",
@@ -20860,12 +20507,7 @@
               {
                 "name": "volume_change_usd",
                 "type": "object",
-                "required": [
-                  "1h",
-                  "1d",
-                  "1w",
-                  "1M"
-                ],
+                "required": ["1h", "1d", "1w", "1M"],
                 "properties": {
                   "1h": {
                     "type": "number",
@@ -20896,12 +20538,7 @@
               {
                 "name": "net_volume_change_usd",
                 "type": "object",
-                "required": [
-                  "1h",
-                  "1d",
-                  "1w",
-                  "1M"
-                ],
+                "required": ["1h", "1d", "1w", "1M"],
                 "properties": {
                   "1h": {
                     "type": "number",
@@ -20932,12 +20569,7 @@
               {
                 "name": "price_percent_change_usd",
                 "type": "object",
-                "required": [
-                  "1h",
-                  "1d",
-                  "1w",
-                  "1M"
-                ],
+                "required": ["1h", "1d", "1w", "1M"],
                 "properties": {
                   "1h": {
                     "type": "number",
@@ -21842,10 +21474,7 @@
                       "type": "array",
                       "field": {
                         "type": "string",
-                        "example": [
-                          "Uniswap",
-                          "Uniswap V3"
-                        ]
+                        "example": ["Uniswap", "Uniswap V3"]
                       }
                     }
                   ]
@@ -22370,12 +21999,7 @@
               {
                 "name": "pricePercentChange",
                 "type": "object",
-                "required": [
-                  "5min",
-                  "1h",
-                  "4h",
-                  "24h"
-                ],
+                "required": ["5min", "1h", "4h", "24h"],
                 "properties": {
                   "5min": {
                     "type": "number",
@@ -22398,12 +22022,7 @@
               {
                 "name": "liquidityPercentChange",
                 "type": "object",
-                "required": [
-                  "5min",
-                  "1h",
-                  "4h",
-                  "24h"
-                ],
+                "required": ["5min", "1h", "4h", "24h"],
                 "properties": {
                   "5min": {
                     "type": "number",
@@ -22426,12 +22045,7 @@
               {
                 "name": "buys",
                 "type": "object",
-                "required": [
-                  "5min",
-                  "1h",
-                  "4h",
-                  "24h"
-                ],
+                "required": ["5min", "1h", "4h", "24h"],
                 "properties": {
                   "5min": {
                     "type": "number",
@@ -22454,12 +22068,7 @@
               {
                 "name": "sells",
                 "type": "object",
-                "required": [
-                  "5min",
-                  "1h",
-                  "4h",
-                  "24h"
-                ],
+                "required": ["5min", "1h", "4h", "24h"],
                 "properties": {
                   "5min": {
                     "type": "number",
@@ -22482,12 +22091,7 @@
               {
                 "name": "totalVolume",
                 "type": "object",
-                "required": [
-                  "5min",
-                  "1h",
-                  "4h",
-                  "24h"
-                ],
+                "required": ["5min", "1h", "4h", "24h"],
                 "properties": {
                   "5min": {
                     "type": "number",
@@ -22510,12 +22114,7 @@
               {
                 "name": "buyVolume",
                 "type": "object",
-                "required": [
-                  "5min",
-                  "1h",
-                  "4h",
-                  "24h"
-                ],
+                "required": ["5min", "1h", "4h", "24h"],
                 "properties": {
                   "5min": {
                     "type": "number",
@@ -22538,12 +22137,7 @@
               {
                 "name": "sellVolume",
                 "type": "object",
-                "required": [
-                  "5min",
-                  "1h",
-                  "4h",
-                  "24h"
-                ],
+                "required": ["5min", "1h", "4h", "24h"],
                 "properties": {
                   "5min": {
                     "type": "number",
@@ -22566,12 +22160,7 @@
               {
                 "name": "buyers",
                 "type": "object",
-                "required": [
-                  "5min",
-                  "1h",
-                  "4h",
-                  "24h"
-                ],
+                "required": ["5min", "1h", "4h", "24h"],
                 "properties": {
                   "5min": {
                     "type": "number",
@@ -22594,12 +22183,7 @@
               {
                 "name": "sellers",
                 "type": "object",
-                "required": [
-                  "5min",
-                  "1h",
-                  "4h",
-                  "24h"
-                ],
+                "required": ["5min", "1h", "4h", "24h"],
                 "properties": {
                   "5min": {
                     "type": "number",
@@ -23854,10 +23438,7 @@
           "required": false,
           "example": "DESC",
           "type": "string",
-          "enum": [
-            "ASC",
-            "DESC"
-          ]
+          "enum": ["ASC", "DESC"]
         },
         {
           "name": "transactionTypes",
@@ -24219,10 +23800,7 @@
           "required": false,
           "example": "DESC",
           "type": "string",
-          "enum": [
-            "ASC",
-            "DESC"
-          ]
+          "enum": ["ASC", "DESC"]
         },
         {
           "name": "transactionTypes",
@@ -26700,12 +26278,7 @@
                     "description": "The 24 hours timeframe data"
                   }
                 },
-                "required": [
-                  "5min",
-                  "1h",
-                  "4h",
-                  "24h"
-                ]
+                "required": ["5min", "1h", "4h", "24h"]
               },
               {
                 "name": "totalVolume",
@@ -26732,12 +26305,7 @@
                     "description": "The 24 hours timeframe data"
                   }
                 },
-                "required": [
-                  "5min",
-                  "1h",
-                  "4h",
-                  "24h"
-                ]
+                "required": ["5min", "1h", "4h", "24h"]
               },
               {
                 "name": "totalBuyVolume",
@@ -26764,12 +26332,7 @@
                     "description": "The 24 hours timeframe data"
                   }
                 },
-                "required": [
-                  "5min",
-                  "1h",
-                  "4h",
-                  "24h"
-                ]
+                "required": ["5min", "1h", "4h", "24h"]
               },
               {
                 "name": "totalSellVolume",
@@ -26796,12 +26359,7 @@
                     "description": "The 24 hours timeframe data"
                   }
                 },
-                "required": [
-                  "5min",
-                  "1h",
-                  "4h",
-                  "24h"
-                ]
+                "required": ["5min", "1h", "4h", "24h"]
               },
               {
                 "name": "totalBuyers",
@@ -26828,12 +26386,7 @@
                     "description": "The 24 hours timeframe data"
                   }
                 },
-                "required": [
-                  "5min",
-                  "1h",
-                  "4h",
-                  "24h"
-                ]
+                "required": ["5min", "1h", "4h", "24h"]
               },
               {
                 "name": "totalSellers",
@@ -26860,12 +26413,7 @@
                     "description": "The 24 hours timeframe data"
                   }
                 },
-                "required": [
-                  "5min",
-                  "1h",
-                  "4h",
-                  "24h"
-                ]
+                "required": ["5min", "1h", "4h", "24h"]
               }
             ]
           }
@@ -27167,11 +26715,7 @@
                     "nullable": true
                   }
                 },
-                "required": [
-                  "type",
-                  "name",
-                  "symbol"
-                ]
+                "required": ["type", "name", "symbol"]
               },
               {
                 "name": "collection",
@@ -27408,11 +26952,7 @@
                       "nullable": true
                     }
                   },
-                  "required": [
-                    "type",
-                    "name",
-                    "symbol"
-                  ]
+                  "required": ["type", "name", "symbol"]
                 },
                 {
                   "name": "collection",
@@ -27714,10 +27254,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "solana",
-                  "lamports"
-                ]
+                "required": ["solana", "lamports"]
               },
               {
                 "name": "nfts",
@@ -27800,11 +27337,7 @@
                           "nullable": true
                         }
                       },
-                      "required": [
-                        "type",
-                        "name",
-                        "symbol"
-                      ]
+                      "required": ["type", "name", "symbol"]
                     },
                     {
                       "name": "collection",
@@ -28342,13 +27875,7 @@
                     "example": "18"
                   }
                 },
-                "required": [
-                  "address",
-                  "name",
-                  "symbol",
-                  "logo",
-                  "decimals"
-                ]
+                "required": ["address", "name", "symbol", "logo", "decimals"]
               },
               {
                 "name": "quoteToken",
@@ -28380,13 +27907,7 @@
                     "example": "18"
                   }
                 },
-                "required": [
-                  "address",
-                  "name",
-                  "symbol",
-                  "logo",
-                  "decimals"
-                ]
+                "required": ["address", "name", "symbol", "logo", "decimals"]
               },
               {
                 "name": "result",
@@ -29038,9 +28559,7 @@
           {
             "name": "addresses",
             "type": "array",
-            "example": [
-              "So11111111111111111111111111111111111111112"
-            ],
+            "example": ["So11111111111111111111111111111111111111112"],
             "field": {
               "type": "string"
             }
@@ -29388,12 +28907,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "value",
-                  "decimals",
-                  "name",
-                  "symbol"
-                ]
+                "required": ["value", "decimals", "name", "symbol"]
               },
               {
                 "name": "usdPrice",
@@ -29511,12 +29025,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "value",
-                    "decimals",
-                    "name",
-                    "symbol"
-                  ]
+                  "required": ["value", "decimals", "name", "symbol"]
                 },
                 {
                   "name": "usdPrice",
@@ -30037,11 +29546,7 @@
                           "example": 20
                         }
                       },
-                      "required": [
-                        "swap",
-                        "transfer",
-                        "airdrop"
-                      ]
+                      "required": ["swap", "transfer", "airdrop"]
                     },
                     {
                       "name": "holdersIn",
@@ -30245,11 +29750,7 @@
                     "example": 20
                   }
                 },
-                "required": [
-                  "swap",
-                  "transfer",
-                  "airdrop"
-                ]
+                "required": ["swap", "transfer", "airdrop"]
               },
               {
                 "name": "holderChange",
@@ -30277,15 +29778,7 @@
                     "$ref": "#/components/schemas/HolderChangeDto"
                   }
                 },
-                "required": [
-                  "5min",
-                  "1h",
-                  "6h",
-                  "24h",
-                  "3d",
-                  "7d",
-                  "30d"
-                ]
+                "required": ["5min", "1h", "6h", "24h", "3d", "7d", "30d"]
               },
               {
                 "name": "holderDistribution",
@@ -30672,9 +30165,7 @@
                                 "format": "double"
                               }
                             },
-                            "required": [
-                              "type"
-                            ],
+                            "required": ["type"],
                             "additionalProperties": false,
                             "example": {}
                           },
@@ -30700,12 +30191,7 @@
                       "name": "status",
                       "type": "string",
                       "description": "The stream status:\n[active] The Stream is healthy and processing blocks\n[paused] The Stream is paused and is not processing blocks\n[error] The Stream has encountered an error and is not processing blocks",
-                      "enum": [
-                        "active",
-                        "paused",
-                        "error",
-                        "terminated"
-                      ],
+                      "enum": ["active", "paused", "error", "terminated"],
                       "example": {}
                     },
                     {
@@ -30933,9 +30419,7 @@
                       "format": "double"
                     }
                   },
-                  "required": [
-                    "type"
-                  ],
+                  "required": ["type"],
                   "additionalProperties": false,
                   "example": {}
                 },
@@ -31122,9 +30606,7 @@
                           "format": "double"
                         }
                       },
-                      "required": [
-                        "type"
-                      ],
+                      "required": ["type"],
                       "additionalProperties": false,
                       "example": {}
                     },
@@ -31150,12 +30632,7 @@
                 "name": "status",
                 "type": "string",
                 "description": "The stream status:\n[active] The Stream is healthy and processing blocks\n[paused] The Stream is paused and is not processing blocks\n[error] The Stream has encountered an error and is not processing blocks",
-                "enum": [
-                  "active",
-                  "paused",
-                  "error",
-                  "terminated"
-                ],
+                "enum": ["active", "paused", "error", "terminated"],
                 "example": {}
               },
               {
@@ -31363,9 +30840,7 @@
                           "format": "double"
                         }
                       },
-                      "required": [
-                        "type"
-                      ],
+                      "required": ["type"],
                       "additionalProperties": false,
                       "example": {}
                     },
@@ -31391,12 +30866,7 @@
                 "name": "status",
                 "type": "string",
                 "description": "The stream status:\n[active] The Stream is healthy and processing blocks\n[paused] The Stream is paused and is not processing blocks\n[error] The Stream has encountered an error and is not processing blocks",
-                "enum": [
-                  "active",
-                  "paused",
-                  "error",
-                  "terminated"
-                ],
+                "enum": ["active", "paused", "error", "terminated"],
                 "example": {}
               },
               {
@@ -31618,9 +31088,7 @@
                       "format": "double"
                     }
                   },
-                  "required": [
-                    "type"
-                  ],
+                  "required": ["type"],
                   "additionalProperties": false,
                   "example": {}
                 },
@@ -31807,9 +31275,7 @@
                           "format": "double"
                         }
                       },
-                      "required": [
-                        "type"
-                      ],
+                      "required": ["type"],
                       "additionalProperties": false,
                       "example": {}
                     },
@@ -31835,12 +31301,7 @@
                 "name": "status",
                 "type": "string",
                 "description": "The stream status:\n[active] The Stream is healthy and processing blocks\n[paused] The Stream is paused and is not processing blocks\n[error] The Stream has encountered an error and is not processing blocks",
-                "enum": [
-                  "active",
-                  "paused",
-                  "error",
-                  "terminated"
-                ],
+                "enum": ["active", "paused", "error", "terminated"],
                 "example": {}
               },
               {
@@ -32048,9 +31509,7 @@
                           "format": "double"
                         }
                       },
-                      "required": [
-                        "type"
-                      ],
+                      "required": ["type"],
                       "additionalProperties": false,
                       "example": {}
                     },
@@ -32076,12 +31535,7 @@
                 "name": "status",
                 "type": "string",
                 "description": "The stream status:\n[active] The Stream is healthy and processing blocks\n[paused] The Stream is paused and is not processing blocks\n[error] The Stream has encountered an error and is not processing blocks",
-                "enum": [
-                  "active",
-                  "paused",
-                  "error",
-                  "terminated"
-                ],
+                "enum": ["active", "paused", "error", "terminated"],
                 "example": {}
               },
               {
@@ -32289,9 +31743,7 @@
                           "format": "double"
                         }
                       },
-                      "required": [
-                        "type"
-                      ],
+                      "required": ["type"],
                       "additionalProperties": false,
                       "example": {}
                     },
@@ -32317,12 +31769,7 @@
                 "name": "status",
                 "type": "string",
                 "description": "The stream status:\n[active] The Stream is healthy and processing blocks\n[paused] The Stream is paused and is not processing blocks\n[error] The Stream has encountered an error and is not processing blocks",
-                "enum": [
-                  "active",
-                  "paused",
-                  "error",
-                  "terminated"
-                ],
+                "enum": ["active", "paused", "error", "terminated"],
                 "example": {}
               },
               {
@@ -32369,12 +31816,7 @@
             "name": "status",
             "type": "string",
             "description": "The stream status:\n[active] The Stream is healthy and processing blocks\n[paused] The Stream is paused and is not processing blocks\n[error] The Stream has encountered an error and is not processing blocks",
-            "enum": [
-              "active",
-              "paused",
-              "error",
-              "terminated"
-            ],
+            "enum": ["active", "paused", "error", "terminated"],
             "example": {}
           }
         ]
@@ -32549,9 +31991,7 @@
                           "format": "double"
                         }
                       },
-                      "required": [
-                        "type"
-                      ],
+                      "required": ["type"],
                       "additionalProperties": false,
                       "example": {}
                     },
@@ -32577,12 +32017,7 @@
                 "name": "status",
                 "type": "string",
                 "description": "The stream status:\n[active] The Stream is healthy and processing blocks\n[paused] The Stream is paused and is not processing blocks\n[error] The Stream has encountered an error and is not processing blocks",
-                "enum": [
-                  "active",
-                  "paused",
-                  "error",
-                  "terminated"
-                ],
+                "enum": ["active", "paused", "error", "terminated"],
                 "example": {}
               },
               {

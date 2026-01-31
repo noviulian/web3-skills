@@ -55,7 +55,7 @@ Not all endpoints follow the same pattern. Always verify exact path in rule file
 | Endpoint Type              | Path Pattern                            | Example                         | Notes                                    |
 | ------------------------- | -------------------------------------- | -------------------------------- | ----------------------------------------- |
 | Direct address           | `/{address}`                             | `getWalletTransactions`          | Simple replacement                          |
-| Token balance            | `/{address}/erc20`                        | `getWalletTokenBalances`        | ERC20 suffix                            |
+| Token balance            | `/{address}/erc20`                        | `getWalletTokenBalancesPrice`        | ERC20 suffix (with prices)                            |
 | NFT balance             | `/{address}/nft`                          | `getWalletNFTs`                | NFT suffix                              |
 | Wallet stats            | `/wallets/{address}/stats`               | `getWalletStats`                | ⚠️ Note `/wallets/` prefix           |
 | DeFi positions          | `/wallets/{address}/defi/positions`       | `getDefiPositionsSummary`     | ⚠️ Multi-segment path                 |

@@ -48,6 +48,8 @@ const IGNORED_ENDPOINTS = new Set([
   "getRiskyBetsTokens",
   "getSolidPerformersTokens",
   "resyncNFTRarity",
+  // Deprecated in favor of better alternatives
+  "getWalletTokenBalances", // use getWalletTokenBalancesPrice instead (includes prices)
 ]);
 
 /**
